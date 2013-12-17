@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/spriteExampleBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onSpriteExampleClick"
+        android:text="Sprite Example" />
+
+    <Button
+        android:id="@+id/fontExampleBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onFontExampleClick"
+        android:text="Font Example" />
+
+    <Button
+        android:id="@+id/inputExampleBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onInputExampleClick"
+        android:text="Input Example" />
+
+    <Button
+        android:id="@+id/soundExampleBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onSoundExampleClick"
+        android:text="Sound Example" />
+
+    <Button
+        android:id="@+id/musicExampleBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onMusicExampleClick"
+        android:text="Music Example" />
+
+    <Button
+        android:id="@+id/layoutExampleBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onLayoutExampleClick"
+        android:text="Layout Example" />
+
+</LinearLayout>
