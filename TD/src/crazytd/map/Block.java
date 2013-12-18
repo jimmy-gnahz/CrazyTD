@@ -21,7 +21,7 @@ public class Block {
 		this.y= Math.round(y);
 		this.type = type;
 	}
-	public Vector getCondinate(){
+	public Vector getCoordinate(){
 		return new Vector((float)x,(float)y);
 	}
 	
