@@ -220,4 +220,6 @@ public class MusicManager {
 	 */
 	public static float getVolume() { return mVolume; }
 
+	public static boolean isStoped(){ return mStopped;}
 }
+

@@ -79,7 +79,7 @@ public class Engine {
 			return;
 		}
 		mWorld.update(time);
-		Multitouch.clear();
+		//Multitouch.clear();
 	}
 	
 	/**

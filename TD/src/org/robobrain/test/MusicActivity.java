@@ -23,6 +23,11 @@ public class MusicActivity extends GameActivity {
 	}
 	
 	public void onPlayBtnClick(View view) {
+		if (MusicManager.isStoped()){
+			MusicManager.release();
+			MusicManager.loadMusic("music/xltt.mp3");
+		}
+			
 		MusicManager.play();
 	}
 	
