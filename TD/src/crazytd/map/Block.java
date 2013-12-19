@@ -23,7 +23,7 @@ public class Block {
 		this.y=(int)Math.round(y);
 		this.type=blockType.valueOf(type);
 	}
-	public Vector getCondinate(){
+	public Vector getCoordinate(){
 		return new Vector((float)x,(float)y);
 	}
 	
