@@ -5,21 +5,23 @@ import org.robobrain.sdk.graphics.Vector;
 
 public class Block {
 	public enum blockType{
-		BUILDABLE , ROAD, WASTELAND, OBSTACLES		
+		BUILDABLE , ROAD, WASTELAND, OBSTACLES
 	}
 	
 	private int x;		// location
 	private int y;		// location
 	private blockType type;//block type
-	public Block(int x, int y, blockType type){
+	
+	public Block(int x, int y, String type){
 		this.x = x;
 		this.y = y;
-		this.type=type;
+		this.type=blockType.valueOf(type);
 	}
-	public Block(float x, float y, blockType type){
-		this.x= Math.round(x);
-		this.y= Math.round(y);
-		this.type = type;
+
+	public Block(double x, double y, String type){
+		this.x=(int)Math.round(x);
+		this.y=(int)Math.round(y);
+		this.type=blockType.valueOf(type);
 	}
 	public Vector getCondinate(){
 		return new Vector((float)x,(float)y);
@@ -32,7 +34,7 @@ public class Block {
 	public float getY(){
 		return (float)y;
 	}
-	public blockType getBlockType(){
-		return type;
+	public String getBlockType(){
+		return type.toString();
 	}
 }
