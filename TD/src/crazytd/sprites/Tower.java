@@ -9,12 +9,32 @@ import org.robobrain.sdk.graphics.TextureManager;
 import org.robobrain.test.TDspriteGame;
 
 public class Tower extends Entity{
+	/**
+	 * Firing range of the tower
+	 * units in side length of grid
+	 */
+	double range; 
+	
+	/**
+	 * Frequency at which towers fire missiles
+	 * Measured in ___________ (TODO fill in blank)
+	 */
+	double firingFreq;
+	
+	/**
+	 * cost of producing one tower (not needed for first sprint)
+	 */
+	int cost;
+	
+	
+	
 	public Tower() {
 		super();
 		Texture t = TextureManager.getTexture(TDspriteGame.SPRITE_TOWER);
 		Sprite s = new Sprite(t, 64, 64, 1);
 		mRenderable = s;
 		mSpeed = 0.5f;
+		//
 	}
 	
 	@Override 
