@@ -8,7 +8,7 @@ import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.TextSprite;
 import org.robobrain.sdk.graphics.Texture;
 import org.robobrain.sdk.graphics.TextureManager;
-import crazytd.map.Block;
+import crazytd.map.*;
 public class FontGame extends Engine {
 	public static final int FONT_TEXTURE = 2;
 	
@@ -17,13 +17,17 @@ public class FontGame extends Engine {
 		TextureManager.registerTexture("images/arial.png", FONT_TEXTURE);
 		
 		mWorld = new World();
-		Block b = new Block(1.75,3.14,"ROAD");
+		Road b = new Road(1.75,12.14,"NORTH","EAST");
 		TextEntity te = new TextEntity(0,0.00*mWorld.getHeight(),b.getBlockType());
 		mWorld.addEntity(te);
 		TextEntity num1 = new TextEntity(0,0.05*mWorld.getHeight(),b.getX()+"");
 		mWorld.addEntity(num1);
 		TextEntity num2 = new TextEntity(0,0.10*mWorld.getHeight(),b.getY()+"");
 		mWorld.addEntity(num2);
+		TextEntity num3 = new TextEntity(0,0.15*mWorld.getHeight(),b.getDirection(1.75, 13.14).x+","+b.getDirection(1.75, 13.14).y);
+		mWorld.addEntity(num3);
+		TextEntity num4 = new TextEntity(0,0.20*mWorld.getHeight(),b.getDirection(3.35, 12.14).x+","+b.getDirection(3.35, 12.14).y);
+		mWorld.addEntity(num4);
 	}
 }
 
