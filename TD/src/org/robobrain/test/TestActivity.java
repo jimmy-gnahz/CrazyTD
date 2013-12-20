@@ -39,4 +39,8 @@ public class TestActivity extends Activity {
     public void onLayoutExampleClick(View view) {
     	startActivity(new Intent(this, LayoutActivity.class));
     }
+    
+    public void onTDspriteExampleClick(View view) {
+    	startActivity(new Intent(this, TDspriteActivity.class));
+    }
 }

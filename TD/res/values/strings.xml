@@ -3,5 +3,8 @@
 
     <string name="hello">Hello World, ExampleActivity!</string>
     <string name="app_name">RoboBrain Beta SDK Tests</string>
+    <string name="title_activity_tdsprite">TDspriteActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

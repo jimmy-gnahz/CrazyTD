@@ -167,7 +167,6 @@ public class Entity {
 	
 	/**
 	 * Sets the Entity's position along the X axis.
-	 * @deprecated
 	 * @param x
 	 * The Entity's position along the X axis.
 	 */
@@ -177,7 +176,6 @@ public class Entity {
 	
 	/**
 	 * Gets the Entity's position along the X axis.
-	 * @deprecated
 	 * @param x
 	 * The Entity's position along the X axis.
 	 */
@@ -187,7 +185,6 @@ public class Entity {
 	
 	/**
 	 * Sets the Entity's position along the Y axis.
-	 * @deprecated
 	 * @param y
 	 * The Entity's position along the Y axis.
 	 */
@@ -197,7 +194,6 @@ public class Entity {
 	
 	/**
 	 * Gets the Entity's position along the Y axis.
-	 * @deprecated
 	 * @param y
 	 * The Entity's position along the Y axis.
 	 */

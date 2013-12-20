@@ -45,5 +45,12 @@
         android:layout_height="wrap_content"
         android:onClick="onLayoutExampleClick"
         android:text="Layout Example" />
+    
+        <Button
+        android:id="@+id/tdSpriteBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onTDspriteExampleClick"
+        android:text="DO NOT ENTER, Jimmy Only" />
 
 </LinearLayout>
