@@ -22,6 +22,11 @@ public class Tower extends Entity{
 	float firingFreq;
 	
 	/**
+	 * The elapsed time from the last time the tower fired
+	 */
+	float elapsedTime;
+	
+	/**
 	 * cost of producing one tower (not needed for first sprint)
 	 */
 	int cost;
@@ -53,6 +58,10 @@ public class Tower extends Entity{
 	
 	public void setFiringFreq(float frequency){
 		firingFreq = frequency;
+		
+		// Tower will fire when elapsedTime >= firingFreq
+		// We set this to max so that it will fire the first missile when a monster is just within range
+		elapsedTime = frequency; 
 	}
 	
 	public void setCost(int cost){

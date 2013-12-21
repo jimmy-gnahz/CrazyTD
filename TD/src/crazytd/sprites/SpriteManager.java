@@ -1,7 +1,6 @@
 package crazytd.sprites;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import android.util.Log;
@@ -12,7 +11,10 @@ import android.util.Log;
 
 public class SpriteManager  {
 	
-	private final int BLOCK_SIZE = 64; // Size length of one block, used for testing/debugging
+	private final static int BLOCK_SIZE = 64; // Size length of one block, used for testing/debugging
+	private float startTime;
+	private float endTime;
+	private float deltaTime;
 	
 	private List<Tower> towers;
 	private List<Monster> monsters;
@@ -21,9 +23,9 @@ public class SpriteManager  {
 	public SpriteManager() {
 		towers = new ArrayList<Tower>();
 		monsters = new ArrayList<Monster>();
-		missiles = new ArrayList<Missile>();	
+		missiles = new ArrayList<Missile>();
+		startTime = System.currentTimeMillis();
 	}
-	
 	
 	
 	/**
@@ -33,7 +35,21 @@ public class SpriteManager  {
 	public void updateSprites(){
 		updateMissiles();
 		updateMonsters();
+		updateTowers();
 	}
+	
+	/**
+	 * Sets a target if it doesn't already have one
+	 * Fire missile if frequency is reached
+	 */
+	public void updateTowers(){
+		endTime = System.currentTimeMillis();
+		deltaTime = endTime - startTime;
+		startTime = System.currentTimeMillis();
+		
+		// TODO
+	}
+	
 	
 	/**
 	 *  Checks if any of the missiles has collided with its target monster
