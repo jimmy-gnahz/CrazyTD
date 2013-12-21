@@ -35,7 +35,6 @@ public class Missile extends Entity{
 		// update vx and vy so that missile will chase after target
 		vx = target.x - x;
 		vy = target.y - y;
-		
 		super.update(time);
 	}
 	

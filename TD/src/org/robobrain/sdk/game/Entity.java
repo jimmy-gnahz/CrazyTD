@@ -287,8 +287,8 @@ public class Entity {
 	    if (mRenderable == null) {
             return null;
         }
-		return new Rectangle((int)(mRenderable.x - mRenderable.getHalfWidth()),
-							 (int)(mRenderable.y - mRenderable.getHalfHeight()),
+		return new Rectangle((int)(x - mRenderable.getHalfWidth()),
+							 (int)(y - mRenderable.getHalfHeight()),
 							 mRenderable.getWidth(),
 							 mRenderable.getHeight());
 	}
