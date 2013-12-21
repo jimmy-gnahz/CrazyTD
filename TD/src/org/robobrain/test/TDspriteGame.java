@@ -24,15 +24,20 @@ public class TDspriteGame extends Engine {
 		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
 		TextureManager.registerTexture("images/missile.jpg", SPRITE_MISSILE);
 		
-		Monster monster = new Monster(0.03f,100);
+		Monster monster = new Monster(0.03f,30);
 		monster.x = (float) (0.3 * mWorld.getWidth());
 		monster.y = (float) (0.8 * mWorld.getHeight());
 		monster.vx = 1.0f;
 		
-		Missile missile = new Missile(monster,20,0.1f);
+		Missile missile = new Missile(monster,50,0.1f);
 		missile.x = (float) (0.3 * mWorld.getWidth());
 		missile.y = (float) (0.3 * mWorld.getHeight());
 		missile.vx = 0.0f; missile.vy = 0.1f;
+		
+		Missile missile2 = new Missile(monster,20,0.03f);
+		missile2.x = 0;
+		missile2.y = 0;
+		missile2.vx = 1; missile2.vy = 1;
 		
 		Tower tower = new Tower(missile);
 		tower.x = (float) (0.5 * (float)mWorld.getWidth());
@@ -42,9 +47,11 @@ public class TDspriteGame extends Engine {
 		spriteManager.addMissile(missile);
 		spriteManager.addMonster(monster);
 		spriteManager.addTower(tower);
+		spriteManager.addMissile(missile2);
 		
 		mWorld.addSpriteManager(spriteManager);
 		mWorld.addEntity(missile);
+		mWorld.addEntity(missile2);
 		mWorld.addEntity(tower);
 		mWorld.addEntity(monster);
 
