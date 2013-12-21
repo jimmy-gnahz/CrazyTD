@@ -58,6 +58,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 	 * Called when the surface is created or recreated.
 	 */
 	public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+		mStartTime = System.currentTimeMillis();
 		sGL = gl;
 		sScale = 1.0f;
 		mPaused = false;
@@ -87,17 +88,20 @@ public class GLRenderer implements GLSurfaceView.Renderer {
 		if (mPaused) {
 			return;
 		}
-		mStartTime = System.currentTimeMillis();
-		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-		if (mEngine != null) {
-			mEngine.update(mDeltaTime);
-			mEngine.render(gl);
-		}
 		mEndTime = System.currentTimeMillis();
 		mDeltaTime = mEndTime - mStartTime;
 		if (mDeltaTime > 0) {
 			sFPS = 1000.0f / (float)mDeltaTime;
 		}
+		mStartTime = System.currentTimeMillis();
+		
+		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+		if (mEngine != null) {
+			mEngine.update(mDeltaTime);
+			mEngine.render(gl);
+		}
+		
+
 		//Log.d("FPS", "" + mFPS);
 	}
 	

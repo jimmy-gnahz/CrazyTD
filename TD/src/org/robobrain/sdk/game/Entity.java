@@ -120,12 +120,15 @@ public class Entity {
 	    if (mRenderable == null) {
 	        return;
 	    }
-		vx = dx * (mSpeed * GLRenderer.getScale());
-		vy = dy * (mSpeed * GLRenderer.getScale());
-		vx *= mFriction;
-		vy *= mFriction;
-		mRenderable.x += vx * time;
-		mRenderable.y += vy * time;
+	    normalizeVelocity();
+//		vx = dx * (mSpeed * GLRenderer.getScale());
+//		vy = dy * (mSpeed * GLRenderer.getScale());
+//		vx *= mFriction;
+//		vy *= mFriction;
+		x += mSpeed * vx * time;
+		y += mSpeed * vy * time;
+		//String msg = ""+mRenderable.x + " " + mRenderable.y + " " + x + " " + y;
+		//Log.e("Update Renderable",msg);
 		mRenderable.update(time);
 	}
 	
@@ -340,6 +343,12 @@ public class Entity {
 	        return;
 	    }
 		mRenderable.draw(gl, x, y, rotation, scale);
+	}
+	
+	private void normalizeVelocity(){
+		double mag = Math.sqrt(vx*vx + vy*vy);
+		vx /= (float)mag; vy /= (float)mag;
+				
 	}
 	
 	// TODO: Add kill() function
