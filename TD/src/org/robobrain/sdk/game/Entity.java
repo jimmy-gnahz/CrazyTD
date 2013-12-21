@@ -127,8 +127,8 @@ public class Entity {
 //		vy *= mFriction;
 		x += mSpeed * vx * time;
 		y += mSpeed * vy * time;
-		//String msg = ""+mRenderable.x + " " + mRenderable.y + " " + x + " " + y;
-		//Log.e("Update Renderable",msg);
+//		String msg = ""+mRenderable.x + " " + mRenderable.y + " " + x + " " + y;
+//		Log.e("Update Renderable",msg);
 		mRenderable.update(time);
 	}
 	
@@ -346,6 +346,8 @@ public class Entity {
 	}
 	
 	private void normalizeVelocity(){
+		if ((vx == 0) && (vy == 0)) return;
+		
 		double mag = Math.sqrt(vx*vx + vy*vy);
 		vx /= (float)mag; vy /= (float)mag;
 				

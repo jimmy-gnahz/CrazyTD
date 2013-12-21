@@ -27,9 +27,22 @@ public class Missile extends Entity{
 		mRenderable = s;
 		mSpeed = speed;
 		this.damage = damage;
-		this.target = target;
-		
+		this.target = target;	
 	}
+
+	@Override
+	public void update(long time){
+		// update vx and vy so that missile will chase after target
+		vx = target.x - x;
+		vy = target.y - y;
+		
+		super.update(time);
+	}
+	
+	
+	//********************************************************************
+	// 						SETTERS & GETTERS
+	//********************************************************************
 	
 	public void setTarget(Monster m){
 		target = m;
