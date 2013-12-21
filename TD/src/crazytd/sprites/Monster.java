@@ -10,14 +10,30 @@ import org.robobrain.test.TDspriteGame;
 
 public class Monster extends Entity{
 
+	/**
+	 * Horse Power 
+	 */
+	int hp;
 	
-	public Monster() {
+	/**
+	 * @param speed : speed at which monsters move
+	 * @param hp 	: max hp for a monster
+	 */
+	public Monster(float speed, int hp) {
 		super();
 		Texture t = TextureManager.getTexture(TDspriteGame.SPRITE_MONSTER);
 		Sprite s = new Sprite(t, 64, 64, 4);
 		mRenderable = s;
-		mSpeed = 0.5f;
-		//
+		mSpeed = speed;
+		this.hp = hp;
+	}
+
+	public void setHP(int hp){
+		this.hp = hp;
+	}
+	
+	public int getHP(){
+		return hp;
 	}
 	
 	@Override 
