@@ -1,6 +1,7 @@
 package crazytd.map;
 
 import org.robobrain.sdk.graphics.Vector;
+import org.robobrain.test.TDspriteGame;
 
 
 public class Road extends Block{
@@ -15,11 +16,13 @@ public class Road extends Block{
 		super(x, y);
 		setDir(true, inDir);
 		setDir(false,outDir);
+		bindTextureIndex(TDspriteGame.SPRITE_ROAD);
 	}
 	public Road(int col, int row, String inDir, String outDir) {
 		super(col, row);
 		setDir(true, inDir);
 		setDir(false,outDir);
+		bindTextureIndex(TDspriteGame.SPRITE_ROAD);
 	}
 	
 	private void setDir(boolean isInDir, String direction){

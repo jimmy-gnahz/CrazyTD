@@ -1,6 +1,7 @@
 package crazytd.map;
 
 import org.robobrain.sdk.game.Entity;
+import org.robobrain.test.TDspriteGame;
 
 import android.util.Log;
 import crazytd.sprites.Tower;
@@ -13,10 +14,14 @@ public class Buildable extends Block {
 	public Buildable(int x, int y) {
 		super(x, y);
 		isBuilt = false;
+		bindTextureIndex(TDspriteGame.SPRITE_NOT_BUILT);
+		bindBuiltTextureIndex(TDspriteGame.SPRITE_BUILT);
 	}
 	public Buildable(float x, float y) {
 		super(x, y);
 		isBuilt = false;
+		bindTextureIndex(TDspriteGame.SPRITE_NOT_BUILT);
+		bindBuiltTextureIndex(TDspriteGame.SPRITE_BUILT);
 	}
 
 	public void Build(Tower newTower){
