@@ -11,6 +11,11 @@ import android.util.Log;
 
 public class SpriteManager  {
 	
+	private final static int BLOCK_SIZE = 64; // Size length of one block, used for testing/debugging
+	private float startTime;
+	private float endTime;
+	private float deltaTime;
+	
 	private List<Tower> towers;
 	private List<Monster> monsters;
 	private List<Missile> missiles;
@@ -18,26 +23,78 @@ public class SpriteManager  {
 	public SpriteManager() {
 		towers = new ArrayList<Tower>();
 		monsters = new ArrayList<Monster>();
-		missiles = new ArrayList<Missile>();	
+		missiles = new ArrayList<Missile>();
+		startTime = System.currentTimeMillis();
 	}
+	
+	
+	/**
+	 * updates List of Missiles and Monsters
+	 * checks for removal
+	 */
+	public void updateSprites(){
+		updateMissiles();
+		updateMonsters();
+		updateTowers();
+	}
+	
+	/**
+	 * Sets a target if it doesn't already have one
+	 * Fire missile if frequency is reached
+	 */
+	public void updateTowers(){
+		endTime = System.currentTimeMillis();
+		deltaTime = endTime - startTime;
+		startTime = System.currentTimeMillis();
+		
+		// TODO
+	}
+	
 	
 	/**
 	 *  Checks if any of the missiles has collided with its target monster
 	 *  remove the missile if it has collided
 	 */
 	public void updateMissiles(){
+		List<Missile> toRemoveMissiles = new ArrayList<Missile>();
+		
 		for (Missile missile : missiles){
 			Monster target = missile.getTarget();
 			if (missile.hasCollided(target)){
-				
-				Log.e("Collision","happened "+target.getHP());
 				int newHP = target.getHP() - missile.getDamage();
 				target.setHP(newHP);
-				Log.e("collision","finished " +target.getHP());
 				missile.remove = true; // This is for removing it from World
-				missiles.remove(missile);
+				toRemoveMissiles.add(missile);
 			}
 		}
+		
+		missiles.removeAll(toRemoveMissiles);
+	}
+	
+	/**
+	 * Removes the monsters whose hp has dropped to 0
+	 * Also removes the missiles targeting that monster
+	 */
+	public void updateMonsters(){
+		List<Missile> toRemoveMissiles = new ArrayList<Missile>();
+		List<Monster> toRemoveMonsters = new ArrayList<Monster>();
+		
+		for (Monster monster : monsters){
+			if (monster.getHP() <= 0){
+				
+				for(Missile missile : missiles){
+					if (missile.getTarget().equals(monster)){
+						missile.remove = true;
+						toRemoveMissiles.add(missile);
+					}
+				}
+				monster.remove = true;
+				toRemoveMonsters.remove(monster);
+			}
+		}
+		
+		missiles.removeAll(toRemoveMissiles);
+		monsters.removeAll(toRemoveMonsters);
 	}
 	
 	

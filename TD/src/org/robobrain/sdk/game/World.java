@@ -72,7 +72,9 @@ public class World extends Entity {
 			}
 		}
 		
-		spriteManager.updateMissiles();
+		if (!(spriteManager == null)) {
+			spriteManager.updateSprites();
+		}
 		
 		for (int i = 0; i < count - 1; i++) {
 			for (int j = i + 1; j < count; j++) {
