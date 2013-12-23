@@ -2,7 +2,6 @@ package crazytd.map;
 
 import org.robobrain.sdk.graphics.Vector;
 
-import crazytd.map.Block.BlockType;
 
 public class Road extends Block{
 	public enum Direction{
