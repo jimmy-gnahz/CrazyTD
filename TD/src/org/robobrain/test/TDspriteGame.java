@@ -45,6 +45,18 @@ public class TDspriteGame extends Engine {
 		TextureManager.registerTexture("images/monster_den.png", SPRITE_MONSTER_DEN);
 		TextureManager.registerTexture("images/castle.png", SPRITE_CASTLE);
 		
+<<<<<<< HEAD
+=======
+		Monster monster = new Monster(0.1f,300);
+		monster.x = (float) (0.0 * mWorld.getWidth());
+		monster.y = (float) (0.47 * mWorld.getHeight());
+		monster.vx = 1.0f;
+		
+		Missile missile = new Missile(monster,10,0.1f);
+		missile.x = (float) (0.3 * mWorld.getWidth());
+		missile.y = (float) (0.3 * mWorld.getHeight());
+		missile.vx = 0.0f; missile.vy = 0.0f;
+>>>>>>> defc1c9db4f9fd0913031add63209be5aaae2a21
 		
 
 		WasteLand w = new WasteLand(0,2);
@@ -73,21 +85,19 @@ public class TDspriteGame extends Engine {
 //		missile2.y = 0;
 //		missile2.vx = 1; missile2.vy = 1;
 		
-		Tower tower = new Tower(missile);
+		Tower tower = new Tower(missile,2,Tower.FAST);
+		
 		if(b.getClass()==Buildable.class){
 			if(!((Buildable) b).getIsBuilt()){
 				((Buildable) b).Build(tower);
 			}
 		}
-			
-		//tower.x = (float) (0.5 * (float)mWorld.getWidth());
-		Log.e("XofTower", ""+tower.x);
-//		tower.y = (float) (0.5 * (float)mWorld.getHeight());
 		
-		spriteManager = new SpriteManager();
+		spriteManager = new SpriteManager(mWorld);
 		spriteManager.addMissile(missile);
 		spriteManager.addMonster(monster);
 		spriteManager.addTower(tower);
+<<<<<<< HEAD
 //		spriteManager.addMissile(missile2);
 
 		
@@ -99,6 +109,15 @@ public class TDspriteGame extends Engine {
 		mWorld.addEntity(d.getMapElement());
 		mWorld.addEntity(b.getMapElement());
 		mWorld.addEntity(notBuilt.getMapElement());
+=======
+		spriteManager.addMissile(missile2);
+		
+		mWorld.addSpriteManager(spriteManager);
+//		mWorld.addEntity(w.getMapElement());
+//		mWorld.addEntity(r.getMapElement());
+//		mWorld.addEntity(b.getMapElement());
+//		mWorld.addEntity(notBuilt.getMapElement());
+>>>>>>> defc1c9db4f9fd0913031add63209be5aaae2a21
 		mWorld.addEntity(missile);
 //		mWorld.addEntity(missile2);
 		mWorld.addEntity(tower);

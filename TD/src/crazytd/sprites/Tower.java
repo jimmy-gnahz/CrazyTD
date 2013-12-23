@@ -1,5 +1,8 @@
 package crazytd.sprites;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.microedition.khronos.opengles.GL10;
 
 import org.robobrain.sdk.game.Entity;
@@ -9,25 +12,35 @@ import org.robobrain.sdk.graphics.TextureManager;
 import org.robobrain.test.TDspriteGame;
 
 public class Tower extends Entity{
+	
 	/**
 	 * Firing range of the tower
-	 * units in side length of grid
+	 * units in side length of 1 grid
 	 */
 	float range; 
 	
 	/**
+	 * Firing frequencies
+	 * Measured in #fires/minute
+	 */
+	public static final float FAST = 120;
+	public static final float MEDIUM = 60;
+	public static final float SLOW = 30;
+	
+	/**
 	 * Frequency at which towers fire missiles
-	 * Measured in ___________ (TODO fill in blank)
+	 * One of {FAST,MEDIUM,SLOW}
 	 */
 	float firingFreq;
 	
 	/**
 	 * The elapsed time from the last time the tower fired
+	 * measured in Milliseconds
 	 */
 	float elapsedTime;
 	
 	/**
-	 * cost of producing one tower (not needed for first sprint)
+	 * cost of producing one tower (perhaps not needed for first sprint)
 	 */
 	int cost;
 	
@@ -37,15 +50,49 @@ public class Tower extends Entity{
 	Monster target;
 	
 	/**
-	 * The missile the tower fires
+	 * The type of missile the tower fires
 	 */
 	Missile missile;
 	
-	public Tower(Missile missile) {
+	public Tower(Missile missile, float range, float frequency) {
 		super();
 		Texture t = TextureManager.getTexture(TDspriteGame.SPRITE_TOWER);
 		Sprite s = new Sprite(t, 64, 64, 1);
 		mRenderable = s;
+		this.range = range;
+		this.firingFreq = frequency;
+		this.missile = missile;
+	}
+	
+	@Override 
+	public void draw(GL10 gl) {
+	    super.draw(gl);
+	}
+
+	/**
+	 * Sets the target and returns boolean indicating whether we have found it or not
+	 * @param monsters the list of monsters in game
+	 * @return true if we have found a target, false otherwise
+	 */
+	public boolean findTarget(List<Monster> monsters) {
+		float actualRange = range * SpriteManager.BLOCK_SIZE;
+		
+		// Set this.target as the first monster in firing range
+		for(Monster monster: monsters){
+			float dist = distToMonster(monster);
+			if (dist < actualRange) {
+				target = monster;
+				return true;
+			}
+		}
+		
+		// all monsters are not in range
+		return false;
+	}
+	
+	public float distToMonster(Monster monster){
+		return (float) Math.sqrt(
+				Math.pow((monster.x - x),2) + Math.pow((monster.y - y),2));
 	}
 	
 	//********************************************************
@@ -76,6 +123,10 @@ public class Tower extends Entity{
 		this.missile = missile;
 	}
 	
+	public void setElapsedTime(float et){
+		elapsedTime = et;
+	}
+	
 	public float getRange(){
 		return range;
 	}
@@ -96,8 +147,17 @@ public class Tower extends Entity{
 		return missile;
 	}
 	
-	@Override 
-	public void draw(GL10 gl) {
-	    super.draw(gl);
+	public float getElapsedTime(){
+		return elapsedTime;
 	}
+	
+	/**
+	 * @return the time between each firing each missile
+	 */
+	public float getFiringInterval(){
+		float intervalInSeconds = 60/firingFreq;
+		return intervalInSeconds * 1000;
+	}
+	
+
 }
