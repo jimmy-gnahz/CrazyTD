@@ -17,9 +17,9 @@ public class FontGame extends Engine {
 		TextureManager.registerTexture("images/arial.png", FONT_TEXTURE);
 		
 		mWorld = new World();
-		Road b = new Road(1.75,12.14,"NORTH","EAST");
-		TextEntity te = new TextEntity(0,0.00*mWorld.getHeight(),b.getBlockType());
-		mWorld.addEntity(te);
+		Road b = new Road(1.75f,12.14f,"NORTH","EAST");
+		b.getClass().toString();
+		
 		TextEntity num1 = new TextEntity(0,0.05*mWorld.getHeight(),b.getX()+"");
 		mWorld.addEntity(num1);
 		TextEntity num2 = new TextEntity(0,0.10*mWorld.getHeight(),b.getY()+"");

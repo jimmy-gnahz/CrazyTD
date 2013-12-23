@@ -4,6 +4,10 @@ import org.robobrain.sdk.game.Engine;
 import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.TextureManager;
 
+import android.util.Log;
+
+import crazytd.map.Block;
+import crazytd.map.Buildable;
 import crazytd.sprites.Missile;
 import crazytd.sprites.Monster;
 import crazytd.sprites.SpriteManager;
@@ -34,9 +38,17 @@ public class TDspriteGame extends Engine {
 		missile.y = (float) (0.3 * mWorld.getHeight());
 		missile.vx = 0.0f; missile.vy = 0.1f;
 		
+		Block b = new Buildable((float)((float)mWorld.getWidth()*0.5),(float)((float)mWorld.getHeight()*0.5));
 		Tower tower = new Tower(missile);
-		tower.x = (float) (0.5 * (float)mWorld.getWidth());
-		tower.y = (float) (0.5 * (float)mWorld.getHeight());
+		if(b.getClass()==Buildable.class){
+			if(!((Buildable) b).getIsBuilt()){
+				((Buildable) b).Build(tower);
+			}
+		}
+			
+		//tower.x = (float) (0.5 * (float)mWorld.getWidth());
+		Log.e("XofTower", ""+tower.x);
+//		tower.y = (float) (0.5 * (float)mWorld.getHeight());
 		
 		spriteManager = new SpriteManager();
 		spriteManager.addMissile(missile);
