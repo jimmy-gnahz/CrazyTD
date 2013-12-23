@@ -10,7 +10,9 @@ import org.robobrain.sdk.graphics.Vector;
 
 
 public class Block {
-
+	public enum Direction{
+		NORTH, SOUTH, EAST, WEST
+	}
 	
 	private int tileX;		// the column number in the map
 	private int tileY;		// the row number in the map

@@ -12,30 +12,24 @@ public class Road extends Block{
 	private Vector n=new Vector(0,-1), s= new Vector(0,1),e=new Vector(1,0),w=new Vector(-1,0), o=new Vector(0,0);
 	
 	
-	public Road(float x, float y, String inDir, String outDir) {
+	public Road(float x, float y, Direction inDir, Direction outDir) {
 		super(x, y);
-		setDir(true, inDir);
-		setDir(false,outDir);
+		inDirection = inDir;
+		outDirection = outDir;
 		bindTextureIndex(TDspriteGame.SPRITE_ROAD);
 	}
-	public Road(int col, int row, String inDir, String outDir) {
+	public Road(int col, int row, Direction inDir, Direction outDir) {
 		super(col, row);
-		setDir(true, inDir);
-		setDir(false,outDir);
+		inDirection = inDir;
+		outDirection = outDir;
 		bindTextureIndex(TDspriteGame.SPRITE_ROAD);
 	}
 	
-	private void setDir(boolean isInDir, String direction){
-		Direction d =Direction.valueOf(""+direction);
-		if(isInDir)			//is incoming direction
-			inDirection = d;
-		else outDirection = d;
-	}
 	//get the direction (unit vector) of the monster is heading given the coordinate
 	//(0,0) flags for error
-	public Vector getDirection(double x, double y){
-		double xInTile=x-this.x;
-		double yInTile=y-this.y;
+	public Vector getDirection(float x, float y){
+		float xInTile=x-this.x;
+		float yInTile=y-this.y;
 		if (xInTile > tileSize/2 || xInTile<tileSize/2 || yInTile > tileSize/2 ||yInTile<tileSize/2) return o; //out of boundary
 		switch(inDirection){
 		case NORTH:
