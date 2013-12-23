@@ -38,15 +38,12 @@ public class TDspriteGame extends Engine {
 		missile.y = (float) (0.3 * mWorld.getHeight());
 		missile.vx = 0.0f; missile.vy = 0.1f;
 		
-<<<<<<< HEAD
 		Block b = new Buildable((float)((float)mWorld.getWidth()*0.5),(float)((float)mWorld.getHeight()*0.5));
-=======
 		Missile missile2 = new Missile(monster,20,0.03f);
 		missile2.x = 0;
 		missile2.y = 0;
 		missile2.vx = 1; missile2.vy = 1;
 		
->>>>>>> ecb64260b3b65b8c8f6b2202a0eed754abd19ecd
 		Tower tower = new Tower(missile);
 		if(b.getClass()==Buildable.class){
 			if(!((Buildable) b).getIsBuilt()){
