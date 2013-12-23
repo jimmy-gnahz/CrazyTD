@@ -49,13 +49,13 @@ public class TDspriteGame extends Engine {
 		missile.y = (float) (0.3 * mWorld.getHeight());
 		missile.vx = 0.0f; missile.vy = 0.1f;
 		
-		WasteLand w = new WasteLand(2,2);
+		WasteLand w = new WasteLand(0,2);
 		w.bindTextureIndex(SPRITE_WASTELAND);
 		
 		Road r= new Road(0,0,"EAST","WEST");
 		r.bindTextureIndex(SPRITE_ROAD);
 		
-		Buildable notBuilt= new Buildable(3,4);
+		Buildable notBuilt= new Buildable(1,1);
 		notBuilt.bindTextureIndex(SPRITE_NOT_BUILT);
 		notBuilt.bindBuiltTextureIndex(SPRITE_BUILT);
 		
