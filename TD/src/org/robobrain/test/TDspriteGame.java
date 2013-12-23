@@ -69,11 +69,6 @@ public class TDspriteGame extends Engine {
 		Castle c = new Castle(3,0,50);
 		Buildable notBuilt= new Buildable(1,1);		
 		Block b = new Buildable((float)((float)mWorld.getWidth()*0.5),(float)((float)mWorld.getHeight()*0.5));
-//		
-//		Missile missile2 = new Missile(monster,20,0.03f);
-//		missile2.x = 0;
-//		missile2.y = 0;
-//		missile2.vx = 1; missile2.vy = 1;
 		
 		Tower tower = new Tower(missile,2,Tower.FAST);
 		
@@ -83,15 +78,7 @@ public class TDspriteGame extends Engine {
 			}
 		}
 		
-		spriteManager = new SpriteManager(mWorld);
-		spriteManager.addMissile(missile);
-		spriteManager.addMonster(monster);
-		spriteManager.addMonster(monster2);
-		spriteManager.addTower(tower);
-		//spriteManager.addMissile(missile2);
 
-		
-		mWorld.addSpriteManager(spriteManager);
 		mWorld.addEntity(w.getMapElement());
 		mWorld.addEntity(r1.getMapElement());
 		mWorld.addEntity(r2.getMapElement());
@@ -100,11 +87,14 @@ public class TDspriteGame extends Engine {
 		mWorld.addEntity(b.getMapElement());
 		mWorld.addEntity(notBuilt.getMapElement());
 		
-		mWorld.addEntity(missile);
-//		mWorld.addEntity(missile2);
-		mWorld.addEntity(tower);
-		mWorld.addEntity(monster);
-		mWorld.addEntity(monster2);
+		spriteManager = new SpriteManager(mWorld);
+		spriteManager.addMissile(missile);
+		spriteManager.addMonster(monster);
+		spriteManager.addMonster(monster2);
+		spriteManager.addTower(tower);
+		mWorld.addSpriteManager(spriteManager);
+		
+
 
 		
 	}

@@ -161,14 +161,17 @@ public class SpriteManager  {
 	//********************************************************
 	
 	public void addTower(Tower tower){
+		world.addEntity(tower);
 		towers.add(tower);
 	}
 	
 	public void addMonster(Monster monster){
+		world.addEntity(monster);
 		monsters.add(monster);
 	}
 	
 	public void addMissile(Missile missile){
+		world.addEntity(missile);
 		missiles.add(missile);
 	}
 	
