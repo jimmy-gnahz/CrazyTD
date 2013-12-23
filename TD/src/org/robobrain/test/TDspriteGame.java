@@ -8,6 +8,8 @@ import android.util.Log;
 
 import crazytd.map.Block;
 import crazytd.map.Buildable;
+import crazytd.map.Castle;
+import crazytd.map.MonsterDen;
 import crazytd.map.Road;
 import crazytd.map.WasteLand;
 import crazytd.sprites.Missile;
@@ -20,6 +22,8 @@ public class TDspriteGame extends Engine {
 	public static final int SPRITE_WASTELAND = 2;
 	public static final int SPRITE_NOT_BUILT = 3;
 	public static final int SPRITE_BUILT=4;
+	public static final int SPRITE_MONSTER_DEN=5;
+	public static final int SPRITE_CASTLE=6;
 	
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
@@ -38,28 +42,36 @@ public class TDspriteGame extends Engine {
 		TextureManager.registerTexture("images/built.png", SPRITE_BUILT);
 		TextureManager.registerTexture("images/not_built.png", SPRITE_NOT_BUILT);
 		TextureManager.registerTexture("images/wasteland.png", SPRITE_WASTELAND);
+		TextureManager.registerTexture("images/monster_den.png", SPRITE_MONSTER_DEN);
+		TextureManager.registerTexture("images/castle.png", SPRITE_CASTLE);
 		
-		Monster monster = new Monster(0.03f,30);
-		monster.x = (float) (0.3 * mWorld.getWidth());
-		monster.y = (float) (0.8 * mWorld.getHeight());
-		monster.vx = 1.0f;
 		
-		Missile missile = new Missile(monster,50,0.1f);
-		missile.x = (float) (0.3 * mWorld.getWidth());
-		missile.y = (float) (0.3 * mWorld.getHeight());
-		missile.vx = 0.0f; missile.vy = 0.1f;
-		
+
 		WasteLand w = new WasteLand(0,2);
-		
-		Road r= new Road(0,0,"EAST","WEST");
-		
+		MonsterDen d= new MonsterDen(0,0,MonsterDen.Direction.EAST);
+		Road r1= new Road(1,0,Road.Direction.WEST,Road.Direction.EAST);
+		Road r2 = new Road(2,0,Road.Direction.WEST,Road.Direction.EAST);
+		Castle c = new Castle(3,0,50);
 		Buildable notBuilt= new Buildable(1,1);		
 		Block b = new Buildable((float)((float)mWorld.getWidth()*0.5),(float)((float)mWorld.getHeight()*0.5));
 		
-		Missile missile2 = new Missile(monster,20,0.03f);
-		missile2.x = 0;
-		missile2.y = 0;
-		missile2.vx = 1; missile2.vy = 1;
+		
+		
+		Monster monster = new Monster(0.03f,30);
+		monster.x = (float) (d.getX());
+		monster.y = (float) (d.getY());
+		monster.vx = 1.0f;
+		
+		Missile missile = new Missile(monster,50,0.01f);
+		missile.x = (float) (b.getX());
+		missile.y = (float) (b.getY());
+		missile.vx = 0.0f; missile.vy = 0.1f;
+		
+//		
+//		Missile missile2 = new Missile(monster,20,0.03f);
+//		missile2.x = 0;
+//		missile2.y = 0;
+//		missile2.vx = 1; missile2.vy = 1;
 		
 		Tower tower = new Tower(missile);
 		if(b.getClass()==Buildable.class){
@@ -76,16 +88,19 @@ public class TDspriteGame extends Engine {
 		spriteManager.addMissile(missile);
 		spriteManager.addMonster(monster);
 		spriteManager.addTower(tower);
-		spriteManager.addMissile(missile2);
+//		spriteManager.addMissile(missile2);
 
 		
 		mWorld.addSpriteManager(spriteManager);
 		mWorld.addEntity(w.getMapElement());
-		mWorld.addEntity(r.getMapElement());
+		mWorld.addEntity(r1.getMapElement());
+		mWorld.addEntity(r2.getMapElement());
+		mWorld.addEntity(c.getMapElement());
+		mWorld.addEntity(d.getMapElement());
 		mWorld.addEntity(b.getMapElement());
 		mWorld.addEntity(notBuilt.getMapElement());
 		mWorld.addEntity(missile);
-		mWorld.addEntity(missile2);
+//		mWorld.addEntity(missile2);
 		mWorld.addEntity(tower);
 		mWorld.addEntity(monster);
 
