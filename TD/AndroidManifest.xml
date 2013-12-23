@@ -32,7 +32,8 @@
         </activity>
         <activity
             android:name="org.robobrain.test.TDspriteActivity"
-            android:label="@string/title_activity_tdsprite" >
+            android:label="@string/title_activity_tdsprite" 
+            android:screenOrientation="landscape">
         </activity>
     </application>
 
