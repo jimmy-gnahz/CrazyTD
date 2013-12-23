@@ -39,15 +39,15 @@ public class TDspriteGame extends Engine {
 		TextureManager.registerTexture("images/not_built.png", SPRITE_NOT_BUILT);
 		TextureManager.registerTexture("images/wasteland.png", SPRITE_WASTELAND);
 		
-		Monster monster = new Monster(0.03f,30);
-		monster.x = (float) (0.3 * mWorld.getWidth());
-		monster.y = (float) (0.8 * mWorld.getHeight());
+		Monster monster = new Monster(0.1f,300);
+		monster.x = (float) (0.0 * mWorld.getWidth());
+		monster.y = (float) (0.47 * mWorld.getHeight());
 		monster.vx = 1.0f;
 		
-		Missile missile = new Missile(monster,50,0.1f);
+		Missile missile = new Missile(monster,10,0.1f);
 		missile.x = (float) (0.3 * mWorld.getWidth());
 		missile.y = (float) (0.3 * mWorld.getHeight());
-		missile.vx = 0.0f; missile.vy = 0.1f;
+		missile.vx = 0.0f; missile.vy = 0.0f;
 		
 		WasteLand w = new WasteLand(0,2);
 		
@@ -61,29 +61,25 @@ public class TDspriteGame extends Engine {
 		missile2.y = 0;
 		missile2.vx = 1; missile2.vy = 1;
 		
-		Tower tower = new Tower(missile);
+		Tower tower = new Tower(missile,2,Tower.FAST);
+		
 		if(b.getClass()==Buildable.class){
 			if(!((Buildable) b).getIsBuilt()){
 				((Buildable) b).Build(tower);
 			}
 		}
-			
-		//tower.x = (float) (0.5 * (float)mWorld.getWidth());
-		Log.e("XofTower", ""+tower.x);
-//		tower.y = (float) (0.5 * (float)mWorld.getHeight());
 		
-		spriteManager = new SpriteManager();
+		spriteManager = new SpriteManager(mWorld);
 		spriteManager.addMissile(missile);
 		spriteManager.addMonster(monster);
 		spriteManager.addTower(tower);
 		spriteManager.addMissile(missile2);
-
 		
 		mWorld.addSpriteManager(spriteManager);
-		mWorld.addEntity(w.getMapElement());
-		mWorld.addEntity(r.getMapElement());
-		mWorld.addEntity(b.getMapElement());
-		mWorld.addEntity(notBuilt.getMapElement());
+//		mWorld.addEntity(w.getMapElement());
+//		mWorld.addEntity(r.getMapElement());
+//		mWorld.addEntity(b.getMapElement());
+//		mWorld.addEntity(notBuilt.getMapElement());
 		mWorld.addEntity(missile);
 		mWorld.addEntity(missile2);
 		mWorld.addEntity(tower);

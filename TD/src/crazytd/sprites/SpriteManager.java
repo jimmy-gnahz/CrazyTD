@@ -3,6 +3,8 @@ package crazytd.sprites;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.robobrain.sdk.game.World;
+
 import android.util.Log;
 
 /*
@@ -11,16 +13,19 @@ import android.util.Log;
 
 public class SpriteManager  {
 	
-	private final static int BLOCK_SIZE = 64; // Size length of one block, used for testing/debugging
-	private float startTime;
-	private float endTime;
-	private float deltaTime;
+	public final static int BLOCK_SIZE = 64; // Size length of one block, used for testing/debugging
+	private long startTime;
+	private long endTime;
+	private long deltaTime;
 	
 	private List<Tower> towers;
 	private List<Monster> monsters;
 	private List<Missile> missiles;
 	
-	public SpriteManager() {
+	private World world;
+	
+	public SpriteManager(World world) {
+		this.world = world;
 		towers = new ArrayList<Tower>();
 		monsters = new ArrayList<Monster>();
 		missiles = new ArrayList<Missile>();
@@ -39,17 +44,62 @@ public class SpriteManager  {
 	}
 	
 	/**
-	 * Sets a target if it doesn't already have one
-	 * Fire missile if frequency is reached
+	 * updates each tower's target monster
+	 * Fires missile if frequency is reached
 	 */
 	public void updateTowers(){
 		endTime = System.currentTimeMillis();
 		deltaTime = endTime - startTime;
 		startTime = System.currentTimeMillis();
 		
+
+		
+		for (Tower tower : towers) {
+			updateTowerTarget(tower);
+			
+			if (tower.target != null) Log.e("SpriteManager","Has target");
+			else Log.e("SpriteManager","No target");
+			
+			// update tower.elapsedTime
+			tower.setElapsedTime(tower.getElapsedTime() + deltaTime);
+			Log.e("SpriteManager","Firing?? "+tower.getElapsedTime()+" "+tower.getFiringInterval());
+			if ((tower.getElapsedTime() >= tower.getFiringInterval()) && (tower.target != null)){
+				
+				tower.setElapsedTime(0);
+				Missile newMissile = tower.getMissile().clone();
+				newMissile.setTarget(tower.getTarget());
+				newMissile.x = tower.x; newMissile.y = tower.y;
+				missiles.add(newMissile);
+				world.addEntity(newMissile);
+				
+			}
+		}
+		
+		
+		
 		// TODO
 	}
 	
+	/**
+	 * checks if target is still in range, if not then deletes the current target
+	 * Sets a target if it doesn't already have one
+	 */
+	public void updateTowerTarget(Tower tower){
+
+		// Deletes the current target if the target is out of range
+		if (tower.target != null){
+			float actualRange = tower.range * BLOCK_SIZE;
+			if (tower.distToMonster(tower.target) > actualRange){
+				tower.target = null;
+			}
+		}
+
+		boolean foundTarget = false;
+		if (tower.target == null){
+			foundTarget = tower.findTarget(monsters);
+		}
+
+	}
 	
 	/**
 	 *  Checks if any of the missiles has collided with its target monster
@@ -86,6 +136,12 @@ public class SpriteManager  {
 					if (missile.getTarget().equals(monster)){
 						missile.remove = true;
 						toRemoveMissiles.add(missile);
+					}
+				}
+				
+				for(Tower tower : towers){
+					if (tower.getTarget().equals(monster)){
+						tower.target = null;
 					}
 				}
 				monster.remove = true;

@@ -38,6 +38,12 @@ public class Missile extends Entity{
 		super.update(time);
 	}
 	
+	@Override
+	public Missile clone(){
+		Missile cloneMissile = new Missile(target,damage,mSpeed);
+		cloneMissile.mRenderable = mRenderable;
+		return cloneMissile;
+	}
 	
 	//********************************************************************
 	// 						SETTERS & GETTERS
