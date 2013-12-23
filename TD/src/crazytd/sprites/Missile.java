@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2013 Jimmy Zhang
+ * See the file COPYING.txt for full copyright information
+ */
+
 package crazytd.sprites;
 
 import javax.microedition.khronos.opengles.GL10;

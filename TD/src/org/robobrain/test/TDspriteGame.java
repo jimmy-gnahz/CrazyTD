@@ -46,7 +46,7 @@ public class TDspriteGame extends Engine {
 		TextureManager.registerTexture("images/castle.png", SPRITE_CASTLE);
 		
 
-		Monster monster = new Monster(0.1f,300);
+		Monster monster = new Monster(0.1f,30);
 		monster.x = (float) (0.0 * mWorld.getWidth());
 		monster.y = (float) (0.4 * mWorld.getHeight());
 		monster.vx = 1.0f;
