@@ -52,17 +52,14 @@ public class SpriteManager  {
 		deltaTime = endTime - startTime;
 		startTime = System.currentTimeMillis();
 		
-
-		
 		for (Tower tower : towers) {
 			updateTowerTarget(tower);
 			
-			if (tower.target != null) Log.e("SpriteManager","Has target");
-			else Log.e("SpriteManager","No target");
+			// update tower.elapsedTime 
+			if (tower.getElapsedTime() < tower.getFiringInterval()) {
+				tower.setElapsedTime(tower.getElapsedTime() + deltaTime);
+			}
 			
-			// update tower.elapsedTime
-			tower.setElapsedTime(tower.getElapsedTime() + deltaTime);
-			Log.e("SpriteManager","Firing?? "+tower.getElapsedTime()+" "+tower.getFiringInterval());
 			if ((tower.getElapsedTime() >= tower.getFiringInterval()) && (tower.target != null)){
 				
 				tower.setElapsedTime(0);
@@ -145,7 +142,7 @@ public class SpriteManager  {
 					}
 				}
 				monster.remove = true;
-				toRemoveMonsters.remove(monster);
+				toRemoveMonsters.add(monster);
 			}
 		}
 		
