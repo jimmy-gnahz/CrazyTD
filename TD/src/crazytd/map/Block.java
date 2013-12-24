@@ -68,8 +68,8 @@ class MapElement extends Entity {
 		super();
 		Texture t = TextureManager.getTexture(textureIndex);
 		Sprite s = new Sprite(t, 64, 64, 1);
-		this.x=x;
-		this.y=y;
+		this.x = x;
+		this.y = y;
 		mRenderable = s;
 		mSpeed = 0.5f;
 	}

@@ -5,9 +5,7 @@ import org.robobrain.test.TDspriteGame;
 
 
 public class Road extends Block{
-	public enum Direction{
-		NORTH, SOUTH, EAST, WEST
-	}
+
 	private Direction inDirection, outDirection;
 	
 	/**

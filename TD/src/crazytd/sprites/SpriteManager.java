@@ -19,7 +19,7 @@ import android.util.Log;
 public class SpriteManager  {
 	
 	// Size length of one block, used for testing/debugging
-	public final static int BLOCK_SIZE = 64; 
+	public final static int BLOCK_SIZE = 64;
 	
 	private long startTime;
 	private long endTime;
@@ -41,8 +41,7 @@ public class SpriteManager  {
 	
 	
 	/**
-	 * updates List of Missiles and Monsters
-	 * checks for removal
+	 * Updates the lists of sprites
 	 */
 	public void updateSprites(){
 		updateMissiles();
@@ -51,7 +50,7 @@ public class SpriteManager  {
 	}
 	
 	/**
-	 * updates each tower's target monster
+	 * Updates each tower's target monster. 
 	 * Fires missile if frequency is reached
 	 */
 	public void updateTowers(){
@@ -60,32 +59,45 @@ public class SpriteManager  {
 		startTime = System.currentTimeMillis();
 		
 		for (Tower tower : towers) {
+			
+			updateTowerElapsedTime(tower);
 			updateTowerTarget(tower);
 			
-			// update tower.elapsedTime 
-			if (tower.getElapsedTime() < tower.getFiringInterval()) {
-				tower.setElapsedTime(tower.getElapsedTime() + deltaTime);
-			}
-			
 			if ((tower.getElapsedTime() >= tower.getFiringInterval()) && (tower.target != null)){
-				
-				tower.setElapsedTime(0);
-				Missile newMissile = tower.getMissile().clone();
-				newMissile.setTarget(tower.getTarget());
-				newMissile.x = tower.x; newMissile.y = tower.y;
-				missiles.add(newMissile);
-				world.addEntity(newMissile);
-				
+				fireMissile(tower);
 			}
 		}
 		// TODO
 	}
 	
 	/**
-	 * checks if target is still in range, if not then deletes the current target
+	 * Creates a new missile from the tower. 
+	 * Adds missile to list
+	 * @param tower
+	 */
+	private void fireMissile(Tower tower){
+		tower.setElapsedTime(0);
+		Missile newMissile = tower.getMissile().clone();
+		newMissile.setTarget(tower.getTarget());
+		newMissile.x = tower.x; newMissile.y = tower.y;
+		addMissile(newMissile);
+	}
+	
+	/**
+	 * adds deltaTime to tower's elapsedTime.
+	 * @param tower
+	 */
+	private void updateTowerElapsedTime(Tower tower){
+		if (tower.getElapsedTime() < tower.getFiringInterval()) {
+			tower.setElapsedTime(tower.getElapsedTime() + deltaTime);
+		}
+	}
+	
+	/**
+	 * checks if target is still in range, if not then deletes the current target. 
 	 * Sets a target if it doesn't already have one
 	 */
-	public void updateTowerTarget(Tower tower){
+	private void updateTowerTarget(Tower tower){
 
 		// Deletes the current target if the target is out of range
 		if (tower.target != null){
@@ -95,18 +107,16 @@ public class SpriteManager  {
 			}
 		}
 
-		boolean foundTarget = false;
 		if (tower.target == null){
-			foundTarget = tower.findTarget(monsters);
+			tower.findTarget(monsters);
 		}
-
 	}
 	
 	/**
-	 *  Checks if any of the missiles has collided with its target monster
-	 *  remove the missile if it has collided
+	 *  Checks if any of the missiles has collided with its target monster. 
+	 *  Removes the missile if it has collided.
 	 */
-	public void updateMissiles(){
+	private void updateMissiles(){
 		List<Missile> toRemoveMissiles = new ArrayList<Missile>();
 		
 		for (Missile missile : missiles){
@@ -123,16 +133,17 @@ public class SpriteManager  {
 	}
 	
 	/**
-	 * Removes the monsters whose hp has dropped to 0
+	 * Removes the monsters whose hp has dropped to 0. 
 	 * Also removes the missiles targeting that monster
 	 */
-	public void updateMonsters(){
+	private void updateMonsters(){
 		List<Missile> toRemoveMissiles = new ArrayList<Missile>();
 		List<Monster> toRemoveMonsters = new ArrayList<Monster>();
 		
 		for (Monster monster : monsters){
 			if (monster.getHP() <= 0){
 				
+				// Removes the missiles that were targeting the monster
 				for(Missile missile : missiles){
 					if (missile.getTarget().equals(monster)){
 						missile.remove = true;
@@ -140,12 +151,14 @@ public class SpriteManager  {
 					}
 				}
 				
+				// Removes the target monster for towers that were targeting the monster
 				for(Tower tower : towers){
 					if (tower.getTarget().equals(monster)){
 						tower.target = null;
 					}
 				}
-				monster.remove = true;
+				
+				monster.remove = true; 	// To remove the texture
 				toRemoveMonsters.add(monster);
 			}
 		}

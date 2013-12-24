@@ -70,7 +70,7 @@ public class TDspriteGame extends Engine {
 		Buildable notBuilt = new Buildable(1,1);		
 		Block b = new Buildable((float)(mWorld.getWidth()*0.5),(float)(mWorld.getHeight()*0.5));
 		
-		Tower tower = new Tower(missile,2,Tower.FAST);
+		Tower tower = new Tower(missile,2,Tower.QUICK_FIRE);
 		
 		if(b.getClass()==Buildable.class){
 			if(!((Buildable) b).getIsBuilt()){

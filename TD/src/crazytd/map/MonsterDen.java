@@ -4,9 +4,6 @@ import org.robobrain.sdk.graphics.Vector;
 import org.robobrain.test.TDspriteGame;
 public class MonsterDen extends Block {
 
-	public enum Direction{
-		NORTH, SOUTH, EAST, WEST
-	}
 	Direction outDirection;
 	
 	/**

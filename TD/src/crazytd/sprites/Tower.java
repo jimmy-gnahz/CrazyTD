@@ -19,28 +19,28 @@ import org.robobrain.test.TDspriteGame;
 public class Tower extends Entity{
 	
 	/**
-	 * Firing range of the tower
-	 * units in side length of 1 grid
+	 * Firing range of the tower. 
+	 * Unit for measurements is edge length of one tile
 	 */
 	protected float range; 
 	
 	/**
-	 * Firing frequencies
+	 * Firing frequencies. 
 	 * Measured in #fires/minute
 	 */
-	public static final float FAST = 120;
-	public static final float MEDIUM = 60;
-	public static final float SLOW = 30;
+	public static final float QUICK_FIRE = 120;
+	public static final float MEDIUM_FIRE = 60;
+	public static final float SLOW_FIRE = 30;
 	
 	/**
-	 * Frequency at which towers fire missiles
+	 * Frequency at which towers fire missiles. 
 	 * One of {FAST,MEDIUM,SLOW}
 	 */
 	protected float firingFreq;
 	
 	/**
-	 * The elapsed time from the last time the tower fired
-	 * measured in Milliseconds
+	 * The elapsed time from the last time the tower fired. 
+	 * Measured in Milliseconds
 	 */
 	protected float elapsedTime;
 	
@@ -59,6 +59,11 @@ public class Tower extends Entity{
 	 */
 	protected Missile missile;
 	
+	/**
+	 * @param missile
+	 * @param range measured in number of tiles, 
+	 * @param frequency firing speed, recommended: QUICK_FIRE, MEDIUM_FIRE, SLOW_FIRE
+	 */
 	public Tower(Missile missile, float range, float frequency) {
 		super();
 		Texture t = TextureManager.getTexture(TDspriteGame.SPRITE_TOWER);

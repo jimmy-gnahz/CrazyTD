@@ -5,11 +5,13 @@ import org.robobrain.test.TDspriteGame;
 public class Castle extends Block {
 
 	private int hp, maxHp;
+	
 	public Castle(int x, int y,int maxHp) {
 		super(x, y);
 		this.maxHp = maxHp;
 		bindTextureIndex(TDspriteGame.SPRITE_CASTLE);
 	}
+	
 	public Castle(float x, float y,int maxHp) {
 		super(x, y);
 		this.maxHp = maxHp;

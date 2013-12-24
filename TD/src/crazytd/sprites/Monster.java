@@ -40,7 +40,7 @@ public class Monster extends Entity{
 	public int getHP(){
 		return hp;
 	}
-	
+
 	@Override 
 	public void draw(GL10 gl) {
 	    super.draw(gl);
