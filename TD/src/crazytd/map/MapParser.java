@@ -82,7 +82,6 @@ public class MapParser {
 	}
 	
 	/**
-	 * 
 	 * @param str a single character, one of {"n","s","e","w"}
 	 * @return Direction enum
 	 * @throws Exception

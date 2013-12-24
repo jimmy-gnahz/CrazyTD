@@ -19,28 +19,29 @@ public class Block {
 	protected float x;		// the x coordinate in the map
 	protected float y;		// the y coordinate in the map
 	protected MapElement m;
-	//protected BlockType type;//block type
-	
-	//Temporary variables
-	// Somehow..95-100 works better than 64... TODO: look into it
+
 	public static final float tileSize = 64; //the edge length of a tile 
-	//protected float BORDER_WIDTH = 20;
-	//set up a tile by column number and row number
+
+	/**
+	 * set up a tile by column number and row number
+	 * @param col 
+	 * @param row
+	 */
 	public Block(int col, int row){
 		this.tileX = col;
 		this.tileY = row;
-		//this.x = col * tileSize + tileSize/2 + BORDER_WIDTH;
-		//this.y = row * tileSize + tileSize/2 + BORDER_WIDTH;
 		this.x = tileX * tileSize + tileSize/2;
 		this.y = tileY * tileSize + tileSize/2;
 	}
 
-	//set up a tile by given a coordinate
+	/**
+	 * set up a tile by given a coordinate
+	 * @param x
+	 * @param y
+	 */
 	public Block(float x, float y){
 		this.tileX = Math.round(x/tileSize);			//round to the nearest int
 		this.tileY = Math.round(y/tileSize);			//round to the nearest int
-		//this.x = tileX * tileSize + tileSize/2 + BORDER_WIDTH;
-		//this.y = tileY * tileSize + tileSize/2 + BORDER_WIDTH;
 		this.x = tileX * tileSize + tileSize/2;
 		this.y = tileY * tileSize + tileSize/2;
 
