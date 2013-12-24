@@ -22,7 +22,7 @@ public class Tower extends Entity{
 	 * Firing range of the tower
 	 * units in side length of 1 grid
 	 */
-	float range; 
+	protected float range; 
 	
 	/**
 	 * Firing frequencies
@@ -36,28 +36,28 @@ public class Tower extends Entity{
 	 * Frequency at which towers fire missiles
 	 * One of {FAST,MEDIUM,SLOW}
 	 */
-	float firingFreq;
+	protected float firingFreq;
 	
 	/**
 	 * The elapsed time from the last time the tower fired
 	 * measured in Milliseconds
 	 */
-	float elapsedTime;
+	protected float elapsedTime;
 	
 	/**
 	 * cost of producing one tower (perhaps not needed for first sprint)
 	 */
-	int cost;
+	protected int cost;
 	
 	/**
 	 * The target monster
 	 */
-	Monster target;
+	protected Monster target;
 	
 	/**
 	 * The type of missile the tower fires
 	 */
-	Missile missile;
+	protected Missile missile;
 	
 	public Tower(Missile missile, float range, float frequency) {
 		super();

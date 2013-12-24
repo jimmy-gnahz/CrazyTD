@@ -18,7 +18,9 @@ import android.util.Log;
 
 public class SpriteManager  {
 	
-	public final static int BLOCK_SIZE = 64; // Size length of one block, used for testing/debugging
+	// Size length of one block, used for testing/debugging
+	public final static int BLOCK_SIZE = 64; 
+	
 	private long startTime;
 	private long endTime;
 	private long deltaTime;
@@ -76,9 +78,6 @@ public class SpriteManager  {
 				
 			}
 		}
-		
-		
-		
 		// TODO
 	}
 	

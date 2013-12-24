@@ -8,6 +8,7 @@ public class WasteLand extends Block {
 		super(x, y);
 		bindTextureIndex(TDspriteGame.SPRITE_WASTELAND);
 	}
+	
 	public WasteLand(float x, float y) {
 		super(x, y);
 		bindTextureIndex(TDspriteGame.SPRITE_WASTELAND);

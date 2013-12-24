@@ -8,7 +8,17 @@ public class MonsterDen extends Block {
 		NORTH, SOUTH, EAST, WEST
 	}
 	Direction outDirection;
-	private Vector n=new Vector(0,-1), s= new Vector(0,1),e=new Vector(1,0),w=new Vector(-1,0), o=new Vector(0,0);
+	
+	/**
+	 * Direction vectors for north, south, east, and west.
+	 * o : zero vector 
+	 */
+	private Vector n = new Vector(0,-1), 
+			s = new Vector(0,1),
+			e = new Vector(1,0),
+			w = new Vector(-1,0), 
+			o = new Vector(0,0);
+	
 	//outDir should be one of the the enum NORTH, SOUTH, EAST, WEST
 	public MonsterDen(int x, int y,Direction outDir) {
 		super(x, y);
@@ -21,9 +31,11 @@ public class MonsterDen extends Block {
 	}
 	
 	public Vector getDirection(float x, float y){
-		float xInTile=x-this.x;
-		float yInTile=y-this.y;
-		if (xInTile > tileSize/2 || xInTile<tileSize/2 || yInTile > tileSize/2 ||yInTile<tileSize/2) return o; //out of boundary
+		float xInTile = x - this.x;
+		float yInTile = y - this.y;
+		if (xInTile > tileSize/2 || xInTile<tileSize/2 || yInTile > tileSize/2 ||yInTile<tileSize/2) {
+			return o; //out of boundary
+		}
 		switch (outDirection){
 		case NORTH:
 			return n;
