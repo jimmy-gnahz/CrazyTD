@@ -10,6 +10,7 @@ import crazytd.map.Block;
 import crazytd.map.Buildable;
 import crazytd.map.Castle;
 import crazytd.map.Map;
+import crazytd.map.MapParser;
 import crazytd.map.MonsterDen;
 import crazytd.map.Road;
 import crazytd.map.WasteLand;
@@ -82,7 +83,7 @@ public class TDspriteGame extends Engine {
 
 		
 
-		Map m= new Map(4,4);
+		Map m= MapParser.parse(MapParser.testmap1);
 		Tower tower = new Tower(missile,5,Tower.QUICK_FIRE);
 	
 		Block b= m.getBlock(3, 2);

@@ -7,8 +7,7 @@ public class Map {
 	public Map(int maxX, int maxY){
 		this.maxX=maxX;
 		this.maxY=maxY;
-		theMap =new Block[maxX][maxY];
-		dummy();
+		theMap =new Block[maxY][maxX];
 	}
 	
 	private void dummy(){

@@ -6,14 +6,19 @@ public class Castle extends Block {
 
 	private int hp, maxHp;
 	
+	public Castle(int x, int y){
+		super(x,y);
+		bindTextureIndex(TDspriteGame.SPRITE_CASTLE);
+	}
+	
 	public Castle(int x, int y,int maxHp) {
-		super(x, y);
+		super(x,y);
 		this.maxHp = maxHp;
 		bindTextureIndex(TDspriteGame.SPRITE_CASTLE);
 	}
 	
 	public Castle(float x, float y,int maxHp) {
-		super(x, y);
+		super(x,y);
 		this.maxHp = maxHp;
 		bindTextureIndex(TDspriteGame.SPRITE_CASTLE);
 	}
@@ -25,6 +30,10 @@ public class Castle extends Block {
 			return new Vector(0,0); //out of boundary
 		}
 		return new Vector(-xInTile,-yInTile).normalize();
+	}
+	
+	public void setHP(int hp){
+		this.hp = hp;
 	}
 	
 	public int getHP(){

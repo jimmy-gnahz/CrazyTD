@@ -50,10 +50,11 @@ public class SpriteManager  {
 	}
 	
 	/**
+	 * Updates elapsedTime for each tower. 
 	 * Updates each tower's target monster. 
 	 * Fires missile if frequency is reached
 	 */
-	public void updateTowers(){
+	private void updateTowers(){
 		endTime = System.currentTimeMillis();
 		deltaTime = endTime - startTime;
 		startTime = System.currentTimeMillis();
@@ -67,7 +68,6 @@ public class SpriteManager  {
 				fireMissile(tower);
 			}
 		}
-		// TODO
 	}
 	
 	/**
