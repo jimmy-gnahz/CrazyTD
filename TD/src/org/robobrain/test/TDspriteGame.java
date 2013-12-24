@@ -93,12 +93,8 @@ public class TDspriteGame extends Engine {
 			}
 		}		
 		
-		Block[][] ma =m.getMap();
-		for(int x=0;x<ma.length;x++){
-			for(int y=0;y<ma[x].length;y++){
-				mWorld.addEntity(ma[x][y].getMapElement());
-			}
-		}
+		m.addMapToWorld(mWorld);
+
 		
 
 

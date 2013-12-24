@@ -168,6 +168,11 @@ public class GameActivity extends Activity {
         setTargetSize(width, height);
     }
     
+    public void initRenderer(){
+    	mGLView = new GLView(this);
+        setContentView(mGLView);
+    }
+    
     /**
      * Sets the ideal width and height for your game. This will be used to 
      * calculate the ratio to scale your scene assets by in order to fit the 
@@ -179,6 +184,7 @@ public class GameActivity extends Activity {
     	mGLView.setTargetSize(width, height);
     }
     
+
     /**
      * Gets the Activity's application Context.
      * @return A valid application Context.

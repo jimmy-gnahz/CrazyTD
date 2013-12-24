@@ -23,24 +23,27 @@ public class Block {
 	
 	//Temporary variables
 	// Somehow..95-100 works better than 64... TODO: look into it
-	protected float tileSize = 64; //the edge length of a tile 
-	protected float BORDER_WIDTH = 20;
+	public static final float tileSize = 64; //the edge length of a tile 
+	//protected float BORDER_WIDTH = 20;
 	//set up a tile by column number and row number
 	public Block(int col, int row){
 		this.tileX = col;
 		this.tileY = row;
-		this.x = col * tileSize + tileSize/2 + BORDER_WIDTH;
-		this.y = row * tileSize + tileSize/2 + BORDER_WIDTH;
-		//this.type=BlockType.valueOf(type);
+		//this.x = col * tileSize + tileSize/2 + BORDER_WIDTH;
+		//this.y = row * tileSize + tileSize/2 + BORDER_WIDTH;
+		this.x = tileX * tileSize + tileSize/2;
+		this.y = tileY * tileSize + tileSize/2;
 	}
 
-	//set up a tile by given a coordinate, the coordinate of the center of a tile will always smaller or equal to the given coordinate
+	//set up a tile by given a coordinate
 	public Block(float x, float y){
-		this.tileX = (int)(x/tileSize);			//round down
-		this.tileY = (int)(y/tileSize);			//round down
-		this.x = tileX * tileSize + tileSize/2 + BORDER_WIDTH;
-		this.y = tileY * tileSize + tileSize/2 + BORDER_WIDTH;
-		//this.type=BlockType.valueOf(type);
+		this.tileX = Math.round(x/tileSize);			//round to the nearest int
+		this.tileY = Math.round(y/tileSize);			//round to the nearest int
+		//this.x = tileX * tileSize + tileSize/2 + BORDER_WIDTH;
+		//this.y = tileY * tileSize + tileSize/2 + BORDER_WIDTH;
+		this.x = tileX * tileSize + tileSize/2;
+		this.y = tileY * tileSize + tileSize/2;
+
 	}
 	public Vector getCoordinate(){
 		return new Vector((float)x,(float)y);
