@@ -29,8 +29,8 @@ public class Buildable extends Block {
 		if (!isBuilt){
 			Log.e("XofTower", "Towerrr "+x);
 			t = newTower;
-			t.x=x;
-			t.y=y;
+			t.x = x;
+			t.y = y;
 			isBuilt = true;
 		}
 	}
@@ -47,6 +47,6 @@ public class Buildable extends Block {
 		return m;
 	}
 	public void bindBuiltTextureIndex(int textureIndex){
-		mBuilt=new MapElement(x, y, textureIndex);
+		mBuilt = new MapElement(x, y, textureIndex);
 	}
 }

@@ -23,21 +23,22 @@ public class Block {
 	
 	//Temporary variables
 	protected float tileSize = 64;//the edge length of a tile 
+	
 	//set up a tile by column number and row number
 	public Block(int col, int row){
 		this.tileX = col;
 		this.tileY = row;
-		this.x=col*tileSize+tileSize/2;
-		this.y=row*tileSize+tileSize/2;
+		this.x = col * tileSize + tileSize/2;
+		this.y = row * tileSize + tileSize/2;
 		//this.type=BlockType.valueOf(type);
 	}
 
 	//set up a tile by given a coordinate, the coordinate of the center of a tile will always smaller or equal to the given coordinate
 	public Block(float x, float y){
-		this.tileX=(int)(x/tileSize);			//round down
-		this.tileY=(int)(y/tileSize);			//round down
-		this.x=tileX*tileSize+tileSize/2;
-		this.y=tileY*tileSize+tileSize/2;
+		this.tileX = (int)(x/tileSize);			//round down
+		this.tileY = (int)(y/tileSize);			//round down
+		this.x = tileX * tileSize + tileSize/2;
+		this.y = tileY * tileSize + tileSize/2;
 		//this.type=BlockType.valueOf(type);
 	}
 	public Vector getCoordinate(){

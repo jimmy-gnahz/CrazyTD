@@ -63,12 +63,12 @@ public class TDspriteGame extends Engine {
 		
 
 		WasteLand w = new WasteLand(0,2);
-		MonsterDen d= new MonsterDen(0,0,MonsterDen.Direction.EAST);
+		MonsterDen d = new MonsterDen(0,0,MonsterDen.Direction.EAST);
 		Road r1= new Road(1,0,Road.Direction.WEST,Road.Direction.EAST);
 		Road r2 = new Road(2,0,Road.Direction.WEST,Road.Direction.EAST);
 		Castle c = new Castle(3,0,50);
-		Buildable notBuilt= new Buildable(1,1);		
-		Block b = new Buildable((float)((float)mWorld.getWidth()*0.5),(float)((float)mWorld.getHeight()*0.5));
+		Buildable notBuilt = new Buildable(1,1);		
+		Block b = new Buildable((float)(mWorld.getWidth()*0.5),(float)(mWorld.getHeight()*0.5));
 		
 		Tower tower = new Tower(missile,2,Tower.FAST);
 		
@@ -77,7 +77,6 @@ public class TDspriteGame extends Engine {
 				((Buildable) b).Build(tower);
 			}
 		}
-		
 
 		mWorld.addEntity(w.getMapElement());
 		mWorld.addEntity(r1.getMapElement());
@@ -93,10 +92,7 @@ public class TDspriteGame extends Engine {
 		spriteManager.addMonster(monster2);
 		spriteManager.addTower(tower);
 		mWorld.addSpriteManager(spriteManager);
-		
-
-
-		
+	
 	}
 }
 
