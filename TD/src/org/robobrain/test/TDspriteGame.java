@@ -9,6 +9,7 @@ import android.util.Log;
 import crazytd.map.Block;
 import crazytd.map.Buildable;
 import crazytd.map.Castle;
+import crazytd.map.Map;
 import crazytd.map.MonsterDen;
 import crazytd.map.Road;
 import crazytd.map.WasteLand;
@@ -62,29 +63,51 @@ public class TDspriteGame extends Engine {
 		missile.vx = 0.0f; missile.vy = 0.0f;
 		
 
-		WasteLand w = new WasteLand(0,2);
-		MonsterDen d = new MonsterDen(0,0,MonsterDen.Direction.EAST);
-		Road r1= new Road(1,0,Road.Direction.WEST,Road.Direction.EAST);
-		Road r2 = new Road(2,0,Road.Direction.WEST,Road.Direction.EAST);
-		Castle c = new Castle(3,0,50);
-		Buildable notBuilt = new Buildable(1,1);		
-		Block b = new Buildable((float)(mWorld.getWidth()*0.5),(float)(mWorld.getHeight()*0.5));
+
+//		WasteLand w = new WasteLand(0,2);
+//		MonsterDen d= new MonsterDen(0,0,MonsterDen.Direction.EAST);
+//		Road r1= new Road(1,0,Road.Direction.WEST,Road.Direction.EAST);
+//		Road r2 = new Road(2,0,Road.Direction.WEST,Road.Direction.EAST);
+//		Castle c = new Castle(3,0,50);
+//		Buildable notBuilt= new Buildable(1,1);		
+//		Block b = new Buildable((float)((float)mWorld.getWidth()*0.5),(float)((float)mWorld.getHeight()*0.5));
+//
+//		WasteLand w = new WasteLand(0,2);
+//		MonsterDen d = new MonsterDen(0,0,MonsterDen.Direction.EAST);
+//		Road r1= new Road(1,0,Road.Direction.WEST,Road.Direction.EAST);
+//		Road r2 = new Road(2,0,Road.Direction.WEST,Road.Direction.EAST);
+//		Castle c = new Castle(3,0,50);
+//		Buildable notBuilt = new Buildable(1,1);		
+//		Block b = new Buildable((float)(mWorld.getWidth()*0.5),(float)(mWorld.getHeight()*0.5));
+
 		
-		Tower tower = new Tower(missile,2,Tower.QUICK_FIRE);
-		
+
+		Map m= new Map(4,4);
+		Tower tower = new Tower(missile,5,Tower.QUICK_FIRE);
+	
+		Block b= m.getBlock(3, 2);
 		if(b.getClass()==Buildable.class){
 			if(!((Buildable) b).getIsBuilt()){
 				((Buildable) b).Build(tower);
 			}
+		}		
+		
+		Block[][] ma =m.getMap();
+		for(int x=0;x<ma.length;x++){
+			for(int y=0;y<ma[x].length;y++){
+				mWorld.addEntity(ma[x][y].getMapElement());
+			}
 		}
+		
 
-		mWorld.addEntity(w.getMapElement());
-		mWorld.addEntity(r1.getMapElement());
-		mWorld.addEntity(r2.getMapElement());
-		mWorld.addEntity(c.getMapElement());
-		mWorld.addEntity(d.getMapElement());
-		mWorld.addEntity(b.getMapElement());
-		mWorld.addEntity(notBuilt.getMapElement());
+
+//		mWorld.addEntity(w.getMapElement());
+//		mWorld.addEntity(r1.getMapElement());
+//		mWorld.addEntity(r2.getMapElement());
+//		mWorld.addEntity(c.getMapElement());
+//		mWorld.addEntity(d.getMapElement());
+//		mWorld.addEntity(b.getMapElement());
+//		mWorld.addEntity(notBuilt.getMapElement());
 		
 		spriteManager = new SpriteManager(mWorld);
 		spriteManager.addMissile(missile);
