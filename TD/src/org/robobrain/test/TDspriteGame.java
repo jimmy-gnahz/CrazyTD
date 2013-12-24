@@ -86,8 +86,8 @@ public class TDspriteGame extends Engine {
 		Map m= MapParser.parse(MapParser.testmap1);
 		Tower tower = new Tower(missile,5,Tower.QUICK_FIRE);
 	
-		Block b= m.getBlock(3, 2);
-		if(b.getClass()==Buildable.class){
+		Block b= m.getBlock(2, 3);
+		if(b instanceof Buildable){
 			if(!((Buildable) b).getIsBuilt()){
 				((Buildable) b).Build(tower);
 			}

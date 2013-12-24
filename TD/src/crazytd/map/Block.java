@@ -22,14 +22,15 @@ public class Block {
 	//protected BlockType type;//block type
 	
 	//Temporary variables
-	protected float tileSize = 64;//the edge length of a tile 
-	
+	// Somehow..95-100 works better than 64... TODO: look into it
+	protected float tileSize = 95; //the edge length of a tile 
+	protected float BORDER_WIDTH = 20;
 	//set up a tile by column number and row number
 	public Block(int col, int row){
 		this.tileX = col;
 		this.tileY = row;
-		this.x = col * tileSize + tileSize/2;
-		this.y = row * tileSize + tileSize/2;
+		this.x = col * tileSize + tileSize/2 + BORDER_WIDTH;
+		this.y = row * tileSize + tileSize/2 + BORDER_WIDTH;
 		//this.type=BlockType.valueOf(type);
 	}
 
@@ -37,8 +38,8 @@ public class Block {
 	public Block(float x, float y){
 		this.tileX = (int)(x/tileSize);			//round down
 		this.tileY = (int)(y/tileSize);			//round down
-		this.x = tileX * tileSize + tileSize/2;
-		this.y = tileY * tileSize + tileSize/2;
+		this.x = tileX * tileSize + tileSize/2 + BORDER_WIDTH;
+		this.y = tileY * tileSize + tileSize/2 + BORDER_WIDTH;
 		//this.type=BlockType.valueOf(type);
 	}
 	public Vector getCoordinate(){
@@ -54,7 +55,7 @@ public class Block {
 	}
 
 	public void bindTextureIndex(int textureIndex){
-		m=new MapElement(x, y, textureIndex);
+		m = new MapElement(x, y, textureIndex);
 	}
 	
 	public Entity getMapElement(){
@@ -71,7 +72,6 @@ class MapElement extends Entity {
 		this.x = x;
 		this.y = y;
 		mRenderable = s;
-		mSpeed = 0.5f;
 	}
 
 }

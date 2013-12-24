@@ -1,20 +1,39 @@
+/*
+ * Copyright (c) 2013 Jimmy Zhang
+ * See the file COPYING.txt for full copyright information
+ */
+
 package crazytd.map;
 
 import crazytd.map.Block.Direction;
 
 public class MapParser {
 	
+	/**
+	 * xx = wasteland 
+	 * bb = buildable 
+	 * cc = castle 
+	 * d("n","s","w","e") = MonsterDen with out direction as one of North,South,West, or East
+	 * ("n","s","w","e")("n","s","w","e") = Road with inDirection specified by the first character and out direction by the second
+	 */
 	public static String testmap1 =   
-			"ww,bb,bb,bb,bb,bb,bb;" +
+			"xx,bb,bb,bb,bb,bb,bb;" +
 			"de,we,ws,bb,se,ws,bb;" +
-			"ww,bb,ns,bb,sn,ns,bb;" +
-			"ww,bb,ne,we,wn,ns,bb;" +
-			"ww,bb,bb,bb,bb,ns,bb;" +
-			"ww,ww,ww,ww,ww,cc,ww"; 
+			"xx,bb,ns,bb,sn,ns,bb;" +
+			"xx,bb,ne,we,wn,ns,bb;" +
+			"xx,bb,bb,bb,bb,ns,bb;" +
+			"xx,xx,xx,xx,xx,cc,xx"; 
 
+	public static String testmap2 = 
+			"xx,bb,xx";
+	
+	/**
+	 * @param map string representation of the map, follow the pattern described above
+	 */
 	public static Map parse(String map){
 		String[][] elements = toStringList(map);
 		Map result = new Map(elements[0].length,elements.length);
+		
 		for (int i=0;i<elements.length;i++){
 			for (int j=0;j<elements[i].length;j++){
 				try {
@@ -28,9 +47,16 @@ public class MapParser {
 		return result;
 	}
 
+	/**
+	 * @param str a two character string such as "cc" representing a block
+	 * @param x the x index of the block
+	 * @param y the y index of the block
+	 * @return Block object corresponding to the string representation
+	 * @throws Exception invalid string
+	 */
 	private static Block stringToBlock(String str,int x,int y) throws Exception{
 		Block blk = null;
-		if (str.equals("ww")){
+		if (str.equals("xx")){
 			blk = new WasteLand(x,y);
 		}
 		
@@ -55,6 +81,12 @@ public class MapParser {
 		return blk;
 	}
 	
+	/**
+	 * 
+	 * @param str a single character, one of {"n","s","e","w"}
+	 * @return Direction enum
+	 * @throws Exception
+	 */
 	private static Direction stringToDir(String str) throws Exception{
 		Direction dir = null;
 		if (str.equals("w")) dir = Block.Direction.WEST;
@@ -65,6 +97,11 @@ public class MapParser {
 		return dir;
 	}
 	
+	/**
+	 * Breaks the String into a string matrix
+	 * @param map a string representation of the TD map
+	 * @return
+	 */
 	private static String[][] toStringList(String map){
 		String[] rows = map.split(";");
 		int verticalLength = rows.length;
