@@ -23,7 +23,7 @@ public class Block {
 	
 	//Temporary variables
 	// Somehow..95-100 works better than 64... TODO: look into it
-	protected float tileSize = 95; //the edge length of a tile 
+	protected float tileSize = 64; //the edge length of a tile 
 	protected float BORDER_WIDTH = 20;
 	//set up a tile by column number and row number
 	public Block(int col, int row){

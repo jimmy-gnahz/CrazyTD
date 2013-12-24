@@ -116,6 +116,8 @@ public class TDspriteGame extends Engine {
 		spriteManager.addMonster(monster2);
 		spriteManager.addTower(tower);
 		mWorld.addSpriteManager(spriteManager);
+		Log.d("Width",""+mWorld.getWidth());
+		Log.d("Height",""+mWorld.getHeight());
 	
 	}
 }

@@ -15,7 +15,9 @@ public class TDspriteActivity extends GameActivity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		initRenderer(800,480);
+		World tempWorld = new World();
+		initRenderer(tempWorld.getWidth(),tempWorld.getHeight());
+		tempWorld.kill();
 		setBackgroundColor(Color.YELLOW);
 		registerGame(new TDspriteGame());
 	}
