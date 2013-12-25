@@ -173,6 +173,9 @@ public class SpriteManager  {
 	//********************************************************
 	
 	public void addTower(Tower tower){
+		if (!tower.isBuilt){
+			return;
+		}
 		world.addEntity(tower);
 		towers.add(tower);
 	}

@@ -7,7 +7,8 @@ public class Map {
 	int maxX, maxY;
 	Block[][] theMap;
 	
-	public Map(int maxX, int maxY){
+	//default visiablity to hide the mess, only MapParser allow to access this constructor
+	Map(int maxX, int maxY){
 		this.maxX=maxX;
 		this.maxY=maxY;
 		theMap =new Block[maxY][maxX];

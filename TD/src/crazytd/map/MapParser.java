@@ -18,11 +18,11 @@ public class MapParser {
 	 */
 	public static String testmap1 =   
 			"xx,bb,bb,bb,bb,bb,bb;" +
-			"de,we,ws,bb,se,ws,bb;" +
-			"xx,bb,ns,bb,sn,ns,bb;" +
-			"xx,bb,ne,we,wn,ns,bb;" +
-			"xx,bb,bb,bb,bb,ns,bb;" +
-			"xx,xx,xx,xx,xx,cc,xx"; 
+			"de,we,ws,bb,se,we,ws;" +
+			"xx,bb,ns,bb,sn,bb,ns;" +
+			"xx,bb,ne,we,wn,bb,ns;" +
+			"xx,bb,bb,bb,bb,bb,ns;" +
+			"xx,xx,xx,xx,xx,xx,cc"; 
 
 	public static String testmap2 = 
 			"xx,bb,xx";

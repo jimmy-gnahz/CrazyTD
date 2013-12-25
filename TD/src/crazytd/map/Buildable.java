@@ -31,6 +31,7 @@ public class Buildable extends Block {
 			t = newTower;
 			t.x = x;
 			t.y = y;
+			t.buildTower();
 			isBuilt = true;
 		}
 	}

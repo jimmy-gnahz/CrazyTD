@@ -17,6 +17,10 @@ import org.robobrain.sdk.graphics.TextureManager;
 import org.robobrain.test.TDspriteGame;
 
 public class Tower extends Entity{
+	/**
+	 * is the tower built
+	 */
+	protected boolean isBuilt = false;
 	
 	/**
 	 * Firing range of the tower. 
@@ -169,5 +173,10 @@ public class Tower extends Entity{
 		return intervalInSeconds * 1000;
 	}
 	
-
+	/**
+	 * build the tower, should only be called by Buildable.build(...);
+	 */
+	public void buildTower(){
+		isBuilt = true;
+	}
 }
