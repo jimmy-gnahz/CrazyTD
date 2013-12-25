@@ -27,9 +27,9 @@ public class Map {
 	
 	public void addMapToWorld(World world){
 		
-		for(int x=0;x<theMap.length;x++){
-			for(int y=0;y<theMap[x].length;y++){
-				world.addEntity(theMap[x][y].getMapElement());
+		for(int x=0;x<theMap[0].length;x++){
+			for(int y=0;y<theMap.length;y++){
+				world.addEntity(theMap[y][x].getMapElement());
 			}
 		}
 	}

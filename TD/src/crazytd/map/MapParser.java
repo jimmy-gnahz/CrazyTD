@@ -37,7 +37,7 @@ public class MapParser {
 		for (int i=0;i<elements.length;i++){
 			for (int j=0;j<elements[i].length;j++){
 				try {
-					Block blk = stringToBlock(elements[i][j],i,j);
+					Block blk = stringToBlock(elements[i][j],j,i);
 					result.theMap[i][j] = blk;
 				} catch (Exception e) {
 					e.printStackTrace();
