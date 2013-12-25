@@ -18,11 +18,11 @@ public class Map {
 	}
 	
 	public Block getBlockByCoordinate(float x, float y){
-		return theMap[Math.round(y/Block.tileSize)][Math.round(x/Block.tileSize)];
+		return theMap[Math.round(x/Block.tileSize)][Math.round(y/Block.tileSize)];
 	}
 	
 	public Block getBlockByCoordinate(Vector coordinate){
-		return theMap[Math.round(coordinate.y/Block.tileSize)][Math.round(coordinate.x/Block.tileSize)];
+		return theMap[Math.round(coordinate.x/Block.tileSize)][Math.round(coordinate.y/Block.tileSize)];
 	}
 	
 	public void addMapToWorld(World world){
@@ -33,8 +33,10 @@ public class Map {
 			}
 		}
 	}
-	
-	public Block[][] getMap(){
-		return theMap;
-	}
+//	We will never show the map in 2d array format, it is confusing!!!
+//  (don't delete this, this tomb is a warning
+//
+//	public Block[][] getMap(){
+//		return theMap;
+//	}
 }
