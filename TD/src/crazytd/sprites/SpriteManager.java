@@ -12,10 +12,10 @@ import org.robobrain.sdk.game.World;
 
 import android.util.Log;
 
-/*
- *  Interface for sprites
+/**
+ * Manages the towers, monsters, and missiles, as well as their interactions with each other in the game.
+ * @author Jimmy
  */
-
 public class SpriteManager  {
 	
 	// Size length of one block, used for testing/debugging
@@ -158,7 +158,7 @@ public class SpriteManager  {
 					}
 				}
 				
-				monster.remove = true; 	// To remove the texture
+				monster.remove = true; 	// This is to remove the renderable sprite from world
 				toRemoveMonsters.add(monster);
 			}
 		}

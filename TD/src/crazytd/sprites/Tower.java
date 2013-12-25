@@ -5,7 +5,6 @@
 
 package crazytd.sprites;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.microedition.khronos.opengles.GL10;
@@ -17,8 +16,9 @@ import org.robobrain.sdk.graphics.TextureManager;
 import org.robobrain.test.TDspriteGame;
 
 public class Tower extends Entity{
+	
 	/**
-	 * is the tower built
+	 * indicates whether or not the tower is built
 	 */
 	protected boolean isBuilt = false;
 	
@@ -38,7 +38,7 @@ public class Tower extends Entity{
 	
 	/**
 	 * Frequency at which towers fire missiles. 
-	 * One of {FAST,MEDIUM,SLOW}
+	 * One of {QUICK_FIRE,MEDIUM_FIRE,SLOW_FIRE}
 	 */
 	protected float firingFreq;
 	
@@ -166,7 +166,7 @@ public class Tower extends Entity{
 	}
 	
 	/**
-	 * @return the time between each firing each missile
+	 * @return the time between firing each missile in milliseconds
 	 */
 	public float getFiringInterval(){
 		float intervalInSeconds = 60/firingFreq;

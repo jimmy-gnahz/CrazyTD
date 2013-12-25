@@ -92,7 +92,7 @@ public class MapParser {
 		else if (str.equals("e")) dir = Block.Direction.EAST;
 		else if (str.equals("n")) dir = Block.Direction.NORTH;
 		else if (str.equals("s")) dir = Block.Direction.SOUTH;
-		else throw new Exception("Monster Den requires valid direction");
+		else throw new Exception("invalid Direction.");
 		return dir;
 	}
 	
