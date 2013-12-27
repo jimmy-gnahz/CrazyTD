@@ -3,15 +3,37 @@ package crazytd.map;
 import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.Vector;
 
+import crazytd.sprites.Monster;
+
 public class Map {
 	int maxX, maxY;
 	Block[][] theMap;
+	Monster monster;
 	
-	//default visiablity to hide the mess, only MapParser allow to access this constructor
+	//default visibility to hide the mess, only MapParser allow to access this constructor
 	Map(int maxX, int maxY){
 		this.maxX=maxX;
 		this.maxY=maxY;
 		theMap =new Block[maxY][maxX];
+	}
+	
+	public Monster getMonster(){
+		return monster;
+	}
+	
+	public void setMonster(Monster monster){
+		this.monster = monster;
+	}
+	
+	public Block getMonsterDen() throws Exception{
+		for(int i=0;i<maxY;i++){
+			for(int j=0;j<maxX;j++){
+				if (theMap[i][j] instanceof MonsterDen) {
+					return theMap[i][j];
+				}
+			}
+		}
+		throw new Exception("MonsterDen Not Found");
 	}
 	
 	public Block getBlock(int x, int y){

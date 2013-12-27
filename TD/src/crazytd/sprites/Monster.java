@@ -54,4 +54,11 @@ public class Monster extends Entity{
 	public void draw(GL10 gl) {
 	    super.draw(gl);
 	}
+	
+	@Override
+	public Monster clone(){
+		Monster clone = new Monster(mSpeed, hp);
+		return clone;
+		
+	}
 }

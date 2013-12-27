@@ -16,7 +16,7 @@ import crazytd.map.Road;
 import crazytd.map.WasteLand;
 import crazytd.sprites.Missile;
 import crazytd.sprites.Monster;
-import crazytd.sprites.SpriteManager;
+import crazytd.sprites.GameManager;
 import crazytd.sprites.Tower;
 
 public class CrazyTowerGame extends Engine {
@@ -31,7 +31,7 @@ public class CrazyTowerGame extends Engine {
 	public static final int SPRITE_MONSTER = 102;
 	public static final int SPRITE_MISSILE = 103;
 	
-	SpriteManager spriteManager;
+	GameManager spriteManager;
 	@Override 
 	public void init() {
 		super.init();
@@ -71,7 +71,7 @@ public class CrazyTowerGame extends Engine {
 		
 		m.addMapToWorld(mWorld);
 		
-		spriteManager = new SpriteManager(mWorld);
+		spriteManager = new GameManager(mWorld);
 		spriteManager.addMissile(missile);
 		spriteManager.addMonster(monster);
 		spriteManager.addMonster(monster2);

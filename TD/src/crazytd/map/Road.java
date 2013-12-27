@@ -57,7 +57,7 @@ public class Road extends Block{
 	public Vector getDirection(float x, float y){
 		float xInTile = x - this.x;
 		float yInTile = y - this.y;
-		if (xInTile > tileSize/2 || xInTile<tileSize/2 || yInTile > tileSize/2 ||yInTile<tileSize/2) {
+		if (xInTile > tileSize/2 || xInTile<-tileSize/2 || yInTile > tileSize/2 ||yInTile<-tileSize/2) {
 			return o; 
 		}//out of boundary
 		switch(inDirection){

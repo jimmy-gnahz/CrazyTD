@@ -16,7 +16,7 @@ import crazytd.map.Road;
 import crazytd.map.WasteLand;
 import crazytd.sprites.Missile;
 import crazytd.sprites.Monster;
-import crazytd.sprites.SpriteManager;
+import crazytd.sprites.GameManager;
 import crazytd.sprites.Tower;
 
 public class TDspriteGame extends Engine {
@@ -31,7 +31,7 @@ public class TDspriteGame extends Engine {
 	public static final int SPRITE_MONSTER = 102;
 	public static final int SPRITE_MISSILE = 103;
 	
-	SpriteManager spriteManager;
+	GameManager spriteManager;
 	@Override 
 	public void init() {
 		super.init();
@@ -54,13 +54,14 @@ public class TDspriteGame extends Engine {
 		monster2.y = (float) (0.6 * mWorld.getHeight());
 		monster2.vx = 1.0f;
 		
-		Missile missile = new Missile(monster,10,0.1f);
+		Missile missile = new Missile(monster,20,0.8f);
 		missile.x = (float) (0.3 * mWorld.getWidth());
 		missile.y = (float) (0.3 * mWorld.getHeight());
 		missile.vx = 0.0f; missile.vy = 0.0f;	
 
-		Map m= MapParser.parse(MapParser.testmap1);
 		Tower tower = new Tower(missile,5,Tower.QUICK_FIRE);
+
+		Map m = MapParser.parse(MapParser.testmap1);
 	
 		Block b= m.getBlock(2, 3);
 		if(b instanceof Buildable){
@@ -69,11 +70,12 @@ public class TDspriteGame extends Engine {
 			}
 		}		
 		
-		m.addMapToWorld(mWorld);
+		m.setMonster(monster);
 		
-		spriteManager = new SpriteManager(mWorld);
+		spriteManager = new GameManager(mWorld);
+		spriteManager.addMap(m);
 		spriteManager.addMissile(missile);
-		spriteManager.addMonster(monster);
+//		spriteManager.addMonster(monster);
 		spriteManager.addMonster(monster2);
 		spriteManager.addTower(tower);
 		mWorld.addSpriteManager(spriteManager);
