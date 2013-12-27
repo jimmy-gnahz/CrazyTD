@@ -37,17 +37,13 @@ public class TDspriteGame extends Engine {
 		super.init();
 		mWorld = new World();
 		
-		TextureManager.registerTexture("images/sled.png", SPRITE_TOWER);
-		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
-		TextureManager.registerTexture("images/missile.jpg", SPRITE_MISSILE);
-		TextureManager.registerTexture("images/road.png", SPRITE_ROAD);
-		TextureManager.registerTexture("images/built.png", SPRITE_BUILT);
-		TextureManager.registerTexture("images/not_built.png", SPRITE_NOT_BUILT);
-		TextureManager.registerTexture("images/wasteland.png", SPRITE_WASTELAND);
-		TextureManager.registerTexture("images/monster_den.png", SPRITE_MONSTER_DEN);
-		TextureManager.registerTexture("images/castle.png", SPRITE_CASTLE);
-		
+		loadTexture();
 
+		loadSprites();
+	
+	}
+	
+	private void loadSprites(){
 		Monster monster = new Monster(0.1f,30);
 		monster.x = (float) (0.0 * mWorld.getWidth());
 		monster.y = (float) (0.4 * mWorld.getHeight());
@@ -61,27 +57,7 @@ public class TDspriteGame extends Engine {
 		Missile missile = new Missile(monster,10,0.1f);
 		missile.x = (float) (0.3 * mWorld.getWidth());
 		missile.y = (float) (0.3 * mWorld.getHeight());
-		missile.vx = 0.0f; missile.vy = 0.0f;
-		
-
-
-//		WasteLand w = new WasteLand(0,2);
-//		MonsterDen d= new MonsterDen(0,0,MonsterDen.Direction.EAST);
-//		Road r1= new Road(1,0,Road.Direction.WEST,Road.Direction.EAST);
-//		Road r2 = new Road(2,0,Road.Direction.WEST,Road.Direction.EAST);
-//		Castle c = new Castle(3,0,50);
-//		Buildable notBuilt= new Buildable(1,1);		
-//		Block b = new Buildable((float)((float)mWorld.getWidth()*0.5),(float)((float)mWorld.getHeight()*0.5));
-//
-//		WasteLand w = new WasteLand(0,2);
-//		MonsterDen d = new MonsterDen(0,0,MonsterDen.Direction.EAST);
-//		Road r1= new Road(1,0,Road.Direction.WEST,Road.Direction.EAST);
-//		Road r2 = new Road(2,0,Road.Direction.WEST,Road.Direction.EAST);
-//		Castle c = new Castle(3,0,50);
-//		Buildable notBuilt = new Buildable(1,1);		
-//		Block b = new Buildable((float)(mWorld.getWidth()*0.5),(float)(mWorld.getHeight()*0.5));
-
-		
+		missile.vx = 0.0f; missile.vy = 0.0f;	
 
 		Map m= MapParser.parse(MapParser.testmap1);
 		Tower tower = new Tower(missile,5,Tower.QUICK_FIRE);
@@ -94,17 +70,6 @@ public class TDspriteGame extends Engine {
 		}		
 		
 		m.addMapToWorld(mWorld);
-
-		
-
-
-//		mWorld.addEntity(w.getMapElement());
-//		mWorld.addEntity(r1.getMapElement());
-//		mWorld.addEntity(r2.getMapElement());
-//		mWorld.addEntity(c.getMapElement());
-//		mWorld.addEntity(d.getMapElement());
-//		mWorld.addEntity(b.getMapElement());
-//		mWorld.addEntity(notBuilt.getMapElement());
 		
 		spriteManager = new SpriteManager(mWorld);
 		spriteManager.addMissile(missile);
@@ -114,7 +79,19 @@ public class TDspriteGame extends Engine {
 		mWorld.addSpriteManager(spriteManager);
 		Log.d("Width",""+mWorld.getWidth());
 		Log.d("Height",""+mWorld.getHeight());
+	}
 	
+	private void loadTexture(){
+		TextureManager.registerTexture("images/sled.png", SPRITE_TOWER);
+		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
+		TextureManager.registerTexture("images/missile.jpg", SPRITE_MISSILE);
+		TextureManager.registerTexture("images/road.png", SPRITE_ROAD);
+		TextureManager.registerTexture("images/built.png", SPRITE_BUILT);
+		TextureManager.registerTexture("images/not_built.png", SPRITE_NOT_BUILT);
+		TextureManager.registerTexture("images/wasteland.png", SPRITE_WASTELAND);
+		TextureManager.registerTexture("images/monster_den.png", SPRITE_MONSTER_DEN);
+		TextureManager.registerTexture("images/castle.png", SPRITE_CASTLE);
+		
 	}
 }
 

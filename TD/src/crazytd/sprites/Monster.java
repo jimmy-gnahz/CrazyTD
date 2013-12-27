@@ -11,7 +11,11 @@ import org.robobrain.sdk.game.Entity;
 import org.robobrain.sdk.graphics.Sprite;
 import org.robobrain.sdk.graphics.Texture;
 import org.robobrain.sdk.graphics.TextureManager;
+import org.robobrain.sdk.graphics.Vector;
 import org.robobrain.test.TDspriteGame;
+
+import crazytd.map.Block;
+import crazytd.map.Block.Direction;
 
 public class Monster extends Entity{
 
@@ -33,6 +37,11 @@ public class Monster extends Entity{
 		this.hp = hp;
 	}
 
+	public void setDirection(Vector direction){
+		vx = direction.x;
+		vy = direction.y;
+	}
+	
 	public void setHP(int hp){
 		this.hp = hp;
 	}

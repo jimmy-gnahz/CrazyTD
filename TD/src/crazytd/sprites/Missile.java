@@ -47,7 +47,7 @@ public class Missile extends Entity{
 	public Missile clone(){
 		Missile cloneMissile = new Missile(target,damage,mSpeed);
 		cloneMissile.mRenderable = mRenderable;
-		return cloneMissile;
+		return cloneMissile; 
 	}
 	
 	//********************************************************************
