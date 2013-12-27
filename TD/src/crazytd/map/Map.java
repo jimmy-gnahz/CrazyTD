@@ -37,21 +37,23 @@ public class Map {
 	}
 	
 	public Block getBlock(int x, int y){
-		return theMap[x][y];
+		return theMap[y][x];
 	}
 	
 	public Block getBlockByCoordinate(float x, float y){
-		return theMap[Math.round(x/Block.tileSize)][Math.round(y/Block.tileSize)];
+		int xCoord = (int)(x/Block.tileSize);
+		int yCoord = (int)(y/Block.tileSize);
+		return theMap[yCoord][xCoord];
 	}
 	
 	public Block getBlockByCoordinate(Vector coordinate){
-		return theMap[Math.round(coordinate.x/Block.tileSize)][Math.round(coordinate.y/Block.tileSize)];
+		return theMap[Math.round(coordinate.y/Block.tileSize)][Math.round(coordinate.x/Block.tileSize)];
 	}
 	
 	public void addMapToWorld(World world){
 		
-		for(int x=0;x<theMap[0].length;x++){
-			for(int y=0;y<theMap.length;y++){
+		for(int y=0;y<theMap.length;y++){
+			for(int x=0;x<theMap[0].length;x++){
 				world.addEntity(theMap[y][x].getMapElement());
 			}
 		}

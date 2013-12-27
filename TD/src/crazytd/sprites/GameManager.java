@@ -10,9 +10,12 @@ import java.util.Collections;
 import java.util.List;
 
 import org.robobrain.sdk.game.World;
+import org.robobrain.sdk.graphics.Vector;
 
+import crazytd.map.Block;
 import crazytd.map.Map;
 import crazytd.map.MonsterDen;
+import crazytd.map.Road;
 
 import android.util.Log;
 
@@ -172,6 +175,19 @@ public class GameManager  {
 		List<Monster> toRemoveMonsters = new ArrayList<Monster>();
 		
 		for (Monster monster : monsters){
+			
+			Block currentBlock = map.getBlockByCoordinate(monster.x, monster.y);
+			Vector direction = new Vector(0,0);
+			if (currentBlock instanceof MonsterDen){
+				Block b = (MonsterDen) currentBlock;
+				direction = b.getDirection(monster.x, monster.y);
+			}
+			if (currentBlock instanceof Road){
+				Block b = (Road) currentBlock;
+				direction = b.getDirection(monster.x, monster.y);
+			}
+			monster.setDirection(direction);
+			
 			if (monster.getHP() <= 0){
 				
 				// Removes the missiles that were targeting the monster

@@ -44,7 +44,7 @@ public class TDspriteGame extends Engine {
 	}
 	
 	private void loadSprites(){
-		Monster monster = new Monster(0.1f,30);
+		Monster monster = new Monster(0.1f,100);
 		monster.x = (float) (0.0 * mWorld.getWidth());
 		monster.y = (float) (0.4 * mWorld.getHeight());
 		monster.vx = 1.0f;
@@ -63,7 +63,7 @@ public class TDspriteGame extends Engine {
 
 		Map m = MapParser.parse(MapParser.testmap1);
 	
-		Block b= m.getBlock(2, 3);
+		Block b= m.getBlock(3, 2);
 		if(b instanceof Buildable){
 			if(!((Buildable) b).getIsBuilt()){
 				((Buildable) b).Build(tower);
@@ -76,7 +76,7 @@ public class TDspriteGame extends Engine {
 		spriteManager.addMap(m);
 		spriteManager.addMissile(missile);
 //		spriteManager.addMonster(monster);
-		spriteManager.addMonster(monster2);
+//		spriteManager.addMonster(monster2);
 		spriteManager.addTower(tower);
 		mWorld.addSpriteManager(spriteManager);
 		Log.d("Width",""+mWorld.getWidth());

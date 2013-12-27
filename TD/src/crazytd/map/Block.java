@@ -65,6 +65,8 @@ public class Block {
 	public Entity getMapElement(){
 		return m;
 	}
+	
+	public Vector getDirection(float x, float y){return new Vector(0,0);}
 
 }
 class MapElement extends Entity {
