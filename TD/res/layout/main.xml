@@ -4,6 +4,14 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
+        
+    <Button
+        android:id="@+id/layoutExampleBtn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onCrazyTowerGameClick"
+        android:text="Tower Game" />
+    
     <Button
         android:id="@+id/tdSpriteBtn"
         android:layout_width="fill_parent"
@@ -52,7 +60,7 @@
         android:layout_height="wrap_content"
         android:onClick="onLayoutExampleClick"
         android:text="Layout Example" />
-    
+
 
 
 </LinearLayout>

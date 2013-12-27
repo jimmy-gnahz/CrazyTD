@@ -44,4 +44,8 @@ public class TestActivity extends Activity {
     public void onTDspriteExampleClick(View view) {
     	startActivity(new Intent(this, TDspriteActivity.class));
     }
+    
+    public void onCrazyTowerGameClick(View view) {
+    	startActivity(new Intent(this, CrazyTowerActivity.class));
+    }
 }
