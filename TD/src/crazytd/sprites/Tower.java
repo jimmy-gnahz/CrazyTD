@@ -10,10 +10,17 @@ import java.util.List;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.robobrain.sdk.game.Entity;
+import org.robobrain.sdk.graphics.Renderable;
 import org.robobrain.sdk.graphics.Sprite;
 import org.robobrain.sdk.graphics.Texture;
 import org.robobrain.sdk.graphics.TextureManager;
+import org.robobrain.test.CrazyTowerGame;
 import org.robobrain.test.TDspriteGame;
+
+import crazytd.map.Block;
+
+import android.graphics.Canvas;
+import android.graphics.Paint;
 
 public class Tower extends Entity{
 	
@@ -64,6 +71,14 @@ public class Tower extends Entity{
 	protected Missile missile;
 	
 	/**
+	 * The game selected this tower to display its range.
+	 */
+	protected boolean isShowRange;
+	
+	private Renderable c;
+
+
+	/**
 	 * @param missile
 	 * @param range measured in number of tiles, 
 	 * @param frequency firing speed, recommended: QUICK_FIRE, MEDIUM_FIRE, SLOW_FIRE
@@ -71,7 +86,9 @@ public class Tower extends Entity{
 	public Tower(Missile missile, float range, float frequency) {
 		super();
 		Texture t = TextureManager.getTexture(TDspriteGame.SPRITE_TOWER);
+		Texture tc = TextureManager.getTexture(CrazyTowerGame.SPRITE_CIRCLE);
 		Sprite s = new Sprite(t, 64, 64, 1);
+		c = new Sprite(tc,256,256, 1);
 		mRenderable = s;
 		this.range = range;
 		this.firingFreq = frequency;
@@ -81,6 +98,9 @@ public class Tower extends Entity{
 	@Override 
 	public void draw(GL10 gl) {
 	    super.draw(gl);
+	    if(isShowRange){
+	    	c.draw(gl, super.x, super.y, 0, range*2*Block.tileSize/256);
+	    }
 	}
 
 	/**
@@ -117,6 +137,9 @@ public class Tower extends Entity{
 		this.range = range;
 	}
 	
+	public void setShowRange(boolean isShowing){
+		this.isShowRange = isShowing;
+	}
 	public void setFiringFreq(float frequency){
 		firingFreq = frequency;
 		

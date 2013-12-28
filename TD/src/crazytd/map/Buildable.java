@@ -38,8 +38,15 @@ public class Buildable extends Block {
 	
 	public boolean getIsBuilt(){
 		return isBuilt;
-	}
+	} 
 	
+	//if the tower is not built, throws an exception, please check before calling this
+	public Tower getTower(){
+		//if(isBuilt){
+			return t;
+		//}
+
+	}
 	@Override
 	public Entity getMapElement(){
 		if(isBuilt){

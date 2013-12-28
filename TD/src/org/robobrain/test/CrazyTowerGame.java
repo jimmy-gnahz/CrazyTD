@@ -3,6 +3,7 @@ package org.robobrain.test;
 import org.robobrain.sdk.game.Engine;
 import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.TextureManager;
+import org.robobrain.sdk.input.Multitouch;
 
 import android.util.Log;
 
@@ -26,10 +27,19 @@ public class CrazyTowerGame extends Engine {
 	public static final int SPRITE_BUILT=4;
 	public static final int SPRITE_MONSTER_DEN=5;
 	public static final int SPRITE_CASTLE=6;
+	public static final int SPRITE_CIRCLE=7;
 	
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
 	public static final int SPRITE_MISSILE = 103;
+
+	Monster monster;
+
+	Map m;
+	Tower tower;
+	
+	
+	
 	
 	SpriteManager spriteManager;
 	@Override 
@@ -43,8 +53,21 @@ public class CrazyTowerGame extends Engine {
 	
 	}
 	
+	@Override
+	public void update(long time){
+		super.update(time);
+		if (Multitouch.getState(0) == Multitouch.POINTER_DOWN) {
+			Block b = m.getBlockByCoordinate(Multitouch.getX(0), Multitouch.getX(0));
+			if(b.getClass()==Buildable.class){
+				if(((Buildable)b).getIsBuilt()){
+
+				}
+			}
+		}
+	}
+	
 	private void loadSprites(){
-		Monster monster = new Monster(0.1f,30);
+		monster = new Monster(0.1f,30);
 		monster.x = (float) (0.0 * mWorld.getWidth());
 		monster.y = (float) (0.4 * mWorld.getHeight());
 		monster.vx = 1.0f;
@@ -91,6 +114,7 @@ public class CrazyTowerGame extends Engine {
 		TextureManager.registerTexture("images/wasteland.png", SPRITE_WASTELAND);
 		TextureManager.registerTexture("images/monster_den.png", SPRITE_MONSTER_DEN);
 		TextureManager.registerTexture("images/castle.png", SPRITE_CASTLE);
+		TextureManager.registerTexture("images/circle.png", SPRITE_CIRCLE);
 		
 	}
 }
