@@ -36,6 +36,17 @@ public class Map {
 		throw new Exception("MonsterDen Not Found");
 	}
 	
+	public Castle getCastle() throws Exception {
+		for(int i=0;i<maxY;i++){
+			for(int j=0;j<maxX;j++){
+				if (theMap[i][j] instanceof Castle) {
+					return (Castle) theMap[i][j];
+				}
+			}
+		}
+		throw new Exception("Castle not found");
+	}
+	
 	public Block getBlock(int x, int y){
 		return theMap[y][x];
 	}
@@ -43,7 +54,11 @@ public class Map {
 	public Block getBlockByCoordinate(float x, float y){
 		int xCoord = (int)(x/Block.tileSize);
 		int yCoord = (int)(y/Block.tileSize);
-		return theMap[yCoord][xCoord];
+		
+		if (xCoord <= maxX && yCoord <= maxY){
+			return theMap[yCoord][xCoord];
+		}
+		return null;
 	}
 	
 	public Block getBlockByCoordinate(Vector coordinate){
@@ -64,4 +79,6 @@ public class Map {
 //	public Block[][] getMap(){
 //		return theMap;
 //	}
+
+
 }
