@@ -38,6 +38,17 @@ public class Map {
 		throw new Exception("MonsterDen Not Found");
 	}
 	
+	public Castle getCastle() throws Exception {
+		for(int i=0;i<maxY;i++){
+			for(int j=0;j<maxX;j++){
+				if (theMap[i][j] instanceof Castle) {
+					return (Castle) theMap[i][j];
+				}
+			}
+		}
+		throw new Exception("Castle not found");
+	}
+	
 	public Block getBlock(int x, int y){
 		return theMap[y][x];
 	}
@@ -45,15 +56,13 @@ public class Map {
 	public Block getBlockByCoordinate(float x, float y){
 		int xCoord = Math.round((x-Block.tileSize/2)/Block.tileSize);
 		int yCoord = Math.round((y-Block.tileSize/2)/Block.tileSize);
-//		Log.d("pointerX", x+" "+xCoord);
-//		Log.d("pointerY", y+" "+yCoord);
-//		
-		return theMap[yCoord][xCoord];
+		
+		if (xCoord <= maxX-1 && yCoord <= maxY-1){
+			return theMap[yCoord][xCoord];
+		}
+		return null;
 	}
 	
-	public Block getBlockByCoordinate(Vector coordinate){
-		return theMap[Math.round((coordinate.y-Block.tileSize/2)/Block.tileSize)][Math.round((coordinate.x-Block.tileSize/2)/Block.tileSize)];
-	}
 	
 	public void addMapToWorld(World world){
 		
@@ -69,4 +78,6 @@ public class Map {
 //	public Block[][] getMap(){
 //		return theMap;
 //	}
+
+
 }

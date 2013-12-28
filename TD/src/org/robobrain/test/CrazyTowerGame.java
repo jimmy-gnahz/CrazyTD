@@ -57,21 +57,27 @@ public class CrazyTowerGame extends Engine {
 	@Override
 	public void update(long time){
 		super.update(time);
-		if (Multitouch.getState(0) == Multitouch.POINTER_DOWN) {
-			Log.d("Before", ""+Multitouch.getX(0)+" , "+mWorld.getWidth());
-			if( Multitouch.getX(0) < mWorld.getWidth());// 
-			tower.isShowRange = !tower.isShowRange;
-			Log.d("After", ""+Multitouch.getX(0)+" , "+mWorld.getWidth());
+		if (Multitouch.getState(0) == Multitouch.POINTER_UP) {
+			//Log.d("Before", ""+Multitouch.getX(0)+" , "+mWorld.getWidth());
+			//if( Multitouch.getX(0) < mWorld.getWidth());// 
+			//tower.isShowRange = !tower.isShowRange;
+			//Log.d("After", ""+Multitouch.getX(0)+" , "+mWorld.getWidth());
 			//float pointerY = Multitouch.getY(0);
 			//if (pointerX < mWorld.getWidth()/2)
 				
 			//Vector v = new Block(2,3).getCoordinate();
-			//Block b = m.getBlockByCoordinate(v.x,v.y);
-//			if(b.getClass()==Buildable.class){
-//				if(((Buildable)b).getIsBuilt()){
-//
-//				}
-//			}
+			//Block b = m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0));
+			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))==null) return;
+			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)).getClass()==Buildable.class){
+				if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
+					((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower().setShowRange(true);
+					return;
+				}
+			}
+			if(gameManager.getTowers().size()<=0)return;
+			for(int i =0; i<gameManager.getTowers().size();i++){
+				gameManager.getTowers().get(i).setShowRange(false);
+			}
 		}
 	}
 	
@@ -91,7 +97,7 @@ public class CrazyTowerGame extends Engine {
 		missile.y = (float) (0.3 * mWorld.getHeight());
 		missile.vx = 0.0f; missile.vy = 0.0f;	
 
-		Map m= MapParser.parse(MapParser.testmap1);
+		m= MapParser.parse(MapParser.testmap1);
 		tower = new Tower(missile,5,Tower.QUICK_FIRE);
 	
 		Block b= m.getBlock(3, 2);

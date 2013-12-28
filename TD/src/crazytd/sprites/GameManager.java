@@ -13,6 +13,7 @@ import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.Vector;
 
 import crazytd.map.Block;
+import crazytd.map.Castle;
 import crazytd.map.Map;
 import crazytd.map.MonsterDen;
 import crazytd.map.Road;
@@ -32,6 +33,8 @@ public class GameManager  {
 	// This is for setting MonsterDen.timeInterval
 	public final static int MONSTER_CREATION_INTERVAL = 500;
 	
+	public final static int CASTLE_HP = 10;
+	
 	private long startTime;
 	private long endTime;
 	private long deltaTime;
@@ -42,6 +45,7 @@ public class GameManager  {
 	
 	private Map map;
 	private MonsterDen monsterDen;
+	private Castle castle;
 	
 	private World world;
 	
@@ -177,7 +181,13 @@ public class GameManager  {
 		for (Monster monster : monsters){
 			
 			Block currentBlock = map.getBlockByCoordinate(monster.x, monster.y);
+			
+			if (currentBlock == null) {
+				continue;
+			}
+			
 			Vector direction = new Vector(0,0);
+			
 			if (currentBlock instanceof MonsterDen){
 				Block b = (MonsterDen) currentBlock;
 				direction = b.getDirection(monster.x, monster.y);
@@ -186,6 +196,20 @@ public class GameManager  {
 				Block b = (Road) currentBlock;
 				direction = b.getDirection(monster.x, monster.y);
 			}
+			if (currentBlock instanceof Castle){
+				Castle b = (Castle) currentBlock;
+				direction = b.getDirection(monster.x, monster.y);
+				monster.setHP(0); // so that it vanishes
+				b.damage(1);
+				// will move this elsewhere:
+				if (b.getHP() <= 0){
+					missiles.clear();
+					monsters.clear();
+					towers.clear();
+					return;
+				}
+			}
+			
 			monster.setDirection(direction);
 			
 			if (monster.getHP() <= 0){
@@ -243,10 +267,13 @@ public class GameManager  {
 		
 		try {
 			monsterDen = (MonsterDen) map.getMonsterDen();
+			castle = (Castle) map.getCastle();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		castle.setHP(CASTLE_HP);
 		monsterDen.setTimeInterval(MONSTER_CREATION_INTERVAL);
 		
 	}
