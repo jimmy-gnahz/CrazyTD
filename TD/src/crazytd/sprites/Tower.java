@@ -73,7 +73,7 @@ public class Tower extends Entity{
 	/**
 	 * The game selected this tower to display its range.
 	 */
-	protected boolean isShowRange;
+	public boolean isShowRange;
 	
 	private Renderable c;
 
@@ -93,6 +93,7 @@ public class Tower extends Entity{
 		this.range = range;
 		this.firingFreq = frequency;
 		this.missile = missile;
+		this.isShowRange = false;
 	}
 	
 	@Override 

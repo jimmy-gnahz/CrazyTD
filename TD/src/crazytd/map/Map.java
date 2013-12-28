@@ -3,6 +3,8 @@ package crazytd.map;
 import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.Vector;
 
+import android.util.Log;
+
 import crazytd.sprites.Monster;
 
 public class Map {
@@ -41,13 +43,16 @@ public class Map {
 	}
 	
 	public Block getBlockByCoordinate(float x, float y){
-		int xCoord = (int)(x/Block.tileSize);
-		int yCoord = (int)(y/Block.tileSize);
+		int xCoord = Math.round((x-Block.tileSize/2)/Block.tileSize);
+		int yCoord = Math.round((y-Block.tileSize/2)/Block.tileSize);
+//		Log.d("pointerX", x+" "+xCoord);
+//		Log.d("pointerY", y+" "+yCoord);
+//		
 		return theMap[yCoord][xCoord];
 	}
 	
 	public Block getBlockByCoordinate(Vector coordinate){
-		return theMap[(int)(coordinate.y/Block.tileSize)][(int)(coordinate.x/Block.tileSize)];
+		return theMap[Math.round((coordinate.y-Block.tileSize/2)/Block.tileSize)][Math.round((coordinate.x-Block.tileSize/2)/Block.tileSize)];
 	}
 	
 	public void addMapToWorld(World world){

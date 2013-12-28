@@ -35,9 +35,9 @@ public class InputGame extends Engine{
 			bat.x = (Multitouch.getX(0));
 			bat.y = (Multitouch.getY(0));
 		}
-		if (Multitouch.getState(0) == Multitouch.POINTER_MOVE) {
-			bat.x = (Multitouch.getX(0));
-			bat.y = (Multitouch.getY(0));
-		}
+//		if (Multitouch.getState(0) == Multitouch.POINTER_MOVE) {
+//			bat.x = (Multitouch.getX(0));
+//			bat.y = (Multitouch.getY(0));
+//		}
 	}
 }

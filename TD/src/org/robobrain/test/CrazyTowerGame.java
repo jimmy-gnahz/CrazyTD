@@ -3,6 +3,7 @@ package org.robobrain.test;
 import org.robobrain.sdk.game.Engine;
 import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.TextureManager;
+import org.robobrain.sdk.graphics.Vector;
 import org.robobrain.sdk.input.Multitouch;
 
 import android.util.Log;
@@ -57,14 +58,20 @@ public class CrazyTowerGame extends Engine {
 	public void update(long time){
 		super.update(time);
 		if (Multitouch.getState(0) == Multitouch.POINTER_DOWN) {
-			float pointerX = Multitouch.getX(0);
-			float pointerY = Multitouch.getY(0);
-			Block b = m.getBlockByCoordinate(pointerX,pointerY);
-			if(b.getClass()==Buildable.class){
-				if(((Buildable)b).getIsBuilt()){
-
-				}
-			}
+			Log.d("Before", ""+Multitouch.getX(0)+" , "+mWorld.getWidth());
+			if( Multitouch.getX(0) < mWorld.getWidth());// 
+			tower.isShowRange = !tower.isShowRange;
+			Log.d("After", ""+Multitouch.getX(0)+" , "+mWorld.getWidth());
+			//float pointerY = Multitouch.getY(0);
+			//if (pointerX < mWorld.getWidth()/2)
+				
+			//Vector v = new Block(2,3).getCoordinate();
+			//Block b = m.getBlockByCoordinate(v.x,v.y);
+//			if(b.getClass()==Buildable.class){
+//				if(((Buildable)b).getIsBuilt()){
+//
+//				}
+//			}
 		}
 	}
 	
@@ -85,7 +92,7 @@ public class CrazyTowerGame extends Engine {
 		missile.vx = 0.0f; missile.vy = 0.0f;	
 
 		Map m= MapParser.parse(MapParser.testmap1);
-		Tower tower = new Tower(missile,5,Tower.QUICK_FIRE);
+		tower = new Tower(missile,5,Tower.QUICK_FIRE);
 	
 		Block b= m.getBlock(3, 2);
 		if(b instanceof Buildable){
