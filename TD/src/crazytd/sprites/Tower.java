@@ -109,7 +109,7 @@ public class Tower extends Entity{
 	 * @return true if we have found a target, false otherwise
 	 */
 	public boolean findTarget(List<Monster> monsters) {
-		float actualRange = range * SpriteManager.BLOCK_SIZE;
+		float actualRange = range * GameManager.BLOCK_SIZE;
 		
 		// Set this.target as the first monster in firing range
 		for(Monster monster: monsters){

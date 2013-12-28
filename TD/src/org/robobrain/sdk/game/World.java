@@ -27,7 +27,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import org.robobrain.sdk.GLRenderer;
 
-import crazytd.sprites.SpriteManager;
+import crazytd.sprites.GameManager;
 
 import android.util.Log;
 
@@ -38,7 +38,7 @@ import android.util.Log;
  */
 public class World extends Entity {
 	
-	protected SpriteManager spriteManager;
+	protected GameManager spriteManager;
 	
 	protected static World sInstance;
 	
@@ -73,7 +73,7 @@ public class World extends Entity {
 		}
 		
 		if (!(spriteManager == null)) {
-			spriteManager.updateSprites();
+			spriteManager.updateGame();
 		}
 		
 		for (int i = 0; i < count - 1; i++) {
@@ -192,7 +192,7 @@ public class World extends Entity {
 	@Override
 	public int getHeight() { return GLRenderer.getHeight(); }
 
-	public void addSpriteManager(SpriteManager spriteManager) {
+	public void addSpriteManager(GameManager spriteManager) {
 		this.spriteManager = spriteManager;
 		
 	}

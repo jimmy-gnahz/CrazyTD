@@ -17,7 +17,7 @@ import crazytd.map.Road;
 import crazytd.map.WasteLand;
 import crazytd.sprites.Missile;
 import crazytd.sprites.Monster;
-import crazytd.sprites.SpriteManager;
+import crazytd.sprites.GameManager;
 import crazytd.sprites.Tower;
 
 public class CrazyTowerGame extends Engine {
@@ -41,7 +41,7 @@ public class CrazyTowerGame extends Engine {
 	
 	
 	
-	SpriteManager spriteManager;
+	GameManager gameManager;
 	@Override 
 	public void init() {
 		super.init();
@@ -57,7 +57,9 @@ public class CrazyTowerGame extends Engine {
 	public void update(long time){
 		super.update(time);
 		if (Multitouch.getState(0) == Multitouch.POINTER_DOWN) {
-			Block b = m.getBlockByCoordinate(Multitouch.getX(0), Multitouch.getX(0));
+			float pointerX = Multitouch.getX(0);
+			float pointerY = Multitouch.getY(0);
+			Block b = m.getBlockByCoordinate(pointerX,pointerY);
 			if(b.getClass()==Buildable.class){
 				if(((Buildable)b).getIsBuilt()){
 
@@ -85,21 +87,22 @@ public class CrazyTowerGame extends Engine {
 		Map m= MapParser.parse(MapParser.testmap1);
 		Tower tower = new Tower(missile,5,Tower.QUICK_FIRE);
 	
-		Block b= m.getBlock(2, 3);
+		Block b= m.getBlock(3, 2);
 		if(b instanceof Buildable){
 			if(!((Buildable) b).getIsBuilt()){
 				((Buildable) b).Build(tower);
 			}
 		}		
 		
-		m.addMapToWorld(mWorld);
+		m.setMonster(monster);
 		
-		spriteManager = new SpriteManager(mWorld);
-		spriteManager.addMissile(missile);
-		spriteManager.addMonster(monster);
-		spriteManager.addMonster(monster2);
-		spriteManager.addTower(tower);
-		mWorld.addSpriteManager(spriteManager);
+		gameManager = new GameManager(mWorld);
+		gameManager.addMap(m);
+		gameManager.addMissile(missile);
+//		gameManager.addMonster(monster);
+//		gameManager.addMonster(monster2);
+		gameManager.addTower(tower);
+		mWorld.addSpriteManager(gameManager);
 		Log.d("Width",""+mWorld.getWidth());
 		Log.d("Height",""+mWorld.getHeight());
 	}

@@ -4,6 +4,14 @@ import org.robobrain.sdk.graphics.Vector;
 import org.robobrain.test.TDspriteGame;
 public class MonsterDen extends Block {
 
+	protected float elapsedTime;
+	
+	/**
+	 * Time interval between creating new monsters. 
+	 * Measured in milliseconds
+	 */
+	protected float timeInterval;
+	
 	Direction outDirection;
 	
 	/**
@@ -20,17 +28,20 @@ public class MonsterDen extends Block {
 	public MonsterDen(int x, int y,Direction outDir) {
 		super(x, y);
 		outDirection = outDir;
+		elapsedTime = 0;
 		bindTextureIndex(TDspriteGame.SPRITE_MONSTER_DEN);
 	}
+	
 	public MonsterDen(float x, float y) {
 		super(x, y);
+		elapsedTime = 0;
 		bindTextureIndex(TDspriteGame.SPRITE_MONSTER_DEN);
 	}
 	
 	public Vector getDirection(float x, float y){
 		float xInTile = x - this.x;
 		float yInTile = y - this.y;
-		if (xInTile > tileSize/2 || xInTile<tileSize/2 || yInTile > tileSize/2 ||yInTile<tileSize/2) {
+		if (xInTile > tileSize/2 || xInTile<-tileSize/2 || yInTile > tileSize/2 ||yInTile<-tileSize/2) {
 			return o; //out of boundary
 		}
 		switch (outDirection){
@@ -44,5 +55,21 @@ public class MonsterDen extends Block {
 			return w;
 		default: return o;//oops something is wrong
 		}
+	}
+	
+	public float getTimeInterval(){
+		return timeInterval;
+	}
+	
+	public float getElapsedTime(){
+		return elapsedTime;
+	}
+	
+	public void setTimeInterval(float time){
+		timeInterval = time;
+	}
+	
+	public void setElapsedTime(float time){
+		elapsedTime = time;
 	}
 }

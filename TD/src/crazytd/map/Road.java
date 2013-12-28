@@ -57,7 +57,7 @@ public class Road extends Block{
 	public Vector getDirection(float x, float y){
 		float xInTile = x - this.x;
 		float yInTile = y - this.y;
-		if (xInTile > tileSize/2 || xInTile<tileSize/2 || yInTile > tileSize/2 ||yInTile<tileSize/2) {
+		if (xInTile > tileSize/2 || xInTile<-tileSize/2 || yInTile > tileSize/2 ||yInTile<-tileSize/2) {
 			return o; 
 		}//out of boundary
 		switch(inDirection){
@@ -94,11 +94,11 @@ public class Road extends Block{
 			case WEST:
 				return w;//heading west
 			case NORTH:	//either heading east or north
-				if (y >= this.y) //over the half point on the way east, should turn now
+				if (x <= this.x) //over the half point on the way east, should turn now
 					return n;
 				else return w;
 			case SOUTH:
-				if (y >= this.y) //over the half point on the way east, should turn now
+				if (x <= this.x) //over the half point on the way east, should turn now
 					return s;
 				else return w;
 			default: return o;	// oops, something is wrong
@@ -108,11 +108,11 @@ public class Road extends Block{
 			case EAST:
 				return e;//heading east
 			case NORTH:	//either heading west or north
-				if (y <= this.y) //over the half point on the way east, should turn now
+				if (x >= this.x) //over the half point on the way east, should turn now
 					return n;
 				else return e;
 			case SOUTH:
-				if (y <= this.y) //over the half point on the way east, should turn now
+				if (x >= this.x) //over the half point on the way east, should turn now
 					return s;
 				else return e;
 			default: return o;	// oops, something is wrong
