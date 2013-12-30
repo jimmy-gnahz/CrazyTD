@@ -27,14 +27,22 @@ import android.util.Log;
  */
 public class GameManager  {
 	
-	// Size length of one block, used for testing/debugging
-	public final static int BLOCK_SIZE = 64;
+	/**
+	 * Size length of one block, used for testing/debugging
+	 */
+	public final static int TILE_SIZE = 64;
 	
-	// This is for setting MonsterDen.timeInterval
+	/**
+	 * This is for setting MonsterDen.timeInterval
+	 */
 	public final static int MONSTER_CREATION_INTERVAL = 500;
 	
+	/**
+	 * The maximum hp for the castle, used for testing and debugging
+	 */
 	public final static int CASTLE_HP = 10;
 	
+	// For tracking elapsedTime for MonsterDen and Towers
 	private long startTime;
 	private long endTime;
 	private long deltaTime;
@@ -77,7 +85,8 @@ public class GameManager  {
 	}
 	
 	/**
-	 * updates elapsedTime for the MonsterDen
+	 * updates elapsedTime for the MonsterDen. 
+	 * Sends out monsters periodically
 	 */
 	private void updateMonsterDen(){
 		monsterDen.setElapsedTime(monsterDen.getElapsedTime() + deltaTime);
@@ -139,7 +148,7 @@ public class GameManager  {
 
 		// Deletes the current target if the target is out of range
 		if (tower.target != null){
-			float actualRange = tower.range * BLOCK_SIZE;
+			float actualRange = tower.range * TILE_SIZE;
 			if (tower.distToMonster(tower.target) > actualRange){
 				tower.target = null;
 			}
@@ -171,6 +180,7 @@ public class GameManager  {
 	}
 	
 	/**
+	 * Updates the direction of each monster based on the in and out direction of the tile. 
 	 * Removes the monsters whose hp has dropped to 0. 
 	 * Also removes the missiles targeting that monster
 	 */

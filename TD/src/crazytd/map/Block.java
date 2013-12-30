@@ -70,7 +70,12 @@ public class Block {
 
 }
 class MapElement extends Entity {
-	//before calling this constructor, in IextureManager, please register the correct texture to the textureIndex 
+	/**
+	 * register the correct texture to the textureIndex in TextureManager before calling this constructor
+	 * @param x
+	 * @param y 
+	 * @param textureIndex found in TextureManager
+	 */
 	public MapElement(float x, float y, int textureIndex) {
 		super();
 		Texture t = TextureManager.getTexture(textureIndex);

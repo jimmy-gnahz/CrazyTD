@@ -12,6 +12,9 @@ public class MonsterDen extends Block {
 	 */
 	protected float timeInterval;
 	
+	/**
+	 *  The direction in which monsters are going out of the tile
+	 */
 	Direction outDirection;
 	
 	/**

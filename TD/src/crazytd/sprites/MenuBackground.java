@@ -8,12 +8,14 @@ import org.robobrain.sdk.graphics.Sprite;
 import org.robobrain.sdk.graphics.Texture;
 
 public class MenuBackground extends Entity{
+	
 	public boolean isVisible;
+	
 	public MenuBackground(Texture t, World myWorld){
 		this.x = myWorld.getWidth()*0.85f;
 		this.y = myWorld.getHeight()/2;
-		this.mRenderable =new Sprite(t ,(int) Math.ceil(myWorld.getWidth()*0.3), (int)(myWorld.getHeight()), 1);
-		isVisible =false;
+		this.mRenderable = new Sprite(t ,(int) Math.ceil(myWorld.getWidth()*0.3), (int)(myWorld.getHeight()), 1);
+		isVisible = false;
 	}
 	
 	

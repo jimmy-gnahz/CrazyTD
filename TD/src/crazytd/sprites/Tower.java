@@ -75,7 +75,7 @@ public class Tower extends Entity{
 	 */
 	public boolean isShowRange;
 	
-	private Renderable c;
+	private Renderable rangeCircle;
 
 
 	/**
@@ -88,7 +88,7 @@ public class Tower extends Entity{
 		Texture t = TextureManager.getTexture(TDspriteGame.SPRITE_TOWER);
 		Texture tc = TextureManager.getTexture(CrazyTowerGame.SPRITE_CIRCLE);
 		Sprite s = new Sprite(t, 64, 64, 1);
-		c = new Sprite(tc,256,256, 1);
+		rangeCircle = new Sprite(tc,256,256, 1);
 		mRenderable = s;
 		this.range = range;
 		this.firingFreq = frequency;
@@ -100,7 +100,7 @@ public class Tower extends Entity{
 	public void draw(GL10 gl) {
 	    super.draw(gl);
 	    if(isShowRange){
-	    	c.draw(gl, super.x, super.y, 0, range*2*Block.tileSize/256);
+	    	rangeCircle.draw(gl, super.x, super.y, 0, range*2*Block.tileSize/256);
 	    }
 	}
 
@@ -110,7 +110,7 @@ public class Tower extends Entity{
 	 * @return true if we have found a target, false otherwise
 	 */
 	public boolean findTarget(List<Monster> monsters) {
-		float actualRange = range * GameManager.BLOCK_SIZE;
+		float actualRange = range * GameManager.TILE_SIZE;
 		
 		// Set this.target as the first monster in firing range
 		for(Monster monster: monsters){

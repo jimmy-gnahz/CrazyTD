@@ -25,16 +25,25 @@ public class Missile extends Entity{
 	 */
 	Monster target;
 	
-	public Missile(Monster target, int damage, float speed) {
+	public Missile(int damage, float speed) {
 		super();
 		Texture t = TextureManager.getTexture(TDspriteGame.SPRITE_MISSILE);
 		Sprite s = new Sprite(t, 20, 20, 1);
 		mRenderable = s;
 		mSpeed = speed;
-		this.damage = damage;
+		this.damage = damage;	
+	}
+	
+	public Missile(Monster target, int damage, float speed) {
+		this(damage,speed);
 		this.target = target;	
 	}
 
+	@Override 
+	public void draw(GL10 gl) {
+		super.draw(gl);
+	}
+	
 	@Override
 	public void update(long time){
 		// update vx and vy so that missile will chase after target
@@ -70,8 +79,4 @@ public class Missile extends Entity{
 		return damage;
 	}
 	
-	@Override 
-	public void draw(GL10 gl) {
-	    super.draw(gl);
-	}
 }

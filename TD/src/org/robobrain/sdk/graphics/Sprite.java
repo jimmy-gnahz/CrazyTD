@@ -323,7 +323,7 @@ public class Sprite extends Renderable{
 	 * The height of the SimpleSprite in pixels.
 	 */
 	@Override
-	public int getHeight() { return mHeight * (int)GLRenderer.getScale() * (int)scaleX; }
+	public int getHeight() { return mHeight * (int)GLRenderer.getScale() * (int)scaleY; }
 	
 	/**
 	 * One half of the Sprite's height.
@@ -337,7 +337,7 @@ public class Sprite extends Renderable{
 	 * @return
 	 * The width of the Sprite divided by 2.
 	 */
-	public int getHalfHeight() { return mHalfHeight * (int)GLRenderer.getScale() * (int)scaleX; }
+	public int getHalfHeight() { return mHalfHeight * (int)GLRenderer.getScale() * (int)scaleY; }
 	
 	/**
 	 * Gets the Texture used by the SimpleSprite.

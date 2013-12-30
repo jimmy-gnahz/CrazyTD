@@ -118,6 +118,6 @@ public class Road extends Block{
 			default: return o;	// oops, something is wrong
 			}
 		}
-		return o; //oops, somthing is wrong
+		return o; //oops, something is wrong
 	}
 }

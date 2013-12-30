@@ -14,16 +14,16 @@ import org.robobrain.test.CrazyTowerGame;
 public class UIButton extends Entity{
 	
 	//protected boolean isTextureLoaded = false;	
-	private int diameter = 100;
+	private final int DIAMETER = 100;
 	
 	public UIButton(Texture t, float x, float y){
 		this.x = x;
 		this.y = y;
-		this.mRenderable =new Sprite(t , diameter, diameter, 1);
+		this.mRenderable = new Sprite(t , DIAMETER, DIAMETER, 1);
 	}
 	
 	public boolean isInside(float x, float y){
-		return diameter > Math.sqrt(
+		return DIAMETER > Math.sqrt(
 				Math.pow((this.x-x),2) + Math.pow((this.y - y),2));
 	}
 }

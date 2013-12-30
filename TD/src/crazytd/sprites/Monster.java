@@ -74,7 +74,12 @@ public class Monster extends Entity{
 	    int shiftup = 30;
 	    float healthPercent = hp/(float)maxhp;
 	    redHealthBar.draw(gl, x, y - shiftup ,0,1);
-	    greenHealthBar.draw(gl,x - (1-healthPercent)*HEALTH_BAR_WIDTH/2,y - shiftup ,0,healthPercent,1);
+	    greenHealthBar.draw(gl,
+	    					x - (1 - healthPercent)*HEALTH_BAR_WIDTH/2, 
+	    					y - shiftup ,
+	    					0,
+	    					healthPercent,
+	    					1);
 	}
 	
 	@Override

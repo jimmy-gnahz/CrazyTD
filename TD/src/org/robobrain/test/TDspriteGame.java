@@ -33,7 +33,7 @@ public class TDspriteGame extends Engine {
 	public static final int MONSTER_GREEN_HEALTHBAR = 104;
 	public static final int MONSTER_RED_HEALTHBAR = 105;
 	
-	GameManager spriteManager;
+	GameManager gameManager;
 	@Override 
 	public void init() {
 		super.init();
@@ -74,15 +74,11 @@ public class TDspriteGame extends Engine {
 		
 		m.setMonster(monster);
 		
-		spriteManager = new GameManager(mWorld);
-		spriteManager.addMap(m);
-		spriteManager.addMissile(missile);
-//		gameManager.addMonster(monster);
-//		gameManager.addMonster(monster2);
-		spriteManager.addTower(tower);
-		mWorld.addGameManager(spriteManager);
-		Log.d("Width",""+mWorld.getWidth());
-		Log.d("Height",""+mWorld.getHeight());
+		gameManager = new GameManager(mWorld);
+		gameManager.addMap(m);
+		gameManager.addMissile(missile);
+		gameManager.addTower(tower);
+		mWorld.addGameManager(gameManager);
 	}
 	
 	private void loadTexture(){
