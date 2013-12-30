@@ -76,7 +76,6 @@ public class TDspriteGame extends Engine {
 		
 		gameManager = new GameManager(mWorld);
 		gameManager.addMap(m);
-		gameManager.addMissile(missile);
 		gameManager.addTower(tower);
 		mWorld.addGameManager(gameManager);
 	}

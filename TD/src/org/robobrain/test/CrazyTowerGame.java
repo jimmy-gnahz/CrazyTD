@@ -40,6 +40,8 @@ public class CrazyTowerGame extends Engine {
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
 	public static final int SPRITE_MISSILE = 103;
+	public static final int MONSTER_GREEN_HEALTHBAR = 104;
+	public static final int MONSTER_RED_HEALTHBAR = 105;
 
 	Map m;
 	UIButton buildButton;
@@ -112,9 +114,6 @@ public class CrazyTowerGame extends Engine {
 		
 		gameManager = new GameManager(mWorld);
 		gameManager.addMap(m);
-		gameManager.addMissile(missile);
-//		gameManager.addMonster(monster);
-//		gameManager.addMonster(monster2);
 		gameManager.addTower(tower);
 		mWorld.addGameManager(gameManager);
 		
@@ -140,6 +139,8 @@ public class CrazyTowerGame extends Engine {
 		TextureManager.registerTexture("images/monster_den.png", SPRITE_MONSTER_DEN);
 		TextureManager.registerTexture("images/castle.png", SPRITE_CASTLE);
 		TextureManager.registerTexture("images/circle.png", SPRITE_CIRCLE);
+		TextureManager.registerTexture("images/healthbar.png", MONSTER_GREEN_HEALTHBAR);
+		TextureManager.registerTexture("images/redhealthbar.png", MONSTER_RED_HEALTHBAR);
 		
 	}
 }
