@@ -38,7 +38,7 @@ import android.util.Log;
  */
 public class World extends Entity {
 	
-	protected GameManager spriteManager;
+	protected GameManager gameManager;
 	
 	protected static World sInstance;
 	
@@ -72,8 +72,8 @@ public class World extends Entity {
 			}
 		}
 		
-		if (!(spriteManager == null)) {
-			spriteManager.updateGame();
+		if (!(gameManager == null)) {
+			gameManager.updateGame();
 		}
 		
 		for (int i = 0; i < count - 1; i++) {
@@ -192,8 +192,8 @@ public class World extends Entity {
 	@Override
 	public int getHeight() { return GLRenderer.getHeight(); }
 
-	public void addSpriteManager(GameManager spriteManager) {
-		this.spriteManager = spriteManager;
+	public void addGameManager(GameManager gameManager) {
+		this.gameManager = gameManager;
 		
 	}
 }

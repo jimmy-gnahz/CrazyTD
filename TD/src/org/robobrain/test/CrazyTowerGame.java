@@ -2,6 +2,7 @@ package org.robobrain.test;
 
 import org.robobrain.sdk.game.Engine;
 import org.robobrain.sdk.game.World;
+import org.robobrain.sdk.graphics.Sprite;
 import org.robobrain.sdk.graphics.TextureManager;
 import org.robobrain.sdk.graphics.Vector;
 import org.robobrain.sdk.input.Multitouch;
@@ -20,6 +21,7 @@ import crazytd.sprites.Missile;
 import crazytd.sprites.Monster;
 import crazytd.sprites.GameManager;
 import crazytd.sprites.Tower;
+import crazytd.sprites.UIButton;
 
 public class CrazyTowerGame extends Engine {
 	public static final int SPRITE_ROAD =1;
@@ -30,17 +32,14 @@ public class CrazyTowerGame extends Engine {
 	public static final int SPRITE_CASTLE=6;
 	public static final int SPRITE_CIRCLE=7;
 	
+	public static final int SPRITE_BUILD_BUTTON = 51;
+	
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
 	public static final int SPRITE_MISSILE = 103;
 
-	Monster monster;
-
 	Map m;
-	Tower tower;
-	
-	
-	
+	UIButton buildButton;
 	
 	GameManager gameManager;
 	@Override 
@@ -82,7 +81,7 @@ public class CrazyTowerGame extends Engine {
 	}
 	
 	private void loadSprites(){
-		monster = new Monster(0.1f,30);
+		Monster monster = new Monster(0.1f,30);
 		monster.x = (float) (0.0 * mWorld.getWidth());
 		monster.y = (float) (0.4 * mWorld.getHeight());
 		monster.vx = 1.0f;
@@ -98,7 +97,7 @@ public class CrazyTowerGame extends Engine {
 		missile.vx = 0.0f; missile.vy = 0.0f;	
 
 		m= MapParser.parse(MapParser.testmap1);
-		tower = new Tower(missile,5,Tower.QUICK_FIRE);
+		Tower tower = new Tower(missile,5,Tower.QUICK_FIRE);
 	
 		Block b= m.getBlock(3, 2);
 		if(b instanceof Buildable){
@@ -115,12 +114,16 @@ public class CrazyTowerGame extends Engine {
 //		gameManager.addMonster(monster);
 //		gameManager.addMonster(monster2);
 		gameManager.addTower(tower);
-		mWorld.addSpriteManager(gameManager);
+		mWorld.addGameManager(gameManager);
+		
+		buildButton = new UIButton(TextureManager.getTexture(SPRITE_BUILD_BUTTON),mWorld.getWidth()*0.85f,mWorld.getHeight()*0.85f);
+		mWorld.addEntity(buildButton);
 		Log.d("Width",""+mWorld.getWidth());
 		Log.d("Height",""+mWorld.getHeight());
 	}
 	
 	private void loadTexture(){
+		TextureManager.registerTexture("images/build_button.png", SPRITE_BUILD_BUTTON);
 		TextureManager.registerTexture("images/sled.png", SPRITE_TOWER);
 		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
 		TextureManager.registerTexture("images/missile.jpg", SPRITE_MISSILE);

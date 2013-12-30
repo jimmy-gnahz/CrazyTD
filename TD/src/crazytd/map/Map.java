@@ -57,7 +57,7 @@ public class Map {
 		int xCoord = Math.round((x-Block.tileSize/2)/Block.tileSize);
 		int yCoord = Math.round((y-Block.tileSize/2)/Block.tileSize);
 		
-		if (xCoord <= maxX-1 && yCoord <= maxY-1){
+		if (xCoord < maxX && yCoord < maxY){
 			return theMap[yCoord][xCoord];
 		}
 		return null;
