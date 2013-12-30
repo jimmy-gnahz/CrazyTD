@@ -104,7 +104,7 @@ public class Sprite extends Renderable{
 		
 		x = 0;
 		y = 0;
-		scale = 1.0f;
+		scaleX = 1.0f;
 		rotation = 0;
 		mTime = 0;
 		
@@ -167,7 +167,7 @@ public class Sprite extends Renderable{
 		gl.glLoadIdentity();
 		gl.glTranslatef(this.x, this.y, 0);
 		gl.glRotatef(this.rotation, 0, 0, 1);
-		gl.glScalef(this.scale * GLRenderer.getScale(), this.scale * GLRenderer.getScale(), 1.0f);
+		gl.glScalef(this.scaleX * GLRenderer.getScale(), this.scaleY * GLRenderer.getScale(), 1.0f);
 		gl.glDrawElements(GL10.GL_TRIANGLES, 6, GL10.GL_UNSIGNED_SHORT, mIndices);
 	}
 	
@@ -181,7 +181,23 @@ public class Sprite extends Renderable{
         this.x = x;
         this.y = y;
         this.rotation = rotation;
-        this.scale = scale;
+        this.scaleX = scale;
+        this.scaleY = scale;
+        this.draw(gl);
+    }
+    
+	/**
+     * Draws the Texture to the screen.
+     * @param gl
+     * A valid OpenGL ES 1.0 object.
+     */
+    @Override
+    public void draw(GL10 gl, float x, float y, float rotation, float scaleX, float scaleY){
+        this.x = x;
+        this.y = y;
+        this.rotation = rotation;
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
         this.draw(gl);
     }
 	
@@ -299,7 +315,7 @@ public class Sprite extends Renderable{
 	 * The width of the SimpleSprite in pixels.
 	 */
 	@Override
-	public int getWidth() { return mWidth * (int)GLRenderer.getScale() * (int)scale; }
+	public int getWidth() { return mWidth * (int)GLRenderer.getScale() * (int)scaleX; }
 	
 	/**
 	 * Gets the height of the Sprite. It is equal to the width of one frame of animation.
@@ -307,21 +323,21 @@ public class Sprite extends Renderable{
 	 * The height of the SimpleSprite in pixels.
 	 */
 	@Override
-	public int getHeight() { return mHeight * (int)GLRenderer.getScale() * (int)scale; }
+	public int getHeight() { return mHeight * (int)GLRenderer.getScale() * (int)scaleX; }
 	
 	/**
 	 * One half of the Sprite's height.
 	 * @return
 	 * The height of the Sprite divided by 2.
 	 */
-	public int getHalfWidth() { return mHalfWidth  * (int)GLRenderer.getScale() * (int)scale; }
+	public int getHalfWidth() { return mHalfWidth  * (int)GLRenderer.getScale() * (int)scaleX; }
 	
 	/**
 	 * One half of the Sprite's width.
 	 * @return
 	 * The width of the Sprite divided by 2.
 	 */
-	public int getHalfHeight() { return mHalfHeight * (int)GLRenderer.getScale() * (int)scale; }
+	public int getHalfHeight() { return mHalfHeight * (int)GLRenderer.getScale() * (int)scaleX; }
 	
 	/**
 	 * Gets the Texture used by the SimpleSprite.

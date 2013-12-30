@@ -30,6 +30,8 @@ public class TDspriteGame extends Engine {
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
 	public static final int SPRITE_MISSILE = 103;
+	public static final int MONSTER_GREEN_HEALTHBAR = 104;
+	public static final int MONSTER_RED_HEALTHBAR = 105;
 	
 	GameManager spriteManager;
 	@Override 
@@ -93,6 +95,8 @@ public class TDspriteGame extends Engine {
 		TextureManager.registerTexture("images/wasteland.png", SPRITE_WASTELAND);
 		TextureManager.registerTexture("images/monster_den.png", SPRITE_MONSTER_DEN);
 		TextureManager.registerTexture("images/castle.png", SPRITE_CASTLE);
+		TextureManager.registerTexture("images/healthbar.png", MONSTER_GREEN_HEALTHBAR);
+		TextureManager.registerTexture("images/redhealthbar.png", MONSTER_RED_HEALTHBAR);
 		
 	}
 }

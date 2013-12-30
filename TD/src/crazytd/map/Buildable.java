@@ -27,7 +27,7 @@ public class Buildable extends Block {
 	public void Build(Tower newTower){
 		
 		if (!isBuilt){
-			Log.e("XofTower", "Towerrr "+x);
+			//Log.e("XofTower", "Towerrr "+x);
 			t = newTower;
 			t.x = x;
 			t.y = y;
@@ -40,13 +40,17 @@ public class Buildable extends Block {
 		return isBuilt;
 	} 
 	
-	//if the tower is not built, throws an exception, please check before calling this
+	/**
+	 * if the tower is not built, throws an exception, please check before calling this
+	 * @return
+	 */
 	public Tower getTower(){
 		//if(isBuilt){
 			return t;
 		//}
-
 	}
+	
+	
 	@Override
 	public Entity getMapElement(){
 		if(isBuilt){

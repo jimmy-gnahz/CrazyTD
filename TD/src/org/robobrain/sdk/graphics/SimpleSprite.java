@@ -70,7 +70,7 @@ public class SimpleSprite extends Renderable {
 		
 		x = 0;
 		y = 0;
-		scale = 1.0f;
+		scaleX = 1.0f;
 		color = Color.WHITE;
 		visible = true;
 	}
@@ -100,7 +100,7 @@ public class SimpleSprite extends Renderable {
 		gl.glLoadIdentity();
 		gl.glTranslatef(x, y, 0);
 		gl.glRotatef(rotation, 0, 0, 1);
-		gl.glScalef(scale * GLRenderer.getScale(), scale * GLRenderer.getScale(), 1.0f);
+		gl.glScalef(scaleX * GLRenderer.getScale(), scaleX * GLRenderer.getScale(), 1.0f);
 		gl.glDrawElements(GL10.GL_TRIANGLES, 6, GL10.GL_UNSIGNED_SHORT, mIndices);
 	}
 	
@@ -108,7 +108,7 @@ public class SimpleSprite extends Renderable {
 	    this.x = x;
 	    this.y = y;
 	    this.rotation = rotation;
-	    this.scale = scale;
+	    this.scaleX = scale;
 	    this.draw(gl);
 	}
 	

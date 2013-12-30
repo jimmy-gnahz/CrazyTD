@@ -46,9 +46,14 @@ public class Renderable {
 	public float rotation;
 	
 	/**
-	 * The amount the Renderable has been scaled. 1.0f = normal size.
+	 * The amount the Renderable has been scaled in the x direcdtion. 1.0f = normal size.
 	 */
-	public float scale;
+	public float scaleX;
+	
+	/**
+	 * The amount the Renderable has been scaled in the y direction. 1.0f = normal size.
+	 */
+	public float scaleY;
 	
 	/**
 	 * Set to false if you don't want to draw the Renderable.
@@ -112,4 +117,8 @@ public class Renderable {
 	 * The Texture used by the Renderable.
 	 */
 	public Texture getTexture() { return null; }
+
+
+	public void draw(GL10 gl, float x, float y, float rotation, float scaleX,
+			float scaleY) {}
 }
