@@ -1,6 +1,7 @@
 package org.robobrain.test;
 
 import org.robobrain.sdk.game.Engine;
+import org.robobrain.sdk.game.Entity;
 import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.Sprite;
 import org.robobrain.sdk.graphics.TextureManager;
@@ -17,6 +18,7 @@ import crazytd.map.MapParser;
 import crazytd.map.MonsterDen;
 import crazytd.map.Road;
 import crazytd.map.WasteLand;
+import crazytd.sprites.MenuBackground;
 import crazytd.sprites.Missile;
 import crazytd.sprites.Monster;
 import crazytd.sprites.GameManager;
@@ -33,6 +35,7 @@ public class CrazyTowerGame extends Engine {
 	public static final int SPRITE_CIRCLE=7;
 	
 	public static final int SPRITE_BUILD_BUTTON = 51;
+	public static final int SPRITE_BUILD_BACKGROUND = 52;
 	
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
@@ -40,6 +43,7 @@ public class CrazyTowerGame extends Engine {
 
 	Map m;
 	UIButton buildButton;
+	MenuBackground buildBackground;
 	
 	GameManager gameManager;
 	@Override 
@@ -57,19 +61,17 @@ public class CrazyTowerGame extends Engine {
 	public void update(long time){
 		super.update(time);
 		if (Multitouch.getState(0) == Multitouch.POINTER_UP) {
-			//Log.d("Before", ""+Multitouch.getX(0)+" , "+mWorld.getWidth());
-			//if( Multitouch.getX(0) < mWorld.getWidth());// 
-			//tower.isShowRange = !tower.isShowRange;
-			//Log.d("After", ""+Multitouch.getX(0)+" , "+mWorld.getWidth());
-			//float pointerY = Multitouch.getY(0);
-			//if (pointerX < mWorld.getWidth()/2)
+			if(buildButton.isInside(Multitouch.getX(0), Multitouch.getY(0))){
+				buildBackground.isVisible=!buildBackground.isVisible;
+				Multitouch.clear();
+				return;
+			}
 				
-			//Vector v = new Block(2,3).getCoordinate();
-			//Block b = m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0));
 			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))==null) return;
 			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)).getClass()==Buildable.class){
 				if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
 					((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower().setShowRange(true);
+					Multitouch.clear();
 					return;
 				}
 			}
@@ -117,13 +119,17 @@ public class CrazyTowerGame extends Engine {
 		mWorld.addGameManager(gameManager);
 		
 		buildButton = new UIButton(TextureManager.getTexture(SPRITE_BUILD_BUTTON),mWorld.getWidth()*0.85f,mWorld.getHeight()*0.85f);
+		buildBackground = new MenuBackground(TextureManager.getTexture(SPRITE_BUILD_BACKGROUND),mWorld);
+		mWorld.addEntity(buildBackground);
 		mWorld.addEntity(buildButton);
+
 		Log.d("Width",""+mWorld.getWidth());
 		Log.d("Height",""+mWorld.getHeight());
 	}
 	
 	private void loadTexture(){
 		TextureManager.registerTexture("images/build_button.png", SPRITE_BUILD_BUTTON);
+		TextureManager.registerTexture("images/BG_Stone.png", SPRITE_BUILD_BACKGROUND);
 		TextureManager.registerTexture("images/sled.png", SPRITE_TOWER);
 		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
 		TextureManager.registerTexture("images/missile.jpg", SPRITE_MISSILE);
