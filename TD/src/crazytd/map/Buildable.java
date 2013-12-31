@@ -1,5 +1,7 @@
 package crazytd.map;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.robobrain.sdk.game.Entity;
 import org.robobrain.test.TDspriteGame;
 

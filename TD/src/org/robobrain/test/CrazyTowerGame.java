@@ -62,17 +62,61 @@ public class CrazyTowerGame extends Engine {
 	@Override
 	public void update(long time){
 		super.update(time);
-		if (Multitouch.getState(0) == Multitouch.POINTER_UP) {
-			if(buildButton.isInside(Multitouch.getX(0), Multitouch.getY(0))){
-				buildBackground.isVisible=!buildBackground.isVisible;
-				Multitouch.clear();
-				return;
+		
+		if (Multitouch.getState(0) == Multitouch.POINTER_DOWN){
+			//when a buildable tower in the menu is picked
+			if(buildBackground.isPointerAt(Multitouch.getX(0), Multitouch.getY(0), 0)){
+				buildBackground.selectedTower=0;
+				buildBackground.towers[0].x=Multitouch.getX(0);
+				buildBackground.towers[0].y=Multitouch.getY(0);
 			}
-				
+		}
+		if (Multitouch.getState(0) == Multitouch.POINTER_MOVE){
+			//when a buildable tower in the menu is moving
+			if(buildBackground.selectedTower != -1){
+				buildBackground.towers[buildBackground.selectedTower].x=Multitouch.getX(0);
+				buildBackground.towers[buildBackground.selectedTower].y=Multitouch.getY(0);
+			}
+		}
+		
+		if (Multitouch.getState(0) == Multitouch.POINTER_UP) {
+			checkBuildButton();
+			//when a buildable tower in the menu is placed
+			if(buildBackground.selectedTower !=-1 ){
+				// build outside the map
+				if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))==null){
+					buildBackground.resetTower(0);	
+					Multitouch.clear();
+					return;
+				}
+				// build to a buildable
+				if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)) instanceof Buildable){
+					//build to a existing tower
+					if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
+						buildBackground.resetTower(0);	
+						Multitouch.clear();
+						return;
+					}
+					//build to an empty buildable
+					else {((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).Build(buildBackground.towers[buildBackground.selectedTower].clone());
+						gameManager.addTower(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower());
+						
+						buildBackground.resetTower(0);
+						Multitouch.clear();
+						return;
+					}
+					
+				}
+				else { buildBackground.resetTower(0);
+				Multitouch.clear();
+				}
+			}
+			//build a tower to a non-buildable block
 			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))==null) return;
-			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)).getClass()==Buildable.class){
+			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)) instanceof Buildable){
 				if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
 					((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower().setShowRange(true);
+					buildBackground.resetTower(0);
 					Multitouch.clear();
 					return;
 				}
@@ -81,6 +125,14 @@ public class CrazyTowerGame extends Engine {
 			for(int i =0; i<gameManager.getTowers().size();i++){
 				gameManager.getTowers().get(i).setShowRange(false);
 			}
+		}
+	}
+	
+	private void checkBuildButton(){
+		if(buildButton.isInside(Multitouch.getX(0), Multitouch.getY(0))){
+			buildBackground.isVisible=!buildBackground.isVisible;
+			Multitouch.clear();
+			return;
 		}
 	}
 	
@@ -117,13 +169,15 @@ public class CrazyTowerGame extends Engine {
 		gameManager.addTower(tower);
 		mWorld.addGameManager(gameManager);
 		
-		buildButton = new UIButton(TextureManager.getTexture(SPRITE_BUILD_BUTTON),mWorld.getWidth()*0.85f,mWorld.getHeight()*0.85f);
-		buildBackground = new MenuBackground(TextureManager.getTexture(SPRITE_BUILD_BACKGROUND),mWorld);
+		buildButton = new UIButton(TextureManager.getTexture(SPRITE_BUILD_BUTTON),mWorld);
+		Tower[] avaliableTowers = new Tower[1];
+		avaliableTowers[0]= new Tower( new Missile(null,10,0.1f), 5, Tower.QUICK_FIRE);
+		buildBackground = new MenuBackground(TextureManager.getTexture(SPRITE_BUILD_BACKGROUND),mWorld,avaliableTowers);
 		mWorld.addEntity(buildBackground);
 		mWorld.addEntity(buildButton);
 
-		Log.d("Width",""+mWorld.getWidth());
-		Log.d("Height",""+mWorld.getHeight());
+		//Log.d("Width",""+mWorld.getWidth());
+		//Log.d("Height",""+mWorld.getHeight());
 	}
 	
 	private void loadTexture(){

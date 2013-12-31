@@ -7,22 +7,79 @@ import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.Sprite;
 import org.robobrain.sdk.graphics.Texture;
 
+import crazytd.map.Block;
+
 public class MenuBackground extends Entity{
 	
 	public boolean isVisible;
 	
-	public MenuBackground(Texture t, World myWorld){
+	/**
+	 * the 1st tower that can be built
+	 */
+	public Tower[] towers;
+	/**
+	 * the coordinate of the 1st tower (that appear in the menu)
+	 */
+	private float xOfTowers[],yOfTowers[];	
+	
+	/**
+	 * a integer (index) to show which Tower is selected and about to be built, default to be -1
+	 */
+	public int selectedTower = -1;
+	
+	public MenuBackground(Texture t, World myWorld, Tower[] towersToBeBuilt){
 		this.x = myWorld.getWidth()*0.85f;
 		this.y = myWorld.getHeight()/2;
 		this.mRenderable = new Sprite(t ,(int) Math.ceil(myWorld.getWidth()*0.3), (int)(myWorld.getHeight()), 1);
 		isVisible = false;
+		
+		towers=towersToBeBuilt;
+		xOfTowers = new float[towersToBeBuilt.length];
+		yOfTowers = new float[towersToBeBuilt.length];
+		for(int i = 0; i< towersToBeBuilt.length; i++){
+			xOfTowers[i] = myWorld.getWidth()*0.85f;
+			yOfTowers[i] = myWorld.getHeight()*(i+1)*0.1f;
+			towers[i].setX(xOfTowers[i]);
+			towers[i].setY(yOfTowers[i]);
+		}
+
+		//myWorld.addEntity(tower1);
 	}
 	
+	public boolean isPointerAt(float x, float y, int towerIndex){
+		if(!isVisible) return false;
+		if(x < (xOfTowers[towerIndex]+Block.tileSize/2) &&
+		   x > (xOfTowers[towerIndex]-Block.tileSize/2) &&
+		   y < (yOfTowers[towerIndex]+Block.tileSize/2) &&
+		   y > (yOfTowers[towerIndex]-Block.tileSize/2)){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * reset the tower in menu given the index, include the tower's:
+	 * 			x, y, isBuilt isShowRange
+	 * and the towerIndex is reset to -1
+	 * do nothing if the index is bad
+	 * @param towerIndex: the index of tower to be resets
+	 */
+	public void resetTower(int towerIndex){
+		if(towerIndex<0 || towerIndex >= towers.length) return;
+		towers[towerIndex].x=xOfTowers[towerIndex];
+		towers[towerIndex].y=yOfTowers[towerIndex];
+		towers[towerIndex].isBuilt = false;
+		towers[towerIndex].isShowRange = false;
+		towerIndex = -1;
+	}
 	
 	@Override
 	public void draw(GL10 gl){
 		if(isVisible){
 			super.draw(gl);
+			if (towers.length<=0) return;
+			for(int i = 0; i < towers.length;i++)
+				towers[i].draw(gl);
 		}
 	}
 }

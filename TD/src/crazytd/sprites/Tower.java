@@ -107,9 +107,13 @@ public class Tower extends Entity{
 	/**
 	 * Sets the target and returns boolean indicating whether we have found it or not
 	 * @param monsters the list of monsters in game
-	 * @return true if we have found a target, false otherwise
+	 * @return true if we have found a target, false otherwise (a tower is not built may not find any target)
 	 */
 	public boolean findTarget(List<Monster> monsters) {
+		if (!isBuilt){
+			return false;
+		}
+			
 		float actualRange = range * GameManager.TILE_SIZE;
 		
 		// Set this.target as the first monster in firing range
@@ -128,6 +132,10 @@ public class Tower extends Entity{
 	public float distToMonster(Monster monster){
 		return (float) Math.sqrt(
 				Math.pow((monster.x - x),2) + Math.pow((monster.y - y),2));
+	}
+	
+	public Tower clone(){
+		return new Tower(missile, range, firingFreq);
 	}
 	
 	//********************************************************
