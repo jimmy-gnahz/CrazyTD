@@ -51,12 +51,12 @@ public class TDspriteGame extends Engine {
 		monster.y = (float) (0.4 * mWorld.getHeight());
 		monster.vx = 1.0f;
 		
-		Missile missile = new Missile(monster , 20 , Missile.SLOW);
+		Missile missile = new Missile(monster , 20 , Missile.FAST);
 		missile.x = (float) (0.3 * mWorld.getWidth());
 		missile.y = (float) (0.3 * mWorld.getHeight());
 		missile.vx = 0.0f; missile.vy = 0.0f;	
 
-		Tower tower = new Tower(missile,5,Tower.SLOW);
+		Tower tower = new Tower(missile,1,Tower.MEDIUM);
 
 		Map m = MapParser.parse(MapParser.testmap1);
 	

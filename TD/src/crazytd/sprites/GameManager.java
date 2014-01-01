@@ -35,7 +35,7 @@ public class GameManager  {
 	/**
 	 * This is for setting MonsterDen.timeInterval
 	 */
-	public final static int MONSTER_CREATION_INTERVAL = 500;
+	public final static int MONSTER_CREATION_INTERVAL = 2000;
 	
 	/**
 	 * The maximum hp for the castle, used for testing and debugging
@@ -243,13 +243,11 @@ public class GameManager  {
 				
 				// Removes the target monster for towers that were targeting the monster
 				for(Tower tower : towers){
-					if(tower.getTarget() != null){
-						if (tower.getTarget().equals(monster)){
-							tower.target = null;
-						}
+					if (monster.equals(tower.getTarget())){
+						tower.target = null;
 					}
 				}
-				
+
 				monster.remove = true; 	// This is to remove the renderable sprite from world
 				toRemoveMonsters.add(monster);
 			}
