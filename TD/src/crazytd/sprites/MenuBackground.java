@@ -29,8 +29,8 @@ public class MenuBackground extends Entity{
 	
 	public MenuBackground(Texture t, World myWorld, Tower[] towersToBeBuilt){
 		this.x = myWorld.getWidth()*0.85f;
-		this.y = myWorld.getHeight()/2;
-		this.mRenderable = new Sprite(t ,(int) Math.ceil(myWorld.getWidth()*0.3), (int)(myWorld.getHeight()), 1);
+		this.y = myWorld.getHeight()*0.9f/2;
+		this.mRenderable = new Sprite(t ,(int) Math.ceil(myWorld.getWidth()*0.3), (int)(myWorld.getHeight()*0.9f), 1);
 		isVisible = false;
 		
 		towers=towersToBeBuilt;
@@ -38,7 +38,7 @@ public class MenuBackground extends Entity{
 		yOfTowers = new float[towersToBeBuilt.length];
 		for(int i = 0; i< towersToBeBuilt.length; i++){
 			xOfTowers[i] = myWorld.getWidth()*0.85f;
-			yOfTowers[i] = myWorld.getHeight()*(i+1)*0.1f;
+			yOfTowers[i] = myWorld.getHeight()*(i+2)*0.1f;
 			towers[i].setX(xOfTowers[i]);
 			towers[i].setY(yOfTowers[i]);
 		}

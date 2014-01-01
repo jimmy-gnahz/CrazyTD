@@ -32,7 +32,7 @@ public class FontGame extends Engine {
 }
 
 class TextEntity extends Entity {
-	public TextEntity() {
+	private TextEntity() {
 		Texture tex = TextureManager.getTexture(FontGame.FONT_TEXTURE);
 		TextSprite ts = new TextSprite(tex);
 		ts.setMessage("hello Font");

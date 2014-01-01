@@ -29,7 +29,6 @@ public class Buildable extends Block {
 	public void Build(Tower newTower){
 		
 		if (!isBuilt){
-			//Log.e("XofTower", "Towerrr "+x);
 			t = newTower;
 			t.x = x;
 			t.y = y;
