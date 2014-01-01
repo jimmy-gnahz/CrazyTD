@@ -19,9 +19,6 @@ import org.robobrain.test.TDspriteGame;
 
 import crazytd.map.Block;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-
 public class Tower extends Entity{
 	
 	/**

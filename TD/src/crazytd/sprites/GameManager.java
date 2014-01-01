@@ -188,7 +188,9 @@ public class GameManager  {
 		List<Missile> toRemoveMissiles = new ArrayList<Missile>();
 		List<Monster> toRemoveMonsters = new ArrayList<Monster>();
 		
-		for (Monster monster : monsters){
+		for (int i=0;i<monsters.size();i++){
+			
+			Monster monster = monsters.get(i);
 			
 			Block currentBlock = map.getBlockByCoordinate(monster.x, monster.y);
 			
@@ -224,11 +226,18 @@ public class GameManager  {
 			
 			if (monster.getHP() <= 0){
 				
-				// Removes the missiles that were targeting the monster
+				// updates the target of each missile which was homing in on the monster.
 				for(Missile missile : missiles){
 					if (missile.getTarget().equals(monster)){
-						missile.remove = true;
-						toRemoveMissiles.add(missile);
+						// Remove the missile if this monster was the last monster
+						if (i == monsters.size() - 1) {
+							missile.remove = true;
+							toRemoveMissiles.add(missile);
+						}
+						// Set the target to be the next monster
+						else {
+							missile.setTarget(monsters.get(i+1)); 
+						}
 					}
 				}
 				
