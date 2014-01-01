@@ -10,7 +10,11 @@ import crazytd.sprites.Monster;
 public class Map {
 	int maxX, maxY;
 	Block[][] theMap;
-	Monster monster;
+	
+	/**
+	 * The type of monster the current map/level is going to create
+	 */
+	private Monster monster;
 	
 	//default visibility to hide the mess, only MapParser allow to access this constructor
 	Map(int maxX, int maxY){
@@ -23,6 +27,10 @@ public class Map {
 		return monster;
 	}
 	
+	/**
+	 * Sets the type of monster that will come out of the monsterDen
+	 * @param monster
+	 */
 	public void setMonster(Monster monster){
 		this.monster = monster;
 	}

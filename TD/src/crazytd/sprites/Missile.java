@@ -16,6 +16,11 @@ import org.robobrain.test.TDspriteGame;
 public class Missile extends Entity{
 
 	/**
+	 * The speed of missiles
+	 */
+	public static final float FAST = 0.6f , MEDIUM = 0.3f , SLOW = 0.1f;
+	
+	/**
 	 * Attack damage of missile
 	 */
 	int damage;

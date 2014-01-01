@@ -46,22 +46,17 @@ public class TDspriteGame extends Engine {
 	}
 	
 	private void loadSprites(){
-		Monster monster = new Monster(0.1f,100);
+		Monster monster = new Monster( Monster.FAST , 100);
 		monster.x = (float) (0.0 * mWorld.getWidth());
 		monster.y = (float) (0.4 * mWorld.getHeight());
 		monster.vx = 1.0f;
 		
-		Monster monster2 = new Monster(0.05f,300);
-		monster2.x = (float) (0.0 * mWorld.getWidth());
-		monster2.y = (float) (0.6 * mWorld.getHeight());
-		monster2.vx = 1.0f;
-		
-		Missile missile = new Missile(monster,20,0.8f);
+		Missile missile = new Missile(monster , 20 , Missile.SLOW);
 		missile.x = (float) (0.3 * mWorld.getWidth());
 		missile.y = (float) (0.3 * mWorld.getHeight());
 		missile.vx = 0.0f; missile.vy = 0.0f;	
 
-		Tower tower = new Tower(missile,5,Tower.QUICK_FIRE);
+		Tower tower = new Tower(missile,5,Tower.SLOW);
 
 		Map m = MapParser.parse(MapParser.testmap1);
 	

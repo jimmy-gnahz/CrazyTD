@@ -36,13 +36,11 @@ public class Tower extends Entity{
 	 * Firing frequencies. 
 	 * Measured in #fires/minute
 	 */
-	public static final float QUICK_FIRE = 120;
-	public static final float MEDIUM_FIRE = 60;
-	public static final float SLOW_FIRE = 30;
-	
+	public static final float FAST = 120 , MEDIUM = 60 , SLOW = 30;
+
 	/**
 	 * Frequency at which towers fire missiles. 
-	 * One of {QUICK_FIRE,MEDIUM_FIRE,SLOW_FIRE}
+	 * One of {FAST,MEDIUM,SLOW}
 	 */
 	protected float firingFreq;
 	
@@ -78,7 +76,7 @@ public class Tower extends Entity{
 	/**
 	 * @param missile
 	 * @param range measured in number of tiles, 
-	 * @param frequency firing speed, recommended: QUICK_FIRE, MEDIUM_FIRE, SLOW_FIRE
+	 * @param frequency firing speed, recommended: FAST, MEDIUM, SLOW
 	 */
 	public Tower(Missile missile, float range, float frequency) {
 		super();

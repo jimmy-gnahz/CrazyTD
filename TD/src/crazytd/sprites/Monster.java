@@ -17,6 +17,11 @@ import org.robobrain.test.TDspriteGame;
 
 public class Monster extends Entity{
 
+	/**
+	 * The speed at which monsters travel
+	 */
+	public static final float FAST = 0.2f, MEDIUM = 0.1f, SLOW = 0.05f; 
+	
 	private final int HEALTH_BAR_WIDTH = 30;
 	private final int HEALTH_BAR_HEIGHT = 6;
 	
