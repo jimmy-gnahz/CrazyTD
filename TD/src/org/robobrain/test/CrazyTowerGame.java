@@ -70,6 +70,9 @@ public class CrazyTowerGame extends Engine {
 				buildBackground.towers[0].x=Multitouch.getX(0);
 				buildBackground.towers[0].y=Multitouch.getY(0);
 			}
+			else{
+				buildBackground.resetTower();
+			}
 		}
 		if (Multitouch.getState(0) == Multitouch.POINTER_MOVE){
 			//when a buildable tower in the menu is moving
@@ -85,7 +88,7 @@ public class CrazyTowerGame extends Engine {
 			if(buildBackground.selectedTower !=-1 ){
 				// build outside the map
 				if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))==null){
-					buildBackground.resetTower(0);	
+					buildBackground.resetTower();	
 					Multitouch.clear();
 					return;
 				}
@@ -93,7 +96,7 @@ public class CrazyTowerGame extends Engine {
 				if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)) instanceof Buildable){
 					//build to a existing tower
 					if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
-						buildBackground.resetTower(0);	
+						buildBackground.resetTower();	
 						Multitouch.clear();
 						return;
 					}
@@ -101,30 +104,33 @@ public class CrazyTowerGame extends Engine {
 					else {((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).Build(buildBackground.towers[buildBackground.selectedTower].clone());
 						gameManager.addTower(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower());
 						
-						buildBackground.resetTower(0);
+						buildBackground.resetTower();
 						Multitouch.clear();
 						return;
 					}
 					
 				}
-				else { buildBackground.resetTower(0);
+				else { buildBackground.resetTower();
 				Multitouch.clear();
 				}
 			}
 			//build a tower to a non-buildable block
 			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))==null) return;
+			if(gameManager.getTowers().size()<=0)return;
+			for(int i =0; i<gameManager.getTowers().size();i++){
+				gameManager.getTowers().get(i).setShowRange(false);
+				buildBackground.resetTower();
+			}
 			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)) instanceof Buildable){
 				if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
 					((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower().setShowRange(true);
-					buildBackground.resetTower(0);
+					buildBackground.resetTower();
 					Multitouch.clear();
 					return;
 				}
 			}
-			if(gameManager.getTowers().size()<=0)return;
-			for(int i =0; i<gameManager.getTowers().size();i++){
-				gameManager.getTowers().get(i).setShowRange(false);
-			}
+			Multitouch.clear();
+
 		}
 	}
 	

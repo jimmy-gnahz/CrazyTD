@@ -243,8 +243,10 @@ public class GameManager  {
 				
 				// Removes the target monster for towers that were targeting the monster
 				for(Tower tower : towers){
-					if (tower.getTarget().equals(monster)){
-						tower.target = null;
+					if(tower.getTarget() != null){
+						if (tower.getTarget().equals(monster)){
+							tower.target = null;
+						}
 					}
 				}
 				

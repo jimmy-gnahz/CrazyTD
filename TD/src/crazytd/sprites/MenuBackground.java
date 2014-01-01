@@ -58,19 +58,17 @@ public class MenuBackground extends Entity{
 	}
 	
 	/**
-	 * reset the tower in menu given the index, include the tower's:
+	 * reset the selectedTower's stats include the tower's:
 	 * 			x, y, isBuilt isShowRange
-	 * and the towerIndex is reset to -1
-	 * do nothing if the index is bad
-	 * @param towerIndex: the index of tower to be resets
+	 * and the selectedTower is reset to -1
 	 */
-	public void resetTower(int towerIndex){
-		if(towerIndex<0 || towerIndex >= towers.length) return;
-		towers[towerIndex].x=xOfTowers[towerIndex];
-		towers[towerIndex].y=yOfTowers[towerIndex];
-		towers[towerIndex].isBuilt = false;
-		towers[towerIndex].isShowRange = false;
-		towerIndex = -1;
+	public void resetTower(){
+		if(selectedTower==-1) return;
+		towers[selectedTower].x=xOfTowers[selectedTower];
+		towers[selectedTower].y=yOfTowers[selectedTower];
+		towers[selectedTower].isBuilt = false;
+		towers[selectedTower].isShowRange = false;
+		selectedTower = -1;
 	}
 	
 	@Override
