@@ -9,16 +9,15 @@ import org.robobrain.sdk.graphics.TextureManager;
 import org.robobrain.sdk.graphics.Vector;
 
 
-public class Block {
+public class Block extends Entity{
 	public enum Direction{
 		NORTH, SOUTH, EAST, WEST
 	}
 	
 	private int tileX;		// the column number in the map
 	private int tileY;		// the row number in the map
-	protected float x;		// the x coordinate in the map
-	protected float y;		// the y coordinate in the map
-	protected MapElement m;
+	//protected float x;		// the x coordinate in the map
+	//protected float y;		// the y coordinate in the map
 
 	public static final float tileSize = 64; //the edge length of a tile 
 
@@ -28,6 +27,7 @@ public class Block {
 	 * @param row
 	 */
 	public Block(int col, int row){
+		super();
 		this.tileX = col;
 		this.tileY = row;
 		this.x = tileX * tileSize + tileSize/2;
@@ -59,11 +59,9 @@ public class Block {
 	}
 
 	public void bindTextureIndex(int textureIndex){
-		m = new MapElement(x, y, textureIndex);
-	}
-	
-	public Entity getMapElement(){
-		return m;
+		Texture t = TextureManager.getTexture(textureIndex);
+		Sprite s = new Sprite(t, 64, 64, 1);
+		mRenderable = s;
 	}
 	
 	public Vector getDirection(float x, float y){return new Vector(0,0);}
@@ -76,13 +74,6 @@ class MapElement extends Entity {
 	 * @param y 
 	 * @param textureIndex found in TextureManager
 	 */
-	public MapElement(float x, float y, int textureIndex) {
-		super();
-		Texture t = TextureManager.getTexture(textureIndex);
-		Sprite s = new Sprite(t, 64, 64, 1);
-		this.x = x;
-		this.y = y;
-		mRenderable = s;
-	}
+
 
 }

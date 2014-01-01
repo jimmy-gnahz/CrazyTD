@@ -76,7 +76,7 @@ public class Map {
 		
 		for(int y=0;y<theMap.length;y++){
 			for(int x=0;x<theMap[0].length;x++){
-				world.addEntity(theMap[y][x].getMapElement());
+				world.addEntity(theMap[y][x]);
 			}
 		}
 	}
