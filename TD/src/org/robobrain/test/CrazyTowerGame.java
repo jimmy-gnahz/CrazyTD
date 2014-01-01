@@ -5,7 +5,6 @@ import org.robobrain.sdk.game.Entity;
 import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.Sprite;
 import org.robobrain.sdk.graphics.TextureManager;
-import org.robobrain.sdk.graphics.Vector;
 import org.robobrain.sdk.input.Multitouch;
 
 import android.util.Log;
@@ -15,15 +14,15 @@ import crazytd.map.Buildable;
 import crazytd.map.Castle;
 import crazytd.map.Map;
 import crazytd.map.MapParser;
-import crazytd.map.MonsterDen;
-import crazytd.map.Road;
-import crazytd.map.WasteLand;
+
+import crazytd.sprites.Icon;
 import crazytd.sprites.MenuBackground;
 import crazytd.sprites.Missile;
 import crazytd.sprites.Monster;
 import crazytd.sprites.GameManager;
 import crazytd.sprites.Tower;
 import crazytd.sprites.UIButton;
+import crazytd.sprites.TextEntity;
 
 public class CrazyTowerGame extends Engine {
 	public static final int SPRITE_ROAD =1;
@@ -36,6 +35,7 @@ public class CrazyTowerGame extends Engine {
 	
 	public static final int SPRITE_BUILD_BUTTON = 51;
 	public static final int SPRITE_BUILD_BACKGROUND = 52;
+	public static final int SPRITE_HEALTH_ICON = 53;
 	
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
@@ -46,6 +46,8 @@ public class CrazyTowerGame extends Engine {
 	Map m;
 	UIButton buildButton;
 	MenuBackground buildBackground;
+	Icon heathIcon;
+	TextEntity castleHealth;
 	
 	GameManager gameManager;
 	@Override 
@@ -176,6 +178,11 @@ public class CrazyTowerGame extends Engine {
 		buildBackground = new MenuBackground(TextureManager.getTexture(SPRITE_BUILD_BACKGROUND),mWorld,avaliableTowers);
 		mWorld.addEntity(buildBackground);
 		mWorld.addEntity(buildButton);
+		
+		heathIcon = new Icon(TextureManager.getTexture(SPRITE_HEALTH_ICON),40,40,0.8f,0.07f,mWorld);
+		castleHealth = new TextEntity(0.85*mWorld.getWidth(),0.95*mWorld.getHeight(),gameManager.CASTLE_HP+"");
+		mWorld.addEntity(heathIcon);
+		mWorld.addEntity(castleHealth);
 
 		//Log.d("Width",""+mWorld.getWidth());
 		//Log.d("Height",""+mWorld.getHeight());
@@ -184,6 +191,7 @@ public class CrazyTowerGame extends Engine {
 	private void loadTexture(){
 		TextureManager.registerTexture("images/build_button.png", SPRITE_BUILD_BUTTON);
 		TextureManager.registerTexture("images/BG_Stone.png", SPRITE_BUILD_BACKGROUND);
+		TextureManager.registerTexture("images/heart.png", SPRITE_HEALTH_ICON);
 		TextureManager.registerTexture("images/sled.png", SPRITE_TOWER);
 		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
 		TextureManager.registerTexture("images/missile.jpg", SPRITE_MISSILE);
