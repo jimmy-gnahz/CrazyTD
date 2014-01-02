@@ -6,6 +6,7 @@ import org.robobrain.sdk.game.Entity;
 import org.robobrain.sdk.game.World;
 import org.robobrain.sdk.graphics.Sprite;
 import org.robobrain.sdk.graphics.Texture;
+import org.robobrain.sdk.input.Multitouch;
 
 import crazytd.map.Block;
 
@@ -29,7 +30,7 @@ public class MenuBackground extends Entity{
 	
 	public MenuBackground(Texture t, World myWorld, Tower[] towersToBeBuilt){
 		this.x = myWorld.getWidth()*0.85f;
-		this.y = myWorld.getHeight()*0.9f/2;
+		this.y = myWorld.getHeight()*1.1f/2;
 		this.mRenderable = new Sprite(t ,(int) Math.ceil(myWorld.getWidth()*0.3), (int)(myWorld.getHeight()*0.9f), 1);
 		isVisible = false;
 		
@@ -37,13 +38,25 @@ public class MenuBackground extends Entity{
 		xOfTowers = new float[towersToBeBuilt.length];
 		yOfTowers = new float[towersToBeBuilt.length];
 		for(int i = 0; i< towersToBeBuilt.length; i++){
-			xOfTowers[i] = myWorld.getWidth()*0.85f;
+			xOfTowers[i] = myWorld.getWidth()*0.8f;
 			yOfTowers[i] = myWorld.getHeight()*(i+2)*0.1f;
 			towers[i].setX(xOfTowers[i]);
 			towers[i].setY(yOfTowers[i]);
 		}
 
 		//myWorld.addEntity(tower1);
+	}
+	/** make the tower the pointer is at the selectedTower, do nothing if the pointer is not on any tower in the menu
+	 */
+	public void selectTower(){
+		if(towers.length>0){
+			for(int i=0; i<towers.length;i++){
+				if(isPointerAt(Multitouch.getX(0),Multitouch.getY(0),i)){
+					selectedTower = i;
+					return;
+				}
+			}
+		}
 	}
 	
 	public boolean isPointerAt(float x, float y, int towerIndex){

@@ -64,65 +64,20 @@ public class CrazyTowerGame extends Engine {
 	@Override
 	public void update(long time){
 		super.update(time);
-		
+		checkBuildButton();
 		if (Multitouch.getState(0) == Multitouch.POINTER_DOWN){
-			//when a buildable tower in the menu is picked
-			if(buildBackground.isPointerAt(Multitouch.getX(0), Multitouch.getY(0), 0)){
-				buildBackground.selectedTower=0;
-				buildBackground.towers[0].x=Multitouch.getX(0);
-				buildBackground.towers[0].y=Multitouch.getY(0);
-			}
-			else{
-				buildBackground.resetTower();
-			}
+			chooseTowerFromMenu();
 		}
+		
+		
 		if (Multitouch.getState(0) == Multitouch.POINTER_MOVE){
-			//when a buildable tower in the menu is moving
-			if(buildBackground.selectedTower != -1){
-				buildBackground.towers[buildBackground.selectedTower].x=Multitouch.getX(0);
-				buildBackground.towers[buildBackground.selectedTower].y=Multitouch.getY(0);
-			}
+			moveTowerFromMenu();
 		}
+		
 		
 		if (Multitouch.getState(0) == Multitouch.POINTER_UP) {
-			checkBuildButton();
-			//when a buildable tower in the menu is placed
-			if(buildBackground.selectedTower !=-1 ){
-				// build outside the map
-				if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))==null){
-					buildBackground.resetTower();	
-					Multitouch.clear();
-					return;
-				}
-				// build to a buildable
-				if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)) instanceof Buildable){
-					//build to a existing tower
-					if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
-						buildBackground.resetTower();	
-						Multitouch.clear();
-						return;
-					}
-					//build to an empty buildable
-					else {((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).Build(buildBackground.towers[buildBackground.selectedTower].clone());
-						gameManager.addTower(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower());
-						
-						buildBackground.resetTower();
-						Multitouch.clear();
-						return;
-					}
-					
-				}
-				else { buildBackground.resetTower();
-				Multitouch.clear();
-				}
-			}
-			//build a tower to a non-buildable block
-			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))==null) return;
-			if(gameManager.getTowers().size()<=0)return;
-			for(int i =0; i<gameManager.getTowers().size();i++){
-				gameManager.getTowers().get(i).setShowRange(false);
-				buildBackground.resetTower();
-			}
+			if (placeTowerFromMenu()) return; // place done placing a tower (success or not) update finished
+			// tower range diaplay
 			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)) instanceof Buildable){
 				if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
 					((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower().setShowRange(true);
@@ -136,11 +91,59 @@ public class CrazyTowerGame extends Engine {
 		}
 	}
 	
-	private void checkBuildButton(){
-		if(buildButton.isInside(Multitouch.getX(0), Multitouch.getY(0))){
-			buildBackground.isVisible=!buildBackground.isVisible;
+	private void chooseTowerFromMenu(){
+		//when a buildable tower in the menu is picked
+		buildBackground.selectTower();
+		if(buildBackground.selectedTower == -1){
+			buildBackground.resetTower();
+		}
+	}
+	
+	private void moveTowerFromMenu(){
+		//when a buildable tower in the menu is moving
+		if(buildBackground.selectedTower != -1){
+			buildBackground.towers[buildBackground.selectedTower].x=Multitouch.getX(0);
+			buildBackground.towers[buildBackground.selectedTower].y=Multitouch.getY(0);
+		}
+	}
+	/**
+	 * attempt to place a tower from menu, and report if it was intended to build a tower (not doing other tasks)
+	 * @return  true if player tried to placed a tower,
+	 * 			false if player is trying to do something else
+	 */
+	private boolean placeTowerFromMenu(){
+		//when a buildable tower in the menu is placed
+		if(buildBackground.selectedTower ==-1 ) return false;	//no tower is selected
+		// place it outside the map, or not a buildable block
+		if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))==null ||
+				!(m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)) instanceof Buildable	)){
+			buildBackground.resetTower();	
 			Multitouch.clear();
-			return;
+			return true;
+		}
+		// if this buildable block is occupied
+		if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
+			buildBackground.resetTower();	
+			Multitouch.clear();
+			return true;
+		}
+		// good to go, let's build it
+		else {
+			((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).Build(buildBackground.towers[buildBackground.selectedTower].clone());
+			gameManager.addTower(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower());
+			
+			buildBackground.resetTower();
+			Multitouch.clear();
+			return true;
+		}
+	}
+	
+	private void checkBuildButton(){
+		if (Multitouch.getState(0) == Multitouch.POINTER_UP) {
+			if(buildButton.isInside(Multitouch.getX(0), Multitouch.getY(0))){
+				buildBackground.isVisible=!buildBackground.isVisible;
+				Multitouch.clear();
+			}
 		}
 	}
 	
@@ -179,7 +182,7 @@ public class CrazyTowerGame extends Engine {
 		mWorld.addEntity(buildBackground);
 		mWorld.addEntity(buildButton);
 		
-		heathIcon = new Icon(TextureManager.getTexture(SPRITE_HEALTH_ICON),40,40,0.8f,0.07f,mWorld);
+		heathIcon = new Icon(TextureManager.getTexture(SPRITE_HEALTH_ICON),32,32,0.8f,0.05f,mWorld);
 		castleHealth = new TextEntity(0.85*mWorld.getWidth(),0.95*mWorld.getHeight(),gameManager.CASTLE_HP+"");
 		mWorld.addEntity(heathIcon);
 		mWorld.addEntity(castleHealth);
