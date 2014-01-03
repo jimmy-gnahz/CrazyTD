@@ -4,6 +4,11 @@ import org.robobrain.sdk.graphics.Vector;
 import org.robobrain.test.TDspriteGame;
 public class MonsterDen extends Block {
 
+	/**
+	 * Indicates whether monsters should be created
+	 */
+	private boolean isSendingMonsters = true;
+	
 	protected float elapsedTime;
 	
 	/**
@@ -60,12 +65,20 @@ public class MonsterDen extends Block {
 		}
 	}
 	
+	public boolean isSendingMonsters(){
+		return isSendingMonsters;
+	}
+	
 	public float getTimeInterval(){
 		return timeInterval;
 	}
 	
 	public float getElapsedTime(){
 		return elapsedTime;
+	}
+	
+	public void setIsSendingMonsters(boolean b){
+		isSendingMonsters = b;
 	}
 	
 	public void setTimeInterval(float time){

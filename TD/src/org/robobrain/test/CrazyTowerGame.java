@@ -76,8 +76,11 @@ public class CrazyTowerGame extends Engine {
 		
 		
 		if (Multitouch.getState(0) == Multitouch.POINTER_UP) {
+			
+			gameManager.setAllTowerShowRangeToFalse();
+			
 			if (placeTowerFromMenu()) return; // place done placing a tower (success or not) update finished
-			// tower range diaplay
+			// tower range display
 			if( m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0)) instanceof Buildable){
 				if(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getIsBuilt()){
 					((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower().setShowRange(true);
