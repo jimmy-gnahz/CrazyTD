@@ -27,6 +27,8 @@ public class TDspriteGame extends Engine {
 	public static final int SPRITE_MONSTER_DEN=5;
 	public static final int SPRITE_CASTLE=6;
 	
+	public static final int GAME_OVER = 7;
+	
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
 	public static final int SPRITE_MISSILE = 103;
@@ -76,6 +78,8 @@ public class TDspriteGame extends Engine {
 	}
 	
 	private void loadTexture(){
+		
+		TextureManager.registerTexture("images/gameOver.png", GAME_OVER);
 		TextureManager.registerTexture("images/sled.png", SPRITE_TOWER);
 		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
 		TextureManager.registerTexture("images/missile.jpg", SPRITE_MISSILE);

@@ -62,8 +62,15 @@ public class World extends Entity {
 	 */
 	@Override
 	public void update(long time) {
+		
 		int count = mEntities.size();
 		for (int i = 0; i < count; i++) {
+			
+			// might wanna place the following if condition somewhere else
+//			if (gameManager.isGameOver) { // it freezes the sprites if game is over
+//				break;
+//			}
+			
 			Entity e = mEntities.get(i);
 			e.update(time);
 			if ((e.getX() < 0) || (e.getX() > GLRenderer.getWidth()) ||

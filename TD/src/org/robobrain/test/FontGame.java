@@ -10,7 +10,7 @@ import org.robobrain.sdk.graphics.Texture;
 import org.robobrain.sdk.graphics.TextureManager;
 import crazytd.map.*;
 public class FontGame extends Engine {
-	public static final int FONT_TEXTURE = 2;
+	public static final int FONT_TEXTURE = 7;
 	
 	@Override
 	public void init() {

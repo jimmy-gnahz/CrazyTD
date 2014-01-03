@@ -5,6 +5,7 @@ import org.robobrain.sdk.graphics.TextSprite;
 import org.robobrain.sdk.graphics.Texture;
 import org.robobrain.sdk.graphics.TextureManager;
 import org.robobrain.test.FontGame;
+import org.robobrain.test.TDspriteGame;
 
 public class TextEntity extends Entity{
 	public TextEntity(double x, double y,String s){

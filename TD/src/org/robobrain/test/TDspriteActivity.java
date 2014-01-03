@@ -19,7 +19,7 @@ public class TDspriteActivity extends GameActivity {
 //		initRenderer(tempWorld.getWidth(),tempWorld.getHeight());
 //		tempWorld.kill();
 		initRenderer();
-		setBackgroundColor(Color.YELLOW);
+		setBackgroundColor(Color.BLACK);
 		registerGame(new TDspriteGame());
 	}
 

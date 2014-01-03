@@ -7,10 +7,19 @@ package crazytd.sprites;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.microedition.khronos.opengles.GL10;
+
+import org.robobrain.sdk.game.Entity;
 import org.robobrain.sdk.game.World;
+import org.robobrain.sdk.graphics.Renderable;
+import org.robobrain.sdk.graphics.Sprite;
+import org.robobrain.sdk.graphics.Texture;
+import org.robobrain.sdk.graphics.TextureManager;
 import org.robobrain.sdk.graphics.Vector;
+import org.robobrain.test.TDspriteGame;
 
 import crazytd.map.Block;
 import crazytd.map.Castle;
@@ -40,7 +49,7 @@ public class GameManager  {
 	/**
 	 * The maximum hp for the castle, used for testing and debugging
 	 */
-	public final static int CASTLE_HP = 10;
+	public final static int CASTLE_HP = 1;
 
 	// For tracking elapsedTime for MonsterDen and Towers
 	private long startTime;
@@ -57,6 +66,8 @@ public class GameManager  {
 
 	private World world;
 
+	public boolean isGameOver = false;
+
 
 	public GameManager(World world) {
 		this.world = world;
@@ -72,6 +83,11 @@ public class GameManager  {
 	 * Updates the lists of sprites
 	 */
 	public void updateGame(){
+		
+		if (isGameOver) {
+			return;
+		}
+		
 		endTime = System.currentTimeMillis();
 		deltaTime = endTime - startTime;
 		startTime = System.currentTimeMillis();
@@ -210,23 +226,21 @@ public class GameManager  {
 			Vector direction = new Vector(0,0);
 
 			if (currentBlock instanceof MonsterDen){
-				Block b = (MonsterDen) currentBlock;
-				direction = b.getDirection(monster.x, monster.y);
+				MonsterDen md = (MonsterDen) currentBlock;
+				direction = md.getDirection(monster.x, monster.y);
 			}
 			if (currentBlock instanceof Road){
-				Block b = (Road) currentBlock;
-				direction = b.getDirection(monster.x, monster.y);
+				Road road = (Road) currentBlock;
+				direction = road.getDirection(monster.x, monster.y);
 			}
 			if (currentBlock instanceof Castle){
-				Castle b = (Castle) currentBlock;
-				direction = b.getDirection(monster.x, monster.y);
+				Castle castle = (Castle) currentBlock;
+				direction = castle.getDirection(monster.x, monster.y);
 				monster.setHP(0); // so that it vanishes
-				b.damage(1);
-				// will move this elsewhere:
-				if (b.getHP() <= 0){
-					missiles.clear();
-					monsters.clear();
-					towers.clear();
+				castle.damage(1);
+				
+				if (castle.getHP() <= 0 && !(isGameOver)){
+					gameOver();
 					return;
 				}
 			}
@@ -266,6 +280,14 @@ public class GameManager  {
 		monsters.removeAll(toRemoveMonsters);
 	}
 
+	/**
+	 * called when game is over
+	 */
+	private void gameOver(){
+		isGameOver = true;
+		world.addEntity(new GameOverText());
+	}
+	
 	/**
 	 * set all towers' isShowRange to false
 	 */
@@ -339,6 +361,26 @@ public class GameManager  {
 
 	public Map getMap(){
 		return map;
+	}
+
+}
+
+/**
+ * We might not need this.
+ * Naive implementation of displaying gameover text
+ * @author Jimmy
+ *
+ */
+class GameOverText extends Entity{
+
+	public GameOverText() {
+		super();
+		
+		Texture t = TextureManager.getTexture(TDspriteGame.GAME_OVER);
+		Sprite s = new Sprite(t, 1024, 1024, 1);		
+		x = new World().getWidth()/2;
+		y = new World().getHeight()/2;
+		mRenderable = s;
 	}
 
 }
