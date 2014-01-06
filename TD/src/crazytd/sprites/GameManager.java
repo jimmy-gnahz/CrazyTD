@@ -49,7 +49,7 @@ public class GameManager  {
 	/**
 	 * The maximum hp for the castle, used for testing and debugging
 	 */
-	public final static int CASTLE_HP = 1;
+	public final static int CASTLE_HP = 5;
 
 	// For tracking elapsedTime for MonsterDen and Towers
 	private long startTime;
@@ -63,6 +63,7 @@ public class GameManager  {
 	private Map map;
 	private MonsterDen monsterDen;
 	private Castle castle;
+	private TextEntity castleHP;
 
 	private World world;
 
@@ -96,6 +97,7 @@ public class GameManager  {
 		updateMissiles();
 		updateMonsters();
 		updateTowers();
+		updateCastleHP();
 
 
 	}
@@ -296,6 +298,13 @@ public class GameManager  {
 			tower.setShowRange(false);
 		}
 	}
+	
+	private void updateCastleHP(){
+		if(castle == null){
+			return;		//oops
+		}
+		castleHP.updateText(castle.getHP()+"");
+	}
 
 	//********************************************************
 	// 					Setter & Getters
@@ -330,6 +339,7 @@ public class GameManager  {
 		try {
 			monsterDen = (MonsterDen) map.getMonsterDen();
 			castle = (Castle) map.getCastle();
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -344,6 +354,7 @@ public class GameManager  {
 	private void initMap(){
 		monsterDen.setIsSendingMonsters(true);
 		castle.setHP(CASTLE_HP);
+		castleHP = new TextEntity(0.85*world.getWidth(),0.05*world.getHeight(),castle.getMaxHp()+"yoho");
 		monsterDen.setTimeInterval(MONSTER_CREATION_INTERVAL);
 	}
 
@@ -361,6 +372,10 @@ public class GameManager  {
 
 	public Map getMap(){
 		return map;
+	}
+	
+	public int getCastleHP(){
+		return castle.getHP();
 	}
 
 }

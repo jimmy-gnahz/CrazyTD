@@ -36,6 +36,7 @@ public class CrazyTowerGame extends Engine {
 	public static final int SPRITE_BUILD_BUTTON = 51;
 	public static final int SPRITE_BUILD_BACKGROUND = 52;
 	public static final int SPRITE_HEALTH_ICON = 53;
+	public static final int FONT_TEXTURE = 54;
 	
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
@@ -64,6 +65,7 @@ public class CrazyTowerGame extends Engine {
 	@Override
 	public void update(long time){
 		super.update(time);
+		castleHealth.updateText(gameManager.getCastleHP()+"");
 		checkBuildButton();
 		if (Multitouch.getState(0) == Multitouch.POINTER_DOWN){
 			chooseTowerFromMenu();
@@ -186,7 +188,7 @@ public class CrazyTowerGame extends Engine {
 		mWorld.addEntity(buildButton);
 		
 		heathIcon = new Icon(TextureManager.getTexture(SPRITE_HEALTH_ICON),32,32,0.8f,0.05f,mWorld);
-		castleHealth = new TextEntity(0.85*mWorld.getWidth(),0.95*mWorld.getHeight(),gameManager.CASTLE_HP+"");
+		castleHealth = new TextEntity(0.85*mWorld.getWidth(),0.05*mWorld.getHeight(),gameManager.getCastleHP()+"");
 		mWorld.addEntity(heathIcon);
 		mWorld.addEntity(castleHealth);
 
@@ -198,6 +200,7 @@ public class CrazyTowerGame extends Engine {
 		TextureManager.registerTexture("images/build_button.png", SPRITE_BUILD_BUTTON);
 		TextureManager.registerTexture("images/BG_Stone.png", SPRITE_BUILD_BACKGROUND);
 		TextureManager.registerTexture("images/heart.png", SPRITE_HEALTH_ICON);
+		TextureManager.registerTexture("images/arial.png", FONT_TEXTURE);
 		TextureManager.registerTexture("images/sled.png", SPRITE_TOWER);
 		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
 		TextureManager.registerTexture("images/missile.jpg", SPRITE_MISSILE);

@@ -66,7 +66,7 @@ public class BitmapFont {
 		mIndices = null;
 		mWidth = texture.getWidth() / 16;
 		mHeight = texture.getHeight() / 16;
-		mColor = Color.WHITE;
+		mColor = Color.BLACK;
 	}
 	
 	/**
