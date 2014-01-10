@@ -49,7 +49,7 @@ public class GameManager  {
 	/**
 	 * The maximum hp for the castle, used for testing and debugging
 	 */
-	public final static int CASTLE_HP = 5;
+	public final static int CASTLE_HP = 15;
 
 	// For tracking elapsedTime for MonsterDen and Towers
 	private long startTime;
@@ -303,7 +303,7 @@ public class GameManager  {
 		if(castle == null){
 			return;		//oops
 		}
-		castleHP.updateText(castle.getHP()+"");
+		castleHP.updateText(castle.getHP()+""+castle.getHP());
 	}
 
 	//********************************************************

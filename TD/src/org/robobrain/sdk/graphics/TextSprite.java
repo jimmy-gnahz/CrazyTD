@@ -81,4 +81,7 @@ public class TextSprite extends Renderable {
 		mFont.end(gl);
 	}
 
+	public void setColor(Color c){
+		mFont.setColor(c);
+	}
 }

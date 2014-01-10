@@ -53,6 +53,8 @@ public class MenuBackground extends Entity{
 			for(int i=0; i<towers.length;i++){
 				if(isPointerAt(Multitouch.getX(0),Multitouch.getY(0),i)){
 					selectedTower = i;
+					towers[i].x=Multitouch.getX(0);
+					towers[i].y=Multitouch.getY(0);
 					return;
 				}
 			}

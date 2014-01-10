@@ -3,6 +3,7 @@ package crazytd.sprites;
 import javax.microedition.khronos.opengles.GL10;
 
 import org.robobrain.sdk.game.Entity;
+import org.robobrain.sdk.graphics.Color;
 import org.robobrain.sdk.graphics.TextSprite;
 import org.robobrain.sdk.graphics.Texture;
 import org.robobrain.sdk.graphics.TextureManager;
@@ -36,5 +37,9 @@ public class TextEntity extends Entity{
 	@Override 
 	public void draw(GL10 gl) {
 		mRenderable.draw(gl);
+	}
+	
+	public void setColor(Color c){
+		((TextSprite)mRenderable).setColor(c);
 	}
 }
