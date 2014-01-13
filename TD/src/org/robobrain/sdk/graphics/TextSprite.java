@@ -80,6 +80,18 @@ public class TextSprite extends Renderable {
 		mFont.drawString(gl, mMessage, x, y);
 		mFont.end(gl);
 	}
+	
+	/**
+	 * Draws the message to the screen.
+	 * @param gl
+	 * A valid OpenGL ES 1.0 object
+	 * @param scale
+	 */
+	public void draw(GL10 gl, float scale){
+		mFont.begin(gl);
+		mFont.drawString(gl, mMessage, x, y,scale);
+		mFont.end(gl);
+	}
 
 	public void setColor(Color c){
 		mFont.setColor(c);

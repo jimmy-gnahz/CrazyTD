@@ -195,6 +195,7 @@ public class CrazyTowerGame extends Engine {
 		heathIcon = new Icon(TextureManager.getTexture(SPRITE_HEALTH_ICON),32,32,0.8f,0.05f,mWorld);
 		//castleHealth = new TextEntity(0.85*mWorld.getWidth(),0.03*mWorld.getHeight(),gameManager.getCastleHP()+""+gameManager.getCastleHP());
 		castleHealth = new TextEntity(0.85*mWorld.getWidth(),0.02*mWorld.getHeight(),gameManager.getCastleHP()+""+gameManager.getCastleHP());
+		castleHealth.setFontScale(2.5f);
 		mWorld.addEntity(heathIcon);
 		mWorld.addEntity(castleHealth);
 
@@ -206,7 +207,7 @@ public class CrazyTowerGame extends Engine {
 		TextureManager.registerTexture("images/build_button.png", SPRITE_BUILD_BUTTON);
 		TextureManager.registerTexture("images/BG_Stone.png", SPRITE_BUILD_BACKGROUND);
 		TextureManager.registerTexture("images/heart.png", SPRITE_HEALTH_ICON);
-		TextureManager.registerTexture("images/arial2.png", FONT_TEXTURE);
+		TextureManager.registerTexture("images/arial.png", FONT_TEXTURE);
 		TextureManager.registerTexture("images/sled.png", SPRITE_TOWER);
 		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
 		TextureManager.registerTexture("images/missile.jpg", SPRITE_MISSILE);

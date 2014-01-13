@@ -80,8 +80,9 @@ public class BitmapFont {
 	 * The position of the character on the X-Axis.
 	 * @param y
 	 * The position of the character on the Y-Axis.
+	 * @param scale
 	 */
-	public void drawChar(GL10 gl, char c, float x, float y) {
+	public void drawChar(GL10 gl, char c, float x, float y, float scale) {
 		if (mTexture == null) {
 			return;
 		}
@@ -122,8 +123,9 @@ public class BitmapFont {
 		
 		gl.glMatrixMode(GL10.GL_MODELVIEW);
 		gl.glLoadIdentity();
-		gl.glScalef(1.0f * GLRenderer.getScale(), 1.0f * GLRenderer.getScale(), 1.0f);
-		gl.glTranslatef(x, y, 0);
+		gl.glTranslatef(1.0f*x*GLRenderer.getScale(), 1.0f*y*GLRenderer.getScale(), 0);
+		gl.glScalef(scale * GLRenderer.getScale(), scale * GLRenderer.getScale(), 1.0f);
+
 		gl.glDrawElements(GL10.GL_TRIANGLES, 6, GL10.GL_UNSIGNED_SHORT, mIndices);
 	}
 	
@@ -149,7 +151,36 @@ public class BitmapFont {
 		int c = s.length();
 		for (int i = 0; i < c; i++) {
 			float cx = x + (i * mWidth);
-			drawChar(gl, s.charAt(i), cx, y);
+			drawChar(gl, s.charAt(i), cx, y, 1);
+		}
+	}
+	
+	/**
+	 * Draws a String to the screen. Please note that the origin is at 
+	 * the String's top left corner.
+	 * @param gl
+	 * A valid OpenGL ES 1.0 object.
+	 * @param s
+	 * The string to draw.
+	 * @param x
+	 * The position of the string on the X-Axis.
+	 * @param y
+	 * The position of the string on the Y-Axis.
+	 * @Param scale
+	 * The ratio of the result image compare the original one
+	 * 
+	 */
+	public void drawString(GL10 gl, String s, float x, float y, float scale) {
+		if (mTexture == null) {
+			return;
+		}
+		if (s == null) {
+			return;
+		}
+		int c = s.length();
+		for (int i = 0; i < c; i++) {
+			float cx = x + (i * mWidth);
+			drawChar(gl, s.charAt(i), cx, y, scale);
 		}
 	}
 	

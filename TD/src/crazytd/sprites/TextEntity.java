@@ -12,7 +12,7 @@ import org.robobrain.test.FontGame;
 import org.robobrain.test.TDspriteGame;
 
 public class TextEntity extends Entity{
-	private int fontSize=20;
+	private float scale=20;
 	public TextEntity(double x, double y,String s){
 		Texture tex = TextureManager.getTexture(CrazyTowerGame.FONT_TEXTURE);
 		TextSprite ts = new TextSprite(tex);
@@ -27,8 +27,8 @@ public class TextEntity extends Entity{
 		//super.update(time);
 	}
 	
-	public void setFontSize(int fontSize){
-		this.fontSize=fontSize;
+	public void setFontScale(float scale){
+		this.scale = scale;
 	}
 	public void updateText(String s){
 		((TextSprite)mRenderable).setMessage(s);
@@ -36,9 +36,13 @@ public class TextEntity extends Entity{
 	
 	@Override 
 	public void draw(GL10 gl) {
-		mRenderable.draw(gl);
+		((TextSprite)mRenderable).draw(gl, scale);
 	}
 	
+	public void draw(GL10 gl, float scale){
+		this.scale=scale;
+		((TextSprite)mRenderable).draw(gl, scale);
+	}
 	public void setColor(Color c){
 		((TextSprite)mRenderable).setColor(c);
 	}
