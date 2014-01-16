@@ -53,7 +53,7 @@ public class Tower extends Entity{
 	/**
 	 * cost of producing one tower (perhaps not needed for first sprint)
 	 */
-	protected int cost;
+	protected int cost =15;
 	
 	/**
 	 * The target monster

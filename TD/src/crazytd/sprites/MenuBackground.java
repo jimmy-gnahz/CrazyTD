@@ -63,10 +63,11 @@ public class MenuBackground extends Entity{
 	
 	public boolean isPointerAt(float x, float y, int towerIndex){
 		if(!isVisible) return false;
-		if(x < (xOfTowers[towerIndex]+Block.tileSize/2) &&
-		   x > (xOfTowers[towerIndex]-Block.tileSize/2) &&
-		   y < (yOfTowers[towerIndex]+Block.tileSize/2) &&
-		   y > (yOfTowers[towerIndex]-Block.tileSize/2)){
+		//give it 10% uncentainty for big fingers
+		if(x < (xOfTowers[towerIndex]+ (Block.tileSize/2)*1.1) &&
+		   x > (xOfTowers[towerIndex]- (Block.tileSize/2)*1.1)&&
+		   y < (yOfTowers[towerIndex]+ (Block.tileSize/2)*1.1) &&
+		   y > (yOfTowers[towerIndex]- (Block.tileSize/2)*1.1)){
 			return true;
 		}
 		return false;

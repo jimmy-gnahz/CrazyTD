@@ -64,6 +64,7 @@ public class GameManager  {
 	private MonsterDen monsterDen;
 	private Castle castle;
 	private TextEntity castleHP;
+	private int gold = 50;
 
 	private World world;
 
@@ -239,6 +240,7 @@ public class GameManager  {
 				Castle castle = (Castle) currentBlock;
 				direction = castle.getDirection(monster.x, monster.y);
 				monster.setHP(0); // so that it vanishes
+				gold-=monster.getGoldDrop();// you don't get money for a monster raid
 				castle.damage(1);
 				
 				if (castle.getHP() <= 0 && !(isGameOver)){
@@ -275,6 +277,7 @@ public class GameManager  {
 
 				monster.remove = true; 	// This is to remove the renderable sprite from world
 				toRemoveMonsters.add(monster);
+				gold+=monster.getGoldDrop();
 			}
 		}
 
@@ -314,8 +317,12 @@ public class GameManager  {
 		if (!tower.isBuilt){
 			return;
 		}
+		if (gold<tower.cost){
+			return;
+		}
 		world.addEntity(tower);
 		towers.add(tower);
+		gold -= tower.cost;
 	}
 
 	public void addMonster(Monster monster){
@@ -376,6 +383,10 @@ public class GameManager  {
 	
 	public int getCastleHP(){
 		return castle.getHP();
+	}
+	
+	public int getGold(){
+		return gold;
 	}
 
 }

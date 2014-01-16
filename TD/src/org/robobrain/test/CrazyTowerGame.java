@@ -36,8 +36,9 @@ public class CrazyTowerGame extends Engine {
 	
 	public static final int SPRITE_BUILD_BUTTON = 51;
 	public static final int SPRITE_BUILD_BACKGROUND = 52;
-	public static final int SPRITE_HEALTH_ICON = 53;
-	public static final int FONT_TEXTURE = 54;
+	public static final int FONT_TEXTURE = 53;
+	public static final int SPRITE_HEALTH_ICON = 54;
+	public static final int SPRITE_GOLD = 55;
 	
 	public static final int SPRITE_TOWER = 101;
 	public static final int SPRITE_MONSTER = 102;
@@ -48,8 +49,9 @@ public class CrazyTowerGame extends Engine {
 	Map m;
 	UIButton buildButton;
 	MenuBackground buildBackground;
-	Icon heathIcon;
+	Icon heathIcon, goldIcon;
 	TextEntity castleHealth;
+	TextEntity gold;
 	
 	GameManager gameManager;
 	@Override 
@@ -71,6 +73,7 @@ public class CrazyTowerGame extends Engine {
 		}
 		else castleHealth.setColor(Color.BLACK);
 		castleHealth.updateText(gameManager.getCastleHP()+"");
+		gold.updateText(gameManager.getGold()+"");
 		checkBuildButton();
 		if (Multitouch.getState(0) == Multitouch.POINTER_DOWN){
 			chooseTowerFromMenu();
@@ -139,9 +142,10 @@ public class CrazyTowerGame extends Engine {
 		}
 		// good to go, let's build it
 		else {
-			((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).Build(buildBackground.towers[buildBackground.selectedTower].clone());
-			gameManager.addTower(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower());
-			
+			if(gameManager.getGold()>buildBackground.towers[buildBackground.selectedTower].getCost()){
+				((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).Build(buildBackground.towers[buildBackground.selectedTower].clone());
+				gameManager.addTower(((Buildable) m.getBlockByCoordinate(Multitouch.getX(0),Multitouch.getY(0))).getTower());			
+			}
 			buildBackground.resetTower();
 			Multitouch.clear();
 			return true;
@@ -171,18 +175,18 @@ public class CrazyTowerGame extends Engine {
 		m= MapParser.parse(MapParser.testmap1);
 		Tower tower = new Tower(missile,2,Tower.MEDIUM);
 	
-		Block b= m.getBlock(3, 2);
+/*		Block b= m.getBlock(3, 2);
 		if(b instanceof Buildable){
 			if(!((Buildable) b).getIsBuilt()){
 				((Buildable) b).Build(tower);
 			}
 		}		
-		
+*/		
 		m.setMonster(monster);
 		
 		gameManager = new GameManager(mWorld);
 		gameManager.addMap(m);
-		gameManager.addTower(tower);
+		//gameManager.addTower(tower);
 		mWorld.addGameManager(gameManager);
 		
 		buildButton = new UIButton(TextureManager.getTexture(SPRITE_BUILD_BUTTON),mWorld);
@@ -193,11 +197,15 @@ public class CrazyTowerGame extends Engine {
 		mWorld.addEntity(buildButton);
 		
 		heathIcon = new Icon(TextureManager.getTexture(SPRITE_HEALTH_ICON),32,32,0.8f,0.05f,mWorld);
-		//castleHealth = new TextEntity(0.85*mWorld.getWidth(),0.03*mWorld.getHeight(),gameManager.getCastleHP()+""+gameManager.getCastleHP());
+		goldIcon = new Icon(TextureManager.getTexture(SPRITE_GOLD),32,32,0.6f,0.05f,mWorld);
+		gold = new TextEntity(0.65*mWorld.getWidth(),0.03*mWorld.getHeight(),gameManager.getGold()+"");
+		gold.setFontScale(2.5f);
 		castleHealth = new TextEntity(0.85*mWorld.getWidth(),0.02*mWorld.getHeight(),gameManager.getCastleHP()+""+gameManager.getCastleHP());
 		castleHealth.setFontScale(2.5f);
 		mWorld.addEntity(heathIcon);
 		mWorld.addEntity(castleHealth);
+		mWorld.addEntity(goldIcon);
+		mWorld.addEntity(gold);
 
 		//Log.d("Width",""+mWorld.getWidth());
 		//Log.d("Height",""+mWorld.getHeight());
@@ -207,6 +215,7 @@ public class CrazyTowerGame extends Engine {
 		TextureManager.registerTexture("images/build_button.png", SPRITE_BUILD_BUTTON);
 		TextureManager.registerTexture("images/BG_Stone.png", SPRITE_BUILD_BACKGROUND);
 		TextureManager.registerTexture("images/heart.png", SPRITE_HEALTH_ICON);
+		TextureManager.registerTexture("images/gold.png",SPRITE_GOLD);
 		TextureManager.registerTexture("images/arial.png", FONT_TEXTURE);
 		TextureManager.registerTexture("images/sled.png", SPRITE_TOWER);
 		TextureManager.registerTexture("images/bat.png", SPRITE_MONSTER);
@@ -220,7 +229,6 @@ public class CrazyTowerGame extends Engine {
 		TextureManager.registerTexture("images/circle.png", SPRITE_CIRCLE);
 		TextureManager.registerTexture("images/healthbar.png", MONSTER_GREEN_HEALTHBAR);
 		TextureManager.registerTexture("images/redhealthbar.png", MONSTER_RED_HEALTHBAR);
-		
 	}
 }
 

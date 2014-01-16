@@ -22,13 +22,18 @@ public class Monster extends Entity{
 	 */
 	public static final float FAST = 0.2f, MEDIUM = 0.1f, SLOW = 0.05f; 
 	
+	/**
+	 * reward for killing this monster, 
+	 */
+	protected int goldDrop = 5;
+	
 	private final int HEALTH_BAR_WIDTH = 30;
 	private final int HEALTH_BAR_HEIGHT = 6;
 	
 	/**
 	 * map hp value
 	 */
-	private int maxhp;
+	protected int maxhp;
 	
 	/**
 	 * Horse Power 
@@ -100,5 +105,9 @@ public class Monster extends Entity{
 
 	public int getMaxHP(){
 		return maxhp;
+	}
+	
+	public int getGoldDrop(){
+		return goldDrop;
 	}
 }
