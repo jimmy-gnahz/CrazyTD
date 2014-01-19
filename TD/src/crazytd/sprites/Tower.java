@@ -56,6 +56,10 @@ public class Tower extends Entity{
 	protected int cost =15;
 	
 	/**
+	 * refund if this tower is sold;
+	 */
+	protected int refund = 1;
+	/**
 	 * The target monster
 	 */
 	protected Monster target;
@@ -72,6 +76,8 @@ public class Tower extends Entity{
 	
 	private Renderable rangeCircle;
 
+	private Renderable sellIcon;
+
 
 	/**
 	 * @param missile
@@ -82,8 +88,10 @@ public class Tower extends Entity{
 		super();
 		Texture t = TextureManager.getTexture(TDspriteGame.SPRITE_TOWER);
 		Texture tc = TextureManager.getTexture(CrazyTowerGame.SPRITE_CIRCLE);
+		Texture ts = TextureManager.getTexture(CrazyTowerGame.SPRITE_SELLICON);
 		Sprite s = new Sprite(t, 64, 64, 1);
 		rangeCircle = new Sprite(tc,256,256, 1);
+		sellIcon = new Sprite(ts,64,64, 1);
 		mRenderable = s;
 		this.range = range;
 		this.firingFreq = frequency;
@@ -96,6 +104,7 @@ public class Tower extends Entity{
 	    super.draw(gl);
 	    if(isShowRange){
 	    	rangeCircle.draw(gl, super.x, super.y, 0, range*2*Block.tileSize/256);
+	    	sellIcon.draw(gl, super.x+Block.tileSize/2, super.y-Block.tileSize/2, 0, Block.tileSize/64, Block.tileSize/64);
 	    }
 	}
 
@@ -178,6 +187,10 @@ public class Tower extends Entity{
 	
 	public int getCost(){
 		return cost;
+	}
+	
+	public int getRefund(){
+		return refund;
 	}
 	
 	public Monster getTarget(){

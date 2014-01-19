@@ -17,7 +17,7 @@ import crazytd.map.Map;
 import crazytd.map.MapParser;
 
 import crazytd.sprites.Icon;
-import crazytd.sprites.MenuBackground;
+import crazytd.sprites.BuildMenuBackground;
 import crazytd.sprites.Missile;
 import crazytd.sprites.Monster;
 import crazytd.sprites.GameManager;
@@ -33,6 +33,7 @@ public class CrazyTowerGame extends Engine {
 	public static final int SPRITE_MONSTER_DEN=5;
 	public static final int SPRITE_CASTLE=6;
 	public static final int SPRITE_CIRCLE=7;
+	public static final int SPRITE_SELLICON=8;
 	
 	public static final int SPRITE_BUILD_BUTTON = 51;
 	public static final int SPRITE_BUILD_BACKGROUND = 52;
@@ -48,7 +49,7 @@ public class CrazyTowerGame extends Engine {
 
 	Map m;
 	UIButton buildButton;
-	MenuBackground buildBackground;
+	BuildMenuBackground buildBackground;
 	Icon heathIcon, goldIcon;
 	TextEntity castleHealth;
 	TextEntity gold;
@@ -192,7 +193,7 @@ public class CrazyTowerGame extends Engine {
 		buildButton = new UIButton(TextureManager.getTexture(SPRITE_BUILD_BUTTON),mWorld);
 		Tower[] avaliableTowers = new Tower[1];
 		avaliableTowers[0]= tower.clone();
-		buildBackground = new MenuBackground(TextureManager.getTexture(SPRITE_BUILD_BACKGROUND),mWorld,avaliableTowers);
+		buildBackground = new BuildMenuBackground(TextureManager.getTexture(SPRITE_BUILD_BACKGROUND),mWorld,avaliableTowers);
 		mWorld.addEntity(buildBackground);
 		mWorld.addEntity(buildButton);
 		
@@ -227,6 +228,7 @@ public class CrazyTowerGame extends Engine {
 		TextureManager.registerTexture("images/monster_den.png", SPRITE_MONSTER_DEN);
 		TextureManager.registerTexture("images/castle.png", SPRITE_CASTLE);
 		TextureManager.registerTexture("images/circle.png", SPRITE_CIRCLE);
+		TextureManager.registerTexture("images/sell_button.png", SPRITE_SELLICON);
 		TextureManager.registerTexture("images/healthbar.png", MONSTER_GREEN_HEALTHBAR);
 		TextureManager.registerTexture("images/redhealthbar.png", MONSTER_RED_HEALTHBAR);
 	}

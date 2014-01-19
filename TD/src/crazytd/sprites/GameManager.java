@@ -22,6 +22,7 @@ import org.robobrain.sdk.graphics.Vector;
 import org.robobrain.test.TDspriteGame;
 
 import crazytd.map.Block;
+import crazytd.map.Buildable;
 import crazytd.map.Castle;
 import crazytd.map.Map;
 import crazytd.map.MonsterDen;
@@ -325,6 +326,11 @@ public class GameManager  {
 		gold -= tower.cost;
 	}
 
+	public void sellTower(Buildable b){
+		if (!b.getIsBuilt()) return;
+		gold += b.getTower().getRefund();
+		towers.remove(b.getTower());
+	}
 	public void addMonster(Monster monster){
 		world.addEntity(monster);
 		monsters.add(monster);

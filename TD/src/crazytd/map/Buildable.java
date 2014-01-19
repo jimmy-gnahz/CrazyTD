@@ -37,6 +37,15 @@ public class Buildable extends Block {
 			bindTextureIndex(TDspriteGame.SPRITE_BUILT);
 		}
 	}
+	/**
+	 * sell a tower on the block
+	 * @return the money to be refund, or 0 if there is no tower
+	 */
+	public void Destroy(){
+		if( t == null )return;
+		t = null;
+		isBuilt = false;
+	}
 	
 	public boolean getIsBuilt(){
 		return isBuilt;
