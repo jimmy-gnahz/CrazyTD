@@ -329,7 +329,9 @@ public class GameManager  {
 	public void sellTower(Buildable b){
 		if (!b.getIsBuilt()) return;
 		gold += b.getTower().getRefund();
+		b.getTower().remove=true;
 		towers.remove(b.getTower());
+		b.destroy();
 	}
 	public void addMonster(Monster monster){
 		world.addEntity(monster);

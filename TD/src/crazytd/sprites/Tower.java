@@ -14,6 +14,7 @@ import org.robobrain.sdk.graphics.Renderable;
 import org.robobrain.sdk.graphics.Sprite;
 import org.robobrain.sdk.graphics.Texture;
 import org.robobrain.sdk.graphics.TextureManager;
+import org.robobrain.sdk.input.Multitouch;
 import org.robobrain.test.CrazyTowerGame;
 import org.robobrain.test.TDspriteGame;
 
@@ -142,6 +143,24 @@ public class Tower extends Entity{
 		return new Tower(missile, range, firingFreq);
 	}
 	
+	/**
+	 * Is the sell icon clicked
+	 * @return
+	 */
+	public boolean isClickingSell(){
+		if(Multitouch.getState(0)==Multitouch.POINTER_DOWN){
+			//check if the pointer is at sellIcon
+			if(Multitouch.getX(0)<(super.x+Block.tileSize/2)+Block.tileSize/2 && 
+				Multitouch.getX(0)>(super.x+Block.tileSize/2)-Block.tileSize/2 &&
+				Multitouch.getY(0)<(super.y+Block.tileSize/2)+Block.tileSize/4 &&
+				Multitouch.getY(0)>(super.y+Block.tileSize/2)-Block.tileSize/2){
+				return true;
+			}
+		}
+		return false;
+		
+		
+	}
 	//********************************************************
 	// 					Setter & Getters
 	//********************************************************

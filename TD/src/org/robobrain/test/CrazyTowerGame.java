@@ -77,7 +77,18 @@ public class CrazyTowerGame extends Engine {
 		gold.updateText(gameManager.getGold()+"");
 		checkBuildButton();
 		if (Multitouch.getState(0) == Multitouch.POINTER_DOWN){
+			Block b = m.getBlockByCoordinate(Multitouch.getX(0)-Block.tileSize/2, Multitouch.getY(0)+Block.tileSize/4);
+			if(b !=null){
+				if(b instanceof Buildable){
+					if(((Buildable)b).getIsBuilt()){
+						if( ((Buildable)b).getTower().isClickingSell()){
+							gameManager.sellTower((Buildable)b);
+						}
+					}
+				}
+			}
 			chooseTowerFromMenu();
+			
 		}
 		
 		

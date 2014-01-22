@@ -41,7 +41,7 @@ public class Buildable extends Block {
 	 * sell a tower on the block
 	 * @return the money to be refund, or 0 if there is no tower
 	 */
-	public void Destroy(){
+	public void destroy(){
 		if( t == null )return;
 		t = null;
 		isBuilt = false;

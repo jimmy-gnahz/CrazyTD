@@ -60,7 +60,12 @@ public class Map {
 	public Block getBlock(int x, int y){
 		return theMap[y][x];
 	}
-	
+	/**
+	 * find a block in map given its coordinate
+	 * @param x
+	 * @param y
+	 * @return the block with the coordinate, null if there is no block
+	 */
 	public Block getBlockByCoordinate(float x, float y){
 		int xCoord = Math.round((x-Block.tileSize/2)/Block.tileSize);
 		int yCoord = Math.round((y-Block.tileSize/2)/Block.tileSize);
