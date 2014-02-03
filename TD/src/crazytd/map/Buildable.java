@@ -45,6 +45,7 @@ public class Buildable extends Block {
 		if( t == null )return;
 		t = null;
 		isBuilt = false;
+		bindTextureIndex(TDspriteGame.SPRITE_NOT_BUILT);
 	}
 	
 	public boolean getIsBuilt(){

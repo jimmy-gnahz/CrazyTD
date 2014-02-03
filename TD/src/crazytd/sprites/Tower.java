@@ -148,15 +148,18 @@ public class Tower extends Entity{
 	 * @return
 	 */
 	public boolean isClickingSell(){
-		if(Multitouch.getState(0)==Multitouch.POINTER_DOWN){
-			//check if the pointer is at sellIcon
-			if(Multitouch.getX(0)<(super.x+Block.tileSize/2)+Block.tileSize/2 && 
-				Multitouch.getX(0)>(super.x+Block.tileSize/2)-Block.tileSize/2 &&
-				Multitouch.getY(0)<(super.y+Block.tileSize/2)+Block.tileSize/4 &&
-				Multitouch.getY(0)>(super.y+Block.tileSize/2)-Block.tileSize/2){
-				return true;
+		if(isShowRange){//button showing up
+			if(Multitouch.getState(0)==Multitouch.POINTER_DOWN){
+				//check if the pointer is at sellIcon
+				if(Multitouch.getX(0)<(super.x+Block.tileSize/2)+Block.tileSize/2 && 
+					Multitouch.getX(0)>(super.x+Block.tileSize/2)-Block.tileSize/2 &&
+					Multitouch.getY(0)<(super.y-Block.tileSize/2)+Block.tileSize/4 &&
+					Multitouch.getY(0)>(super.y-Block.tileSize/2)-Block.tileSize/4){
+					return true;
+				}
 			}
 		}
+
 		return false;
 		
 		
