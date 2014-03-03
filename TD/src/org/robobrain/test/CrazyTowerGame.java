@@ -184,7 +184,7 @@ public class CrazyTowerGame extends Engine {
 		missile.y = (float) (0.3 * mWorld.getHeight());
 		missile.vx = 0.0f; missile.vy = 0.0f;	
 
-		m= MapParser.parse(MapParser.testmap1);
+		m= MapParser.parse(MapParser.testmap3);
 		Tower tower = new Tower(missile,2,Tower.MEDIUM);
 	
 /*		Block b= m.getBlock(3, 2);

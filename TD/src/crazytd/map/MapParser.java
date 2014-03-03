@@ -27,6 +27,16 @@ public class MapParser {
 	public static String testmap2 = 
 			"xx,bb,xx";
 	
+	public static String testmap3 =
+			"xx,xx,xx,xx,xx,xx,xx,xx,xx,xx,xx,xx;" +
+			"xx,bb,bb,bb,bb,bb,bb,bb,bb,bb,bb,xx;" +
+			"xx,bb,se,we,we,ws,bb,se,we,ws,bb,xx;"+
+			"xx,bb,sn,bb,bb,ns,bb,sn,bb,ns,bb,xx;" +
+			"xx,bb,sn,bb,es,nw,bb,sn,bb,ns,bb,xx;" +
+			"xx,se,wn,bb,ns,bb,bb,sn,bb,ns,bb,xx;" +
+			"xx,sn,bb,bb,ne,we,we,wn,bb,ne,we,cc;" +
+			"xx,sn,bb,bb,bb,bb,bb,bb,bb,bb,bb,xx;" +
+			"xx,dn,xx,xx,xx,xx,xx,xx,xx,xx,xx,xx";
 	/**
 	 * @param map string representation of the map, follow the pattern described above
 	 */

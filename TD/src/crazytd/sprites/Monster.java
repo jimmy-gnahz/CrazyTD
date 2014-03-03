@@ -99,6 +99,10 @@ public class Monster extends Entity{
 		this.hp = hp;
 	}
 	
+	public void setGoldDrop(int gd){
+		goldDrop = gd;
+	}
+	
 	public int getHP(){
 		return hp;
 	}
