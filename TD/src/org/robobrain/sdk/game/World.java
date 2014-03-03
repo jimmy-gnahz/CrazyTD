@@ -62,14 +62,16 @@ public class World extends Entity {
 	 */
 	@Override
 	public void update(long time) {
+
+		if (!(gameManager == null)) {
+			gameManager.updateGame();
+			if (gameManager.isGameOver) {
+				return;
+			}
+		}
 		
 		int count = mEntities.size();
 		for (int i = 0; i < count; i++) {
-			
-			// might wanna place the following if condition somewhere else
-//			if (gameManager.isGameOver) { // it freezes the sprites if game is over
-//				break;
-//			}
 			
 			Entity e = mEntities.get(i);
 			e.update(time);
@@ -79,9 +81,7 @@ public class World extends Entity {
 			}
 		}
 		
-		if (!(gameManager == null)) {
-			gameManager.updateGame();
-		}
+
 		
 		for (int i = 0; i < count - 1; i++) {
 			for (int j = i + 1; j < count; j++) {

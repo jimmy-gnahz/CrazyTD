@@ -77,6 +77,7 @@ public class GameManager  {
 		towers = new ArrayList<Tower>();
 		monsters = new ArrayList<Monster>();
 		missiles = new ArrayList<Missile>();
+		
 		startTime = System.currentTimeMillis();
 
 	}
@@ -100,8 +101,7 @@ public class GameManager  {
 		updateMonsters();
 		updateTowers();
 		updateCastleHP();
-
-
+		
 	}
 
 	/**
